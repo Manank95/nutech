@@ -8,23 +8,17 @@ import BlogComponent from './components/BlogComponent';
 import LoginComponent from './components/LoginComponent';
 
 class App extends Component {
-  componentDidMount(){
-		console.log('app mount');
-  }
-  componentDidUpdate(){
-    console.log('app update');
-  }
   render() {
     return (
       <Router>
-          <div className="App">
-            <Switch>
-              <Route path="/home" exact={true} component={HomeComponent} />
-              <Route path="/about" exact={true} component={AboutComponent} />
-              <Route path="/blog" exact={true} component={BlogComponent} />
-              <Route path="/login" exact={true} component={LoginComponent} />
-            </Switch>
-          </div>
+        <div className="App">
+          <Switch>
+            <Route path="/home" exact component={HomeComponent} />
+            <Route path="/about" exact component={AboutComponent} />
+            <Route path="/blog" exact component={BlogComponent} />
+            <Route path="/login" exact component={LoginComponent} />
+          </Switch>
+        </div>
       </Router>
     );
   }
