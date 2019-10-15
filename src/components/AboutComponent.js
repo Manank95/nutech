@@ -11,8 +11,6 @@ class AboutComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				{/* Wrapper */}
-				<div id="wrapper">
 					{/* Header */}
 					<header id="header" className="header-transparent header-fullwidth dark">
 						<div id="header-wrap">
@@ -39,10 +37,10 @@ class AboutComponent extends React.Component {
 												<li><Link to="/home">Home</Link></li>
 												<li><Link to="/login">Login</Link></li>
 												<li><a href="#" className="scroll-to">About US</a></li>
-												<li><a href="index.html#section4" className="scroll-to">Facts</a></li>
-												<li><a href="index.html#section5" className="scroll-to">Gallery</a></li>
-												<li><a href="index.html#section3" className="scroll-to">Services</a></li>
-												<li><a href="index.html#section6" className="scroll-to">Contact</a></li>
+												<li><a href="/home#section4" className="scroll-to">Facts</a></li>
+												<li><a href="/home#section5" className="scroll-to">Gallery</a></li>
+												<li><a href="/home#section3" className="scroll-to">Services</a></li>
+												<li><a href="/home/#section6" className="scroll-to">Contact</a></li>
 											</ul>
 										</nav>
 									</div>
@@ -328,6 +326,7 @@ class AboutComponent extends React.Component {
 												<li><a href="#section4" className="scroll-to">Facts</a></li>
 												<li><a href="#section5" className="scroll-to">Gallery</a></li>
 												<li><a href="#section6" className="scroll-to">Contact</a></li>
+												<li><Link to="/login" className="scroll-to">Login</Link></li>
 											</ul>
 										</div>
 										{/* end: Footer widget area 2 */}
@@ -344,7 +343,6 @@ class AboutComponent extends React.Component {
 						</div>
 					</footer>
 					{/* end: Footer */}
-				</div>
 				{/* end: Wrapper */}
 				{/* Go to top button */}
 				<a id="goToTop"><i className="fa fa-angle-up top-icon" /><i className="fa fa-angle-up" /></a>

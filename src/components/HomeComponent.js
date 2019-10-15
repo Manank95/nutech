@@ -12,8 +12,6 @@ class HomeComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				{/* Wrapper */}
-				<div id="wrapper">
 					{/* Header */}
 					<header id="header" className="header-transparent header-fullwidth dark">
 						<div id="header-wrap">
@@ -204,7 +202,6 @@ class HomeComponent extends React.Component {
 								</div>
 							</div>
 							{/* Portfolio */}
-							<div id="portfolio" className="grid-layout portfolio-3-columns" data-margin={0}>
 								{/* portfolio item */}
 								<div className="portfolio-item no-overlay pf-illustrations pf-media pf-icons pf-Media pf-graphics">
 									<div className="portfolio-item-wrap">
@@ -277,7 +274,6 @@ class HomeComponent extends React.Component {
 									</div>
 								</div>
 								{/* end: portfolio item */}
-							</div>
 							{/* end: Portfolio */}
 							{/* end: Portfolio */}
 						</div>
@@ -508,7 +504,6 @@ class HomeComponent extends React.Component {
 						</div>
 					</footer>
 					{/* end: Footer */}
-				</div>
 				{/* end: Wrapper */}
 				{/* Go to top button */}
 				<a id="goToTop"><i className="fa fa-angle-up top-icon" /><i className="fa fa-angle-up" /></a>
