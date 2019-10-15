@@ -13,7 +13,7 @@ export default class Nav extends Component {
         </div>
 
         <nav className={styles.nav}>
-          <Link to="/home" className={styles.link}>Home</Link>
+          <Link to="/home" className={styles.link}>Home <i class="icofont-thin-down"></i></Link>
           <Link to="/about" className={styles.link}>About Us</Link>
           <Link to="#" className={styles.link}>Facts</Link>
           <Link to="#" className={styles.link}>Gallery</Link>
