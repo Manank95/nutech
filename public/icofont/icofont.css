@@ -33,6 +33,16 @@ url("./fonts/icofont.woff") format("woff");
   -webkit-font-smoothing: antialiased;
 }
 
+.icofont-navigation-menu:before
+{
+  content: "\efa2";
+}
+
+.icofont-close-line:before
+{
+  content: "\eee1";
+}
+
 .icofont-thin-down:before
 {
   content: "\eac8";
