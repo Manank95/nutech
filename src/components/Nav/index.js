@@ -6,14 +6,17 @@ import MobileNav from './MobileNav';
 
 export default function Nav() {
   return (
-    <header className={styles.header}>
-      <div className={styles.logo}>
-        <Link to="/home">
-          <img src="images/logo.png" alt="NUTECH Logo" height='55px' />
-        </Link>
-      </div>
-      <DesktopNav />
-      <MobileNav />
-    </header>
+    <>
+      <header className={styles.header}>
+        <div className={styles.logo}>
+          <Link to="/home">
+            <img src="images/logo.png" alt="NUTECH Logo" height='55px' />
+          </Link>
+        </div>
+        <DesktopNav />
+        <MobileNav />
+      </header>
+      <div className={styles.placeholder} />
+    </>
   );
 }
