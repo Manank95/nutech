@@ -21,27 +21,27 @@ export default class MobileNav extends Component {
           <div className={styles.backdrop_mobile} onClick={this.close} />
           <nav className={styles.sideDrawer}>
             <div className={styles.links_mobile}>
-              <Link to="#" className={styles.link} onClick={this.close}>Mission</Link>
-              <Link to="#" className={styles.link} onClick={this.close}>Facts</Link>
-              <Link to="#" className={styles.link} onClick={this.close}>Gallery</Link>
+              <Link to="/home#mission" className={styles.link} onClick={this.close}>Mission</Link>
+              <Link to="/home#facts" className={styles.link} onClick={this.close}>Facts</Link>
+              <Link to="/home#gallery" className={styles.link} onClick={this.close}>Gallery</Link>
 
               <hr className={styles.divider} />
 
-              <Link to="#" className={styles.link} onClick={this.close}>Who we are</Link>
-              <Link to="#" className={styles.link} onClick={this.close}>FAQs</Link>
-              <Link to="#" className={styles.link} onClick={this.close}>Resources/ Brochures</Link>
+              <Link to="/about#whoweare" className={styles.link} onClick={this.close}>Who we are</Link>
+              <Link to="/about#faqs" className={styles.link} onClick={this.close}>FAQs</Link>
+              <Link to="/about#resources" className={styles.link} onClick={this.close}>Resources/ Brochures</Link>
 
               <hr className={styles.divider} />
 
-              <Link to="#" className={styles.link} onClick={this.close}>Services</Link>
+              <Link to="/home#services" className={styles.link} onClick={this.close}>Services</Link>
 
               <hr className={styles.divider} />
 
-              <Link to="#" className={styles.link} onClick={this.close}>Contact</Link>
+              <Link to="/home#contact" className={styles.link} onClick={this.close}>Contact</Link>
 
               <hr className={styles.divider} />
 
-              <Link to="#" className={styles.link} onClick={this.close}>Login/ Signup</Link>
+              <Link to="/login" className={styles.link} onClick={this.close}>Login/ Signup</Link>
             </div>
           </nav>
         </>}

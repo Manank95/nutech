@@ -32,14 +32,18 @@
 
 .link {
   font-size: 18px;
-  padding  : 0 25px;
+  padding  : 0 20px;
 }
 
 .dropdownContainer {
   position : relative;
   cursor   : pointer;
   font-size: 18px;
-  padding  : 0 25px;
+  padding  : 0 20px;
+}
+
+.dropdownContainer:hover {
+  color: #1abc9c;
 }
 
 .dropdown {

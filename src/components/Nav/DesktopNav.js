@@ -10,19 +10,19 @@ export default function DesktopNav() {
       <Dropdown
         title="Company"
         links={[
-          { to: "/home", tag: "Mission" },
-          { to: "#", tag: "Facts" },
-          { to: "#", tag: "Gallery" }
+          { to: "/home#mission", tag: "Mission" },
+          { to: "/home#facts", tag: "Facts" },
+          { to: "/home#gallery", tag: "Gallery" }
         ]} />
       <Dropdown
         title="About Us"
         links={[
-          { to: "#", tag: "Who we are" },
-          { to: "#", tag: "FAQs" },
-          { to: "#", tag: "Resources" }
+          { to: "/about#whoweare", tag: "Who we are" },
+          { to: "/about#faqs", tag: "FAQs" },
+          { to: "/about#resources", tag: "Resources" }
         ]} />
-      <Link to="#" className={styles.link}>Services</Link>
-      <Link to="#" className={styles.link}>Contact</Link>
+      <Link to="/home#services" className={styles.link}>Services</Link>
+      <Link to="/home#contact" className={styles.link}>Contact</Link>
       <Link to="/login" className={styles.link}>Login/ Signup</Link>
     </nav>
   );

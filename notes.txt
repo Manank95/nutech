@@ -1,0 +1,25 @@
+- Business email address for gmail send (nodemailer)
+- done - gallery
+- blog
+- Login Signup and dashboard pages
+- landing page and routing
+- different headers for different context items
+- done - css fix for header
+- remove all a tag
+- fix warnings
+- remove tracomo
+- remove comments
+
+
+-I am not following the folder structure - Containers and components. Just going with only one component folder.
+
+
+-Company     - About US        - Services    - Contact    - Login/ signup
+  - Mission    - Who we are?
+  - Facts      - FAQs
+  - Gallery    - Resources/ Brochures
+
+
+ - Dashboard   - Company     - About US        - Services    - Contact   - Profile
+									    - Change info
+									    - Logout
