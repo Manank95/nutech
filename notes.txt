@@ -1,6 +1,6 @@
 - Business email address for gmail send (nodemailer)
 - done - gallery
-- blog
+- done - blog
 - Login Signup and dashboard pages
 - landing page and routing
 - different headers for different context items
@@ -10,6 +10,19 @@
 - remove tracomo
 - remove comments
 
+-- after Signup - verify your email
+-- after login - landing page/ dashboard
+      -- Wrong email or password
+      -- email not verified
+-- test registration form
+-- update profile page
+-- 
+-- Forgot your password -- reset your password
+-- payment page
+-- 404 page
+
+
+-- admin pages to view all patient details
 
 -I am not following the folder structure - Containers and components. Just going with only one component folder.
 
