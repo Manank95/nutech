@@ -15,7 +15,7 @@ export default class MobileNav extends Component {
     return (
       <div className={styles.nav_mobile}>
         <div className={styles.nav_openIcon} onClick={this.open}>
-          <i class="icofont-navigation-menu"></i>
+          <i className="icofont-navigation-menu"></i>
         </div>
         {this.state.open && <>
           <div className={styles.backdrop_mobile} onClick={this.close} />
