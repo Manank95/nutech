@@ -39,14 +39,14 @@ class BlogComponent extends React.Component {
                       health is cheaper especially if any problems are detected early and are promptly treated. For this
                       article, we discuss the currently available diagnostic tests (and not on treatments) and focus
                       specifically on the importance and urgency of prostate cancer awareness and monitoring in every man
-              starting from age 40 in India <a href="http://cancerindia.org.in/cp/index.php/know-about-cancer/prostate-cancer, [1].">
-                        http://cancerindia.org.in/cp/index.php/know-about-cancer/prostate-cancer, [1].</a></p>
+              starting from age 40 in India <u><a href="http://cancerindia.org.in/cp/index.php/know-about-cancer/prostate-cancer, [1].">
+                        http://cancerindia.org.in/cp/index.php/know-about-cancer/prostate-cancer, [1].</a></u></p>
                     <p>Among males, prostate cancer is now the third leading cancer site in India (followed by lung and
                       esophageal cancer) [2]. In its 2016 projection, the Indian Council of Medical Research (ICMR)
                       estimated the total number of new cancer cases in India is expected to be approximately 14.5 lakh (1.4
                       million), out of which 50,000 (0.05 million) new cases are of prostate cancer alone, and the figure is
                       likely to reach 60,000 (0.06 million) from the nearly 17.3 lakh (1.7 million) additional new cases
-              estimated in 2020. There are several myths that have been addressed by Dr. Gautam <a href="https://www.linkedin.com/pulse/top-10-myths-prostate-cancer-india-dr-gagan-gautam">(https://www.linkedin.com/pulse/top-10-myths-prostate-cancer-india-dr-gagan-gautam)</a>
+              estimated in 2020. There are several myths that have been addressed by Dr. Gautam <u><a href="https://www.linkedin.com/pulse/top-10-myths-prostate-cancer-india-dr-gagan-gautam">(https://www.linkedin.com/pulse/top-10-myths-prostate-cancer-india-dr-gagan-gautam)</a></u>
                       . This helps our
                       cause further; on monitoring prostate health as a serious health issue that need to be seriously
                       considered by every male over 40 years of age for implementing early cancer detection [3]. Previously
@@ -263,9 +263,9 @@ class BlogComponent extends React.Component {
                       for prostate health management and better treatment options for managing prostate cancer is urgently
               needed. SeroMark-1 is the leader. Let’s take care of your prostate health.</p>
                     <h4><strong>References:</strong></h4>
-                    <p><a href="http://www.marketsandmarkets.com/Market-Reports/oncology-biomarkers-202.html">http://www.marketsandmarkets.com/Market-Reports/oncology-biomarkers-202.html</a>
-                      <a href="https://www.mordorintelligence.com/industry-reports/asia-pacific-cancer-biomarkers-market-industry">https://www.mordorintelligence.com/industry-reports/asia-pacific-cancer-biomarkers-market-industry</a>
-                      For additional information in hindi: <a href="http://www.nirogikaya.com/">http://www.nirogikaya.com/</a></p>
+                    <p><u><a href="http://www.marketsandmarkets.com/Market-Reports/oncology-biomarkers-202.html">http://www.marketsandmarkets.com/Market-Reports/oncology-biomarkers-202.html</a></u> <br />
+                    <u><a href="https://www.mordorintelligence.com/industry-reports/asia-pacific-cancer-biomarkers-market-industry">https://www.mordorintelligence.com/industry-reports/asia-pacific-cancer-biomarkers-market-industry</a></u> <br />
+                    For additional information in hindi: <u><a href="http://www.nirogikaya.com/"> http://www.nirogikaya.com/</a></u></p>
                     <p>1. Hariharan, K. and V. Padmanabha, Demography and disease characteristics of prostate cancer in
                         India. Indian Journal of Urology, 2016. 32(2): p. 103-108. <br />
                       2. Jain, S., S. Saxena, and A. Kumar, Epidemiology of prostate cancer in India. Meta Gene, 2014. 2: p.

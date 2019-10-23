@@ -12,7 +12,7 @@ class SignupComponent extends React.Component {
         <div className="container container-fullscreen">
           <div className="text-middle">
             <div className="row">
-              <div className="col-md-3 center p-30 background-white b-r-6">
+              <div className="col-md-4 center p-30 background-white b-r-6">
                 <h3>Signup for NUTECH</h3>
                 <form className="form-transparent-grey">
                   <div className="form-group">

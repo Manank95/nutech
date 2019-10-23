@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 
@@ -85,7 +85,7 @@ class HomeComponent extends React.Component {
 									Indian males.
 									IT'S WORTH INVESTING IN YOURSELF"
             </p>
-                <Link to="/about" className="btn btn-dark btn-outline btn-rounded">Read More</Link>
+                <Link to="/about#whoweare" className="btn btn-dark btn-outline btn-rounded">Read More</Link>
               </div>
               {/* end features box */}
             </div>
