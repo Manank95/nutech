@@ -8,6 +8,7 @@ import BlogComponent from './components/BlogComponent';
 import LoginComponent from './components/LoginComponent';
 import SignupComponent from './components/SignupComponent';
 import DashboardComponent from './components/DashboardComponent'
+import ErrorComponent from './error';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <Route path="/login" exact component={LoginComponent} />
             <Route path="/signup" exact component={SignupComponent} />
             <Route path="/dashboard" exact component={DashboardComponent} />
+            <Route path="*" component={ErrorComponent}/>
           </Switch>
         </div>
       </Router>

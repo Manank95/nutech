@@ -19,7 +19,7 @@
 -- 
 -- Forgot your password -- reset your password
 -- payment page
--- 404 page
+-- done - but (remove props if not used in the project) 404 page - 
 
 
 -- admin pages to view all patient details

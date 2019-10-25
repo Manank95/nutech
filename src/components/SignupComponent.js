@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 
 class SignupComponent extends React.Component {
   render() {
     return (
+      // <Redirect to={{
+      //   pathname: '/error',
+      //   state: {status: '500', message: "Hello there"}
+      // }} />
       <div>
       <Nav />
       <section className="fullscreen">

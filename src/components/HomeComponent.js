@@ -2,6 +2,7 @@ import React from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
+import config from './../config';
 
 class HomeComponent extends React.Component {
   componentDidMount() {
@@ -9,6 +10,7 @@ class HomeComponent extends React.Component {
   }
 
   render() {
+    console.log(config.services);
     return (
       <div>
         <Nav />
