@@ -287,9 +287,9 @@ class BlogComponent extends React.Component {
                     </p>
                   </div>
                   <div className="post-tags">
-                    <a>Prostate</a> &nbsp;
-                    <a>Cancer</a> &nbsp;
-                    <a>Health</a> &nbsp;
+                    <a href='#blog'>Prostate</a> &nbsp;
+                    <a href="#blog">Cancer</a> &nbsp;
+                    <a href="#blog">Health</a> &nbsp;
                   </div>
                   {/* end: Comments */}
                 </div>

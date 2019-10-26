@@ -7,7 +7,7 @@ import AboutComponent from './components/AboutComponent';
 import BlogComponent from './components/BlogComponent';
 import LoginComponent from './components/LoginComponent';
 import SignupComponent from './components/SignupComponent';
-import DashboardComponent from './components/DashboardComponent'
+import DashboardComponent from './components/DashboardComponent';
 import ErrorComponent from './error';
 
 class App extends Component {

@@ -171,7 +171,7 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <a href="#"><img src="images/portfolio/1.jpg" alt="" /></a>
+                      <img src="images/portfolio/1.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
                       <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/1.jpg"><i className="fa fa-expand" /></a>
@@ -186,7 +186,7 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <a href="#"><img src="images/portfolio/2.jpg" alt="" /></a>
+                      <img src="images/portfolio/2.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
                       <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/2.jpg"><i className="fa fa-expand" /></a>
@@ -199,7 +199,7 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <a href="#"><img src="images/portfolio/3.jpg" alt="" /></a>
+                      <img src="images/portfolio/3.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
                       <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/3.jpg"><i className="fa fa-expand" /></a>
@@ -215,7 +215,7 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <a href="#"><img src="images/portfolio/4.jpg" alt="" /></a>
+                      <img src="images/portfolio/4.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
                       <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/4.jpg"><i className="fa fa-expand" /></a>
@@ -237,7 +237,7 @@ class HomeComponent extends React.Component {
                         <h3>NUTECH Promotions</h3>
                         <span>know more</span>
                       </a>
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/about3.jpg" className="hidden" />
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/about3.jpg" className="hidden">.</a>
                     </div>
                   </div>
                 </div>
@@ -259,10 +259,10 @@ class HomeComponent extends React.Component {
                         <h3>Useful Information</h3>
                         <span>about prostate cancer</span>
                       </a>
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information1.jpg" className="hidden" />
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information2.jpg" className="hidden" />
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information3.jpg" className="hidden" />
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information4.jpg" className="hidden" />
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information1.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information2.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information3.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information4.jpg" className="hidden">.</a>
                     </div>
                   </div>
                 </div>
@@ -277,7 +277,7 @@ class HomeComponent extends React.Component {
             <div className="post-item-wrap">
               <div className="post-quote-img">
                 <Link to="/blog" target="_blank">
-                  <img src="images/quote.png" />
+                  <img src="images/quote.png" alt="blog"/>
                 </Link>
                 <Link to="/blog"><span className="post-meta-category">Blog</span></Link>
               </div>
@@ -296,7 +296,7 @@ class HomeComponent extends React.Component {
         </div>
         {/* end: Post item*/}
         {/* end: Know more */}
-        <section id="services" className="p-t-120 p-b-120">
+        <section id="services" className="background-grey p-t-120 p-b-120">
           <div className="container">
             <div className="row">
               <div className="col-md-7">
@@ -344,7 +344,7 @@ class HomeComponent extends React.Component {
                         <li><i className="fa fa-check" />get PSA Tests FREE</li>
                       </ul>
                       <div className="plan-button">
-                        <a href="#" className="btn">Register Now</a>
+                        <Link to="/login" className="btn">Register Now</Link>
                       </div>
                     </div>
                   </div>
@@ -362,7 +362,7 @@ class HomeComponent extends React.Component {
                         <li><i className="fa fa-check" />get PSA Tests FREE</li>
                       </ul>
                       <div className="plan-button">
-                        <a href="#" className="btn btn-light">Register Now</a>
+                        <Link to="/login" className="btn btn-light">Register Now</Link>
                       </div>
                     </div>
                   </div>
@@ -386,7 +386,7 @@ class HomeComponent extends React.Component {
                       <strong>Headquarters:</strong><br />
                       Office#4, Green Meadows 5F,<br />
                       Lokhandwala Township,<br />
-                      Kandivali(E), Mumbai-400101
+                      Kandivali (E), Mumbai-400101
                 </address>
                     <abbr><strong>Phone:</strong></abbr> +91 88986-64466
                 <br />
@@ -407,7 +407,7 @@ class HomeComponent extends React.Component {
                 </div>
               </div>
               <div className="col-md-5 col-md-offset-1 text-left">
-                <form className="widget-contact-form" action="include/contact-form.php" role="form" method="post">
+                <form className="widget-contact-form">
                   <div className="row">
                     <div className="form-group col-sm-6">
                       <label htmlFor="name">Name</label>
@@ -433,14 +433,14 @@ class HomeComponent extends React.Component {
         </section>
         {/* end: Contact */}
         <div>
-          <iframe title="contact-map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31252.240593704253!2d72.86903232064425!3d19.194584905496093!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf3612caeddd197c5!2sApplied%20Bioscience%20India%20Pvt%20Ltd!5e0!3m2!1sen!2sus!4v1570398044777!5m2!1sen!2sus" width="100%" height={400} frameBorder={0} style={{ border: 0 }} allowFullScreen />
+          <iframe title="contact-map" src="https://maps.google.com/maps?q=Green%20Meadows%2C%20Mira%20Road%20East%2C%20Lokhandwala%20Twp%2C%20Kandivali%2C%20Mumbai%2C%20Maharashtra%20400101%2C%20India&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height={400} frameBorder={0} style={{ border: 0 }} allowFullScreen />
         </div>
         {/* Footer */}
         <FooterComponent />
         {/* end: Footer */}
         {/* end: Wrapper */}
         {/* Go to top button */}
-        <a id="goToTop"><i className="fa fa-angle-up top-icon" /><i className="fa fa-angle-up" /></a>
+        <a href="#home" id="goToTop"><i className="fa fa-angle-up top-icon" /><i className="fa fa-angle-up" /></a>
       </div>
 
     );

@@ -3,9 +3,6 @@ import Nav from './../components/Nav';
 import FooterComponent from './../components/FooterComponent';
 
 class ErrorComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div>

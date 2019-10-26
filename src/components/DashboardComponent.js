@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
+import AuthService from './../auth/AuthService';
 
 class DashboardComponent extends React.Component {
   constructor(props) {
@@ -24,12 +24,30 @@ class DashboardComponent extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+    this.Auth = new AuthService();
+    if (!this.Auth.loggedIn()) {
+      this.props.history.replace('/login')
+    }
+    else {
+      try {
+        console.log('hello getuser')
+      }
+      catch (err) {
+        this.Auth.logout()
+        this.props.history.replace('/login')
+      }
+    }
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
   handleCheckbox(event) {
-    this.setState({concentChecked: !this.state.concentChecked});
+    this.setState({ concentChecked: !this.state.concentChecked });
+  }
+  handleLogout() {
+    this.Auth.logout()
+    this.props.history.replace('/login');
   }
   async handleSubmit(event) {
     event.preventDefault();
@@ -146,6 +164,7 @@ class DashboardComponent extends React.Component {
               </div>
             </div>
           </div>
+          <button type="button" className="btn btn-light btn-xs" onClick={this.handleLogout.bind(this)}>Logout</button>
         </section>
         <FooterComponent />
       </div>

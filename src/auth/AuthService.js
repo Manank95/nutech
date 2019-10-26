@@ -1,6 +1,5 @@
-import config from './../config';
+import config from '../config';
 export default class AuthService {
-  // Initializing important variables
   constructor(domain) {
     this.domain = domain || config.url;
     this.fetch = this.fetch.bind(this);
@@ -9,17 +8,20 @@ export default class AuthService {
   }
 
   async login(email, password) {
-    // Get a token from api server using the fetch api
-    const res = await this.fetch(`${this.domain}/user/login`, {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password
-      })
-    });
-    this.setToken(res.token); // Setting the token in localStorage
-    return res;
-    // return Promise.resolve(res);
+    try{
+      const res = await this.fetch(`${this.domain}/user/login`, {
+        method: 'POST',
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+      console.log('myres', res);
+      if(res.token) this.setToken(res.token);
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   loggedIn() {
@@ -62,25 +64,30 @@ export default class AuthService {
   // }
 
 
-  fetch(url, options) {
-    // performs api calls sending the required authentication headers
+  async fetch(url, options) {
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
-
-    // Setting Authorization header
-    // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
     if (this.loggedIn()) {
       headers['Authorization'] = this.getToken()
     }
-
-    return fetch(url, {
-      headers,
-      ...options
-    })
-      .then(this._checkStatus)
-      .then(response => response.json())
+    try{
+      let res = await fetch(url, {
+        headers,
+        ...options
+      });
+      console.log('resfrom server',res.status);
+      return res.json();
+    } catch(e) {
+      console.log(e);
+    }
+    // return fetch(url, {
+    //   headers,
+    //   ...options
+    // })
+    //   .then(this._checkStatus)
+    //   .then(response => response.json())
   }
 
   _checkStatus(response) {
@@ -89,8 +96,8 @@ export default class AuthService {
       return response
     } else {
       var error = new Error(response.statusText)
-      error.response = response
-      throw error
+      error.response = response;
+      throw error;
     }
   }
 }

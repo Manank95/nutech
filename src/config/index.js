@@ -1,4 +1,4 @@
-let url = 'https://66c65f4e.ngrok.io';
+let url = 'http://localhost:5000';
 let services = [
     {
         name: 'seromark test',

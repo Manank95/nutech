@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
-import AuthService from './AuthService';
+import AuthService from '../auth/AuthService';
 
 class LoginComponent extends React.Component {
   constructor(props) {
@@ -10,11 +10,13 @@ class LoginComponent extends React.Component {
     this.state = {
       error: '',
       email: '',
-      password: ''
+      password: '',
+      message: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.Auth = new AuthService();
+    if (this.Auth.loggedIn()) this.props.history.replace('/dashboard');
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -23,11 +25,13 @@ class LoginComponent extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    try{
+    try {
       let res = await this.Auth.login(this.state.email, this.state.password);
-    console.log(res);
-    this.props.history.replace('/dashboard');
-    } catch(e){
+      this.setState({
+        message: res.message
+      })
+      if (res.token) this.props.history.replace('/dashboard');
+    } catch (e) {
       alert(e);
     }
   }
@@ -41,17 +45,23 @@ class LoginComponent extends React.Component {
               <div className="row">
                 <div className="col-md-4 center p-30 background-white b-r-6">
                   <h3>Login to your Account</h3>
+                  {this.state.message !== '' && (
+                    <div role="alert" className="alert alert-danger alert-dismissible">
+                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                      {this.state.message}
+                    </div>
+                  )}
                   <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                       <label className="sr-only">Email</label>
-                      <input type="text" className="form-control" placeholder="Email" id="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                      <input type="email" className="form-control" placeholder="Email" id="email" name="email" value={this.state.email} onChange={this.handleChange} required />
                     </div>
                     <div className="form-group m-b-5">
                       <label className="sr-only">Password</label>
                       <input type="password" className="form-control" placeholder="Password" id="password" name="password" value={this.state.password} onChange={this.handleChange} required />
                     </div>
                     <div className="form-group form-inline">
-                      <a href="#" className="right"><small>Lost your Password?</small></a>
+                      <Link to="/forgot" className="right"><small>Lost your Password?</small></Link>
                     </div>
                     <br />
                     <div className="form-group">

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 
@@ -243,7 +242,7 @@ class AboutComponent extends React.Component {
         {/* Footer */}
         <FooterComponent />
         {/* end: Footer */}
-        <a id="goToTop"><i className="fa fa-angle-up top-icon" /><i className="fa fa-angle-up" /></a>
+        <a href="foo" id="goToTop"><i className="fa fa-angle-up top-icon" /><i className="fa fa-angle-up" /></a>
         {/*Plugins*/}
         {/*Template functions*/}
       </div>
