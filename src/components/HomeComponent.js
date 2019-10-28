@@ -326,7 +326,7 @@ class HomeComponent extends React.Component {
                         <li><i className="fa fa-check" />get PSA Tests FREE</li>
                       </ul>
                       <div className="plan-button">
-                        <Link to="/login" className="btn btn-light">Register Now</Link>
+                        <Link to="/book" className="btn btn-light">Register Now</Link>
                       </div>
                     </div>
                   </div>
@@ -344,7 +344,7 @@ class HomeComponent extends React.Component {
                         <li><i className="fa fa-check" />get PSA Tests FREE</li>
                       </ul>
                       <div className="plan-button">
-                        <Link to="/login" className="btn">Register Now</Link>
+                        <Link to="/book" className="btn">Register Now</Link>
                       </div>
                     </div>
                   </div>
@@ -362,7 +362,7 @@ class HomeComponent extends React.Component {
                         <li><i className="fa fa-check" />get PSA Tests FREE</li>
                       </ul>
                       <div className="plan-button">
-                        <Link to="/login" className="btn btn-light">Register Now</Link>
+                        <Link to="/book" className="btn btn-light">Register Now</Link>
                       </div>
                     </div>
                   </div>

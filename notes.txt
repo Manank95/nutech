@@ -5,8 +5,8 @@
 - landing page and routing
 - different headers for different context items
 - done - css fix for header
-- remove all a tag
-- fix warnings
+- done - remove all a tag
+- done - fix warnings
 - remove tracomo
 - remove comments
 
@@ -21,6 +21,9 @@
 -- payment page
 -- done - but (remove props if not used in the project) 404 page - 
 
+-- dashboard - calls order/list but token expired - cover this scenario
+-- loading animation at login and dashboard and payment
+-- redirection to 500 o server error!
 
 -- admin pages to view all patient details
 

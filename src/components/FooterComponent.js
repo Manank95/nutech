@@ -57,7 +57,7 @@ class FooterComponent extends React.Component {
           </div>
           <div className="copyright-content">
             <div className="container">
-              <div className="copyright-text text-center">© 2019 NUTECH CANCER BIOMARKERS INDIA PRIVATE LIMITED. All Rights Reserved.</div>
+              <div className="copyright-text text-center"><i className="fa fa-copyright"></i> 2019 NUTECH CANCER BIOMARKERS INDIA PRIVATE LIMITED. All Rights Reserved.</div>
             </div>
           </div>
         </footer>

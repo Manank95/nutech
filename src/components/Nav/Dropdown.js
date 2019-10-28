@@ -16,7 +16,7 @@ export default class Dropdown extends Component {
     return (
       <div className={styles.dropdownContainer}>
         <div onClick={this.open}>
-          {this.props.title}&nbsp;<i className="icofont-thin-down"></i>
+          {this.props.title}<i style={{fontWeight: 600}} className="icofont-thin-down"></i>
         </div>
         {this.state.open && <>
           <div className={styles.backdrop} onClick={this.close} />

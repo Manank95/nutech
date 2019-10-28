@@ -45,7 +45,8 @@ export default class AuthService {
   // }
 
   setToken(token) {
-    localStorage.setItem('id_token', token)
+    localStorage.setItem('id_token', token);
+    // localStorage.setItem('id_email', email);
   }
 
   getToken() {
@@ -56,8 +57,12 @@ export default class AuthService {
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
+    // localStorage.removeItem('id_email');
   }
 
+  // getEmail() {
+  //   return localStorage.getItem('id_email');
+  // }
   // getProfile() {
   //   // Using jwt-decode npm package to decode the token
   //   return decode(this.getToken());

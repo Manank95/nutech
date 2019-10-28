@@ -23,7 +23,7 @@ export default function DesktopNav() {
         ]} />
       <Link to="/home#services" className={styles.link}>Services</Link>
       <Link to="/home#contact" className={styles.link}>Contact</Link>
-      <Link to="/login" className={styles.link}>Login/ Signup</Link>
+      <Link to="/login" className={styles.link}>Login <i className="fa fa-user"></i></Link>
     </nav>
   );
 }
