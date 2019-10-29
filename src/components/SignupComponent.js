@@ -6,10 +6,6 @@ import FooterComponent from './FooterComponent';
 class SignupComponent extends React.Component {
   render() {
     return (
-      // <Redirect to={{
-      //   pathname: '/error',
-      //   state: {status: '500', message: "Hello there"}
-      // }} />
       <div>
       <Nav />
       <section className="fullscreen">

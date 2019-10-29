@@ -6,17 +6,14 @@ export default class Dropdown extends Component {
   state = {
     open: false
   }
-
   close = () => this.setState({ open: false })
-
-
   open = () => this.setState({ open: true })
 
   render() {
     return (
       <div className={styles.dropdownContainer}>
         <div onClick={this.open}>
-          {this.props.title}<i style={{fontWeight: 600}} className="icofont-thin-down"></i>
+          {this.props.title} {this.props.custom ? <i className="fa fa-user"></i>: <i style={{fontWeight: 600}} className="icofont-thin-down"></i>}
         </div>
         {this.state.open && <>
           <div className={styles.backdrop} onClick={this.close} />
