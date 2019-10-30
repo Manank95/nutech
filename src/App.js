@@ -11,6 +11,7 @@ import LoginComponent from './components/LoginComponent';
 import SignupComponent from './components/SignupComponent';
 import DashboardComponent from './components/DashboardComponent';
 import BookComponent from './components/BookComponent';
+import CheckoutComponent from './components/CheckoutComponent'
 import ErrorComponent from './error';
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
             <Route path="/signup" exact component={SignupComponent} />
             <Route path="/dashboard" exact component={DashboardComponent} />
             <Route path="/book" exact component={BookComponent} />
+            <Route path="/checkout" exact component={CheckoutComponent} />
             <Route path="/logout" render={() => {
               Auth.logout();
               return <Redirect to={{ pathname: "/login" }} />;
