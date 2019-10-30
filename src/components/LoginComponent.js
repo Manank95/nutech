@@ -32,7 +32,8 @@ class LoginComponent extends React.Component {
       })
       if (res.token) this.props.history.replace('/dashboard');
     } catch (e) {
-      alert(e);
+      this.props.history.push({pathname: '/error', state: {status: 500, message: 'Internal Server Error!'}})
+      // alert(e);
     }
   }
   render() {
