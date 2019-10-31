@@ -31,7 +31,7 @@ class DashboardComponent extends React.Component {
         return;
       }
       await this.setState({ testDetails: res, loading: false });
-      console.log(res);
+      // console.log(res);
     }
     catch (err) {
       this.Auth.logout()
@@ -43,12 +43,15 @@ class DashboardComponent extends React.Component {
     this.Auth.logout()
     this.props.history.replace('/login');
   }
-  customDiv(payment, report) {
+  customDiv(payment, report, index) {
     let obj = {};
     if (!payment) {
       obj.div = "panel panel-danger";
       obj.icon = <i className="fa fa-warning"></i>;
-      obj.button = <button type="button" className="btn btn-light btn-shadow">Pay Now</button>
+      obj.button = <Link to={{
+        pathname: '/checkout',
+        state: this.state.testDetails.Items[index]
+      }}><button type="button" className="btn btn-light btn-shadow">Pay Now</button></Link>
     }
     else if (!report) {
       obj.div = "panel panel-info";
@@ -108,7 +111,7 @@ class DashboardComponent extends React.Component {
                         </div>
                       </div>
                       <br />
-                      {this.customDiv(test.paymentDone, test.reportGenerated).button}
+                      {this.customDiv(test.paymentDone, test.reportGenerated, index).button}
                     </div>
                   </div>
                 ))}

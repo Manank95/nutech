@@ -29,6 +29,8 @@
 
 -I am not following the folder structure - Containers and components. Just going with only one component folder.
 
+-- re-captcha
+
 
 -Company     - About US        - Services    - Contact    - Login/ signup
   - Mission    - Who we are?
