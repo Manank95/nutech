@@ -2,13 +2,13 @@
 - done - gallery
 - done - blog
 - Login Signup and dashboard pages
-- landing page and routing
-- different headers for different context items
+- done - landing page and routing
+- done - different headers for different context items
 - done - css fix for header
 - done - remove all a tag
 - done - fix warnings
-- remove tracomo
-- remove comments
+- done - remove tracomo
+- remove comments and console.logs
 
 -- after Signup - verify your email
 -- after login - landing page/ dashboard
@@ -18,7 +18,7 @@
 -- update profile page
 -- 
 -- Forgot your password -- reset your password
--- payment page
+-- done payment page
 -- done - but (remove props if not used in the project) 404 page - 
 
 -- dashboard - calls order/list but token expired - cover this scenario
@@ -27,9 +27,8 @@
 
 -- admin pages to view all patient details
 
--I am not following the folder structure - Containers and components. Just going with only one component folder.
-
 -- re-captcha
+-- token logic for expiration
 
 
 -Company     - About US        - Services    - Contact    - Login/ signup

@@ -42,7 +42,7 @@ class CheckoutComponent extends React.Component {
       image: "https://i.ibb.co/HX7Vz3r/outputnusym.png",
       order_id: "order_DaYLpdh4EVS2sk",//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
       handler: function (response) {
-        //console.log('response', response, 'token', self.Auth.getToken());
+        console.log('response', response, 'token', self.Auth.getToken());
       },
       prefill: {
         name: this.state.details.fullName,
