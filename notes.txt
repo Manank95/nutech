@@ -20,7 +20,7 @@
 -- Forgot your password -- reset your password
 -- done payment page
 -- done - but (remove props if not used in the project) 404 page - 
-
+- cors restriction, multiple requests by robot - blacklist
 -- dashboard - calls order/list but token expired - cover this scenario
 -- loading animation at login and dashboard and payment
 -- redirection to 500 o server error!
