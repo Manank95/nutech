@@ -17,7 +17,7 @@ class HomeComponent extends React.Component {
         {/* Inspiro Slider */}
         <div id="slider" className="inspiro-slider arrows-large arrows-creative dots-creative" data-height-xs={360}>
           {/* Slide 1 */}
-          <div className="slide background-overlay-gradient background-image" style={{ backgroundImage: 'url("homepages/corporate-v7/images/1.jpg")' }}>
+          <div className="slide background-overlay-gradient background-image" style={{ backgroundImage: 'url("/homepages/corporate-v7/images/1.jpg")' }}>
             <div className="container">
               <div className="slide-captions text-center text-light">
                 {/* Captions */}
@@ -39,7 +39,7 @@ class HomeComponent extends React.Component {
           </div>
           {/* end: Slide 1 */}
           {/* Slide 2 */}
-          <div className="slide background-overlay-gradient kenburns background-image" style={{ backgroundImage: 'url("homepages/corporate-v7/images/2.jpg")' }}>
+          <div className="slide background-overlay-gradient kenburns background-image" style={{ backgroundImage: 'url("/homepages/corporate-v7/images/2.jpg")' }}>
             <div className="container">
               <div className="slide-captions text-left text-light">
                 {/* Captions */}
@@ -171,10 +171,10 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <img src="images/portfolio/1.jpg" alt="" />
+                      <img src="/images/portfolio/1.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
-                      <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/1.jpg"><i className="fa fa-expand" /></a>
+                      <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/1.jpg"><i className="fa fa-expand" /></a>
                     </div>
                   </div>
                 </div>
@@ -186,10 +186,10 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <img src="images/portfolio/2.jpg" alt="" />
+                      <img src="/images/portfolio/2.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
-                      <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/2.jpg"><i className="fa fa-expand" /></a>
+                      <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/2.jpg"><i className="fa fa-expand" /></a>
                     </div>
                   </div>
                 </div>
@@ -199,10 +199,10 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <img src="images/portfolio/3.jpg" alt="" />
+                      <img src="/images/portfolio/3.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
-                      <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/3.jpg"><i className="fa fa-expand" /></a>
+                      <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/3.jpg"><i className="fa fa-expand" /></a>
                     </div>
                   </div>
                 </div>
@@ -215,10 +215,10 @@ class HomeComponent extends React.Component {
                 <div className="portfolio-item img-zoom pf-illustrations pf-uielements pf-media">
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-image">
-                      <img src="images/portfolio/4.jpg" alt="" />
+                      <img src="/images/portfolio/4.jpg" alt="" />
                     </div>
                     <div className="portfolio-description">
-                      <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/4.jpg"><i className="fa fa-expand" /></a>
+                      <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/4.jpg"><i className="fa fa-expand" /></a>
                     </div>
                   </div>
                 </div>
@@ -228,16 +228,16 @@ class HomeComponent extends React.Component {
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-slider">
                       <div className="carousel dots-inside arrows-dark dots-dark" data-items={1} data-loop="true" data-autoplay="true" data-autoplay-timeout={1800}>
-                        <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/about.jpg"><img src="images/portfolio/about.jpg" alt="" /></a>
-                        <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/about3.jpg"><img src="images/portfolio/about3.jpg" alt="" /></a>
+                        <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/about.jpg"><img src="/images/portfolio/about.jpg" alt="" /></a>
+                        <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/about3.jpg"><img src="/images/portfolio/about3.jpg" alt="" /></a>
                       </div>
                     </div>
                     <div className="portfolio-description" data-lightbox="gallery">
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/about.jpg">
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="/images/portfolio/about.jpg">
                         <h3>NUTECH Promotions</h3>
                         <span>know more</span>
                       </a>
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/about3.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="/images/portfolio/about3.jpg" className="hidden">.</a>
                     </div>
                   </div>
                 </div>
@@ -247,22 +247,22 @@ class HomeComponent extends React.Component {
                   <div className="portfolio-item-wrap">
                     <div className="portfolio-slider">
                       <div className="carousel dots-inside arrows-dark dots-dark" data-items={1} data-loop="true" data-autoplay="true" data-autoplay-timeout={1800}>
-                        <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/information.jpg"><img src="images/portfolio/information.jpg" alt="" /></a>
-                        <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/information1.jpg"><img src="images/portfolio/information1.jpg" alt="" /></a>
-                        <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/information2.jpg"><img src="images/portfolio/information2.jpg" alt="" /></a>
-                        <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/information2.jpg"><img src="images/portfolio/information3.jpg" alt="" /></a>
-                        <a title="NUTECH moments" data-lightbox="image" href="images/portfolio/information2.jpg"><img src="images/portfolio/information4.jpg" alt="" /></a>
+                        <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/information.jpg"><img src="/images/portfolio/information.jpg" alt="" /></a>
+                        <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/information1.jpg"><img src="/images/portfolio/information1.jpg" alt="" /></a>
+                        <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/information2.jpg"><img src="/images/portfolio/information2.jpg" alt="" /></a>
+                        <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/information2.jpg"><img src="/images/portfolio/information3.jpg" alt="" /></a>
+                        <a title="NUTECH moments" data-lightbox="image" href="/images/portfolio/information2.jpg"><img src="/images/portfolio/information4.jpg" alt="" /></a>
                       </div>
                     </div>
                     <div className="portfolio-description" data-lightbox="gallery">
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information.jpg">
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="/images/portfolio/information.jpg">
                         <h3>Useful Information</h3>
                         <span>about prostate cancer</span>
                       </a>
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information1.jpg" className="hidden">.</a>
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information2.jpg" className="hidden">.</a>
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information3.jpg" className="hidden">.</a>
-                      <a title="NUTECH moments" data-lightbox="gallery-item" href="images/portfolio/information4.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="/images/portfolio/information1.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="/images/portfolio/information2.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="/images/portfolio/information3.jpg" className="hidden">.</a>
+                      <a title="NUTECH moments" data-lightbox="gallery-item" href="/images/portfolio/information4.jpg" className="hidden">.</a>
                     </div>
                   </div>
                 </div>
@@ -277,7 +277,7 @@ class HomeComponent extends React.Component {
             <div className="post-item-wrap">
               <div className="post-quote-img">
                 <Link to="/blog" target="_blank">
-                  <img src="images/quote.png" alt="blog"/>
+                  <img src="/images/quote.png" alt="blog"/>
                 </Link>
                 <Link to="/blog"><span className="post-meta-category">Blog</span></Link>
               </div>
@@ -372,7 +372,7 @@ class HomeComponent extends React.Component {
           </div>
         </section>
         {/* Contact */}
-        <section id="contact" className="p-t-150 p-b-200" style={{ backgroundImage: 'url(homepages/branding/images/background-4.png)', backgroundPosition: '71% 22%' }}>
+        <section id="contact" className="p-t-150 p-b-200" style={{ backgroundImage: 'url(/homepages/branding/images/background-4.png)', backgroundPosition: '71% 22%' }}>
           <div className="container">
             <div className="row">
               <div className="col-md-6">

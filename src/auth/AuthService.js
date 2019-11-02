@@ -24,6 +24,36 @@ export default class AuthService {
     }
   }
 
+  async signup(fullName, email, password) {
+    try{
+      const res = await this.fetch(`${this.domain}/user/signup`, {
+        method: 'POST',
+        body: JSON.stringify({
+          fullName,
+          email,
+          password
+        })
+      });
+      console.log('myres', res);
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+
+  async verification(token) {
+    try{
+      const res = await this.fetch(`${this.domain}/user/verification/${token}`, {
+        method: 'GET'
+      });
+      console.log('myres', res);
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken() // GEtting token from localstorage
@@ -82,7 +112,7 @@ export default class AuthService {
         headers,
         ...options
       });
-      console.log('resfrom server',res.status);
+      console.log('resfrom server',res);
       return res.json();
     } catch(e) {
       console.log(e);

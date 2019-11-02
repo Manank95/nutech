@@ -10,7 +10,7 @@ export default function Nav() {
       <header className={styles.header}>
         <div className={styles.logo}>
           <Link to="/home">
-            <img src="images/logo.png" alt="NUTECH Logo" height='55px' />
+            <img src="/images/logo.png" alt="NUTECH Logo" height='55px' />
           </Link>
         </div>
         <DesktopNav />
