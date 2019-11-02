@@ -54,6 +54,35 @@ export default class AuthService {
     }
   }
 
+  async book(details) {
+    try{
+      const res = await this.fetch(`${this.domain}/order/book-test`, {
+        method: 'POST',
+        body: JSON.stringify(details)
+      });
+      console.log('myres', res);
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  async rzInitiate(id, userEmailId) {
+    try{
+      const res = await this.fetch(`${this.domain}/payment/initiate`, {
+        method: 'POST',
+        body: JSON.stringify({
+          id,
+          userEmailId
+        })
+      });
+      console.log('myres', res);
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken() // GEtting token from localstorage
@@ -113,6 +142,7 @@ export default class AuthService {
         ...options
       });
       console.log('resfrom server',res);
+      if(res.status === 401) return this.logout();
       return res.json();
     } catch(e) {
       console.log(e);

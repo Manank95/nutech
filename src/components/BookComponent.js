@@ -18,8 +18,8 @@ class BookComponent extends React.Component {
       pincode: '',
       testID: '',
       responseBackend: '',
-      error: '',
-      concentChecked: false
+      message: '',
+      consentChecked: false
     };
     this.domain = config.url;
     this.handleChange = this.handleChange.bind(this);
@@ -41,7 +41,7 @@ class BookComponent extends React.Component {
   }
 
   handleCheckbox(event) {
-    this.setState({ concentChecked: !this.state.concentChecked });
+    this.setState({ consentChecked: !this.state.consentChecked });
   }
 
   handleLogout() {
@@ -51,42 +51,15 @@ class BookComponent extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
-    // let options = {
-    //   method: 'POST',
-    //   url: `${this.domain}/test`,
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json;charset=UTF-8'
-    //   },
-    //   data: {
-    //     fullName: this.state.fullName,
-    //     email: this.state.email,
-    //     contact: this.state.contact,
-    //     gender: this.state.gender,
-    //     dob: this.state.dob,
-    //     area: this.state.area,
-    //     city: this.state.city,
-    //     pincode: this.state.pincode,
-    //     testID: this.state.testID,
-    //   },
-    //   withCredentials: true
-    // }
-    // try {
-    //   let response = await axios(options);
-    //   let responseOK = response && response.status === 200 && response.statusText === 'OK';
-    //   if (responseOK) {
-    //     let data = await response.data;
-    //     // do something with data
-    //     //console.log("data from node response",data);
-    //     if (data.error !== '') {
-    //       this.setState({ error: data.error });
-    //       console.log(data.error);
-    //     }
-    //   }
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    try {
+      let res = await this.Auth.book(this.state);
+      return this.setState({
+        message: res.message
+      })
+    } catch (e) {
+      this.props.history.push({pathname: '/error', state: {status: 500, message: 'Internal Server Error!'}})
+      // alert(e);
+    }
   }
   render() {
     return (
@@ -98,11 +71,18 @@ class BookComponent extends React.Component {
               <div className="row">
                 <div className="col-md-4 center p-30 background-white b-r-6">
                   <h3>Register for the Lab test</h3>
+                  {this.state.message !== '' && (
+                    <div role="alert" className="alert alert-danger alert-dismissible">
+                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                      {this.state.message}
+                    </div>
+                  )}
                   <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
 
                     <div className="form-group">
                       <label className="sr-only">TestName</label>
-                      <select value={this.state.testID} onChange={this.handleChange} name="testID">
+                      <select value={this.state.testID} onChange={this.handleChange} name="testID" required>
+                        <option value=''> Select a Test </option>
                         <option value="2500676"> SeroMark-1 </option>
                         <option value="2567592"> Total Prostate Specific Antigen (PSA) </option>
                         <option value="2567593"> Free  Prostate Specific Antigen (PSA) </option>
@@ -126,7 +106,8 @@ class BookComponent extends React.Component {
 
                     <div className="form-group">
                       <label className="sr-only">Gender</label>
-                      <select value={this.state.gender} onChange={this.handleChange} name="gender">
+                      <select value={this.state.gender} onChange={this.handleChange} name="gender" required>
+                        <option value=''> Select your gender</option>
                         <option value="Male"> Male</option>
                         <option value="Female">Female</option>
                       </select>
@@ -152,13 +133,13 @@ class BookComponent extends React.Component {
                     <div>
                       <input
                         type="checkbox"
-                        checked={this.state.concentChecked}
+                        checked={this.state.consentChecked}
                         onChange={this.handleCheckbox}
                       />
-                      &nbsp; Concent text
+                      &nbsp; Consent text
                     </div>
                     <div className="form-group">
-                      <button type="submit" className={this.state.concentChecked ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
+                      <button type="submit" className={this.state.consentChecked ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
                     </div>
                   </form>
                 </div>

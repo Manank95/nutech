@@ -53,7 +53,7 @@ class VerificationComponent extends React.Component {
               <div className="row">
                 <div className="col-md-4 center p-30 background-white b-r-6">
                   {
-                    this.state.message !== '' ?
+                    this.state.message === '' ?
                       (
                         <div>
                           <br /><br /><br /><br />
