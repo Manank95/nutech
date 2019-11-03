@@ -13,7 +13,7 @@ class SignupComponent extends React.Component {
       password: '',
       repassword: '',
       message: '',
-      color: ''
+      status: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.Auth = new AuthService();
@@ -35,7 +35,7 @@ class SignupComponent extends React.Component {
         if (res.message.startsWith('Signup Successful'))
           return this.setState({
             message: res.message,
-            color: 'green'
+            status: res.status
           })
 
         return this.setState({
@@ -56,9 +56,9 @@ class SignupComponent extends React.Component {
             <div className="text-middle">
               <div className="row">
                 <div className="col-md-4 center p-30 background-white b-r-6">
-                  {this.state.color === 'green' ? <h3>Verification Email Sent <i className="fa fa-check-circle"></i></h3> :<h3>Signup for NUTECH</h3>}
+                  {this.state.status === 200 ? <h3>Verification Email Sent <i className="fa fa-check-circle"></i></h3> :<h3>Signup for NUTECH</h3>}
                   {this.state.message !== '' && (
-                    <div role="alert" className={this.state.color === 'green' ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
+                    <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
                       <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
                       {this.state.message}
                     </div>

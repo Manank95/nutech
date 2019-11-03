@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../config';
 import Nav from '../components/Nav';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import FooterComponent from './FooterComponent';
 import AuthService from './../auth/AuthService';
 
@@ -20,18 +20,12 @@ class DashboardComponent extends React.Component {
     }
   }
   async componentDidMount() {
-    console.log('in component didmount')
     try {
       const res = await this.Auth.fetch(`${this.domain}/order/list`, {
         method: 'GET'
       });
-      if (res.message && res.message === 'No token provided.') {
-        this.Auth.logout();
-        this.props.history.replace('/login');
-        return;
-      }
-      await this.setState({ testDetails: res, loading: false });
-      // console.log(res);
+      if (res.status === 401) return <Redirect to='/logout' />;
+      return this.setState({ testDetails: res, loading: false });
     }
     catch (err) {
       this.Auth.logout()
@@ -94,6 +88,7 @@ class DashboardComponent extends React.Component {
                       <div className="panel-heading">
                         <h3 className="panel-title text-left">{new Date(test.created_at).toDateString()} {this.customDiv(test.paymentDone, test.reportGenerated).icon}</h3>
                       </div>
+                      <strong>Order ID:</strong> {test.id} <br />
                       <div className="row" style={{ padding: '0px 10px' }}>
                         <div className="col-md-6 text-left" style={{ padding: '0px 10px' }}>
                           <strong>Name:</strong> {test.fullName} <br />

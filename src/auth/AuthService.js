@@ -16,7 +16,6 @@ export default class AuthService {
           password
         })
       });
-      console.log('myres', res);
       if(res.token) this.setToken(res.token);
       return res;
     } catch(e) {
@@ -34,7 +33,6 @@ export default class AuthService {
           password
         })
       });
-      console.log('myres', res);
       return res;
     } catch(e) {
       console.log(e);
@@ -47,7 +45,6 @@ export default class AuthService {
       const res = await this.fetch(`${this.domain}/user/verification/${token}`, {
         method: 'GET'
       });
-      console.log('myres', res);
       return res;
     } catch(e) {
       console.log(e);
@@ -60,7 +57,6 @@ export default class AuthService {
         method: 'POST',
         body: JSON.stringify(details)
       });
-      console.log('myres', res);
       return res;
     } catch(e) {
       console.log(e);
@@ -76,7 +72,18 @@ export default class AuthService {
           userEmailId
         })
       });
-      console.log('myres', res);
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  async rzConfirmation(obj) {
+    try{
+      const res = await this.fetch(`${this.domain}/payment/confirmation`, {
+        method: 'POST',
+        body: JSON.stringify(obj)
+      });
       return res;
     } catch(e) {
       console.log(e);
@@ -141,9 +148,13 @@ export default class AuthService {
         headers,
         ...options
       });
-      console.log('resfrom server',res);
-      if(res.status === 401) return this.logout();
-      return res.json();
+      let status = res.status;
+      let json = await res.json();
+      let response = {
+        ...json,
+        status
+      }
+      return response;
     } catch(e) {
       console.log(e);
     }

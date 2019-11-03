@@ -8,13 +8,13 @@ class CheckoutComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: '',
       message: '',
       rzOrderId: null,
       loading: true,
       details: this.props.location.state,
+      done: false
     };
-    this.razorpayCallback = this.razorpayCallback.bind(this);
+    this.razorpayConfirmation = this.razorpayConfirmation.bind(this);
     this.handlePayment = this.handlePayment.bind(this);
     this.Auth = new AuthService();
     if (!this.Auth.loggedIn()) this.props.history.replace('/login');
@@ -28,22 +28,34 @@ class CheckoutComponent extends React.Component {
     document.body.appendChild(script);
     try {
       let res = await this.Auth.rzInitiate(this.state.details.id, this.state.details.userEmailId);
-      console.log(res);
+      if(res.status === 401) return <Redirect to='/logout' />
+      if(res.status === 400) return this.props.history.push({ pathname: '/error', state: { status: 400, message: res.message } })
       return this.setState({
         rzOrderId: res.razorpay_order_id,
+        status: res.status,
         loading: false
-      })
+      });
     } catch (e) {
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
       // alert(e);
     }
   }
-  async razorpayCallback(res) {
-    console.log(res);
+
+  async razorpayConfirmation(res) {
+    let obj = res;
+    obj.id = this.state.details.id;
+    try{
+      let res = await this.Auth.rzConfirmation(obj);
+      if (res.status === 401) return <Redirect to='/logout' />;
+      return this.setState({ done: true })
+    } catch (e) {
+      this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
+      // alert(e);
+    }
   }
+
   async handlePayment(e) {
     e.preventDefault();
-    const self = this;
     let options = {
       key: "rzp_test_rYV3I2H5tbvoQn", // Enter the Key ID generated from the Dashboard
       amount: this.state.details.amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
@@ -53,8 +65,7 @@ class CheckoutComponent extends React.Component {
       image: "https://i.ibb.co/HX7Vz3r/outputnusym.png",
       order_id: this.state.rzOrderId, //This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
       handler: (response) => {
-        this.razorpayCallback(response);
-        console.log('response', response, 'token', this.Auth.getToken());
+        this.razorpayConfirmation(response);
       },
       prefill: {
         name: this.state.details.fullName,

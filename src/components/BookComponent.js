@@ -3,6 +3,7 @@ import config from '../config';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from './../auth/AuthService';
+import { Link, Redirect } from 'react-router-dom';
 
 class BookComponent extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class BookComponent extends React.Component {
       testID: '',
       responseBackend: '',
       message: '',
+      status: null,
       consentChecked: false
     };
     this.domain = config.url;
@@ -31,11 +33,6 @@ class BookComponent extends React.Component {
       this.props.history.replace('/login')
     }
   }
-  async componentDidMount() {
-    console.log('in component didmount');
-  }
-
-
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -53,12 +50,13 @@ class BookComponent extends React.Component {
     event.preventDefault();
     try {
       let res = await this.Auth.book(this.state);
+      if (res.status === 401) return <Redirect to='/logout' />;
       return this.setState({
-        message: res.message
+        message: res.message,
+        status: res.status
       })
     } catch (e) {
       this.props.history.push({pathname: '/error', state: {status: 500, message: 'Internal Server Error!'}})
-      // alert(e);
     }
   }
   render() {
@@ -72,9 +70,9 @@ class BookComponent extends React.Component {
                 <div className="col-md-4 center p-30 background-white b-r-6">
                   <h3>Register for the Lab test</h3>
                   {this.state.message !== '' && (
-                    <div role="alert" className="alert alert-danger alert-dismissible">
+                    <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible": "alert alert-danger alert-dismissible"}>
                       <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                      {this.state.message}
+                      {this.state.status === 200 ? <Link to='/dashboard'><u>{this.state.message}</u></Link> : this.state.message}
                     </div>
                   )}
                   <form className="form-transparent-grey" onSubmit={this.handleSubmit}>

@@ -8,13 +8,15 @@ class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: '',
       email: '',
       password: '',
-      message: ''
+      status: null,
+      message: '',
+      lost: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.lostPassword = this.lostPassword.bind(this);
     this.Auth = new AuthService();
     if (this.Auth.loggedIn()) this.props.history.replace('/dashboard');
   }
@@ -22,13 +24,16 @@ class LoginComponent extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-
+  lostPassword() {
+    this.setState({lost: !this.state.lost})
+  }
   async handleSubmit(event) {
     event.preventDefault();
     try {
       let res = await this.Auth.login(this.state.email, this.state.password);
       this.setState({
-        message: res.message
+        message: res.message,
+        status: res.status
       })
       if (res.token) this.props.history.replace('/dashboard');
     } catch (e) {
@@ -40,14 +45,46 @@ class LoginComponent extends React.Component {
     return (
       <div>
         <Nav />
-        <section className="fullscreen">
+        {this.state.lost ? (
+          <section className="fullscreen">
+          <div className="container container-fullscreen">
+            <div className="text-middle">
+              <div className="row">
+                <div className="col-md-4 center p-30 background-white b-r-6">
+                  <h3>Forgot your Password?</h3>
+                  {this.state.message !== '' && (
+                    <div role="alert" className="alert alert-danger alert-dismissible">
+                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                      {this.state.message}
+                    </div>
+                  )}
+                  <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
+                    <div className="form-group m-b-5">
+                      <label className="sr-only">Email </label>
+                      <input type="email" className="form-control" placeholder="Email registered with our website" id="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                    </div>
+                    <div className="form-group form-inline">
+                      <Link onClick={this.lostPassword} to='/login' className="right"><small>Go Back to Login</small></Link>
+                    </div>
+                    <br />
+                    <div className="form-group">
+                      <button type="submit" className="btn btn-block">Recover Password</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        ) : (
+          <section className="fullscreen">
           <div className="container container-fullscreen">
             <div className="text-middle">
               <div className="row">
                 <div className="col-md-4 center p-30 background-white b-r-6">
                   <h3>Login to your Account</h3>
                   {this.state.message !== '' && (
-                    <div role="alert" className="alert alert-danger alert-dismissible">
+                    <div role="alert" className={this.state.status===200 ? "alert alert-success alert-dismissible": "alert alert-danger alert-dismissible" }>
                       <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
                       {this.state.message}
                     </div>
@@ -62,7 +99,7 @@ class LoginComponent extends React.Component {
                       <input type="password" className="form-control" placeholder="Password" id="password" name="password" value={this.state.password} onChange={this.handleChange} required />
                     </div>
                     <div className="form-group form-inline">
-                      <Link to="/forgot" className="right"><small>Lost your Password?</small></Link>
+                      <Link onClick={this.lostPassword} to='/login' className="right"><small>Lost your Password?</small></Link>
                     </div>
                     <br />
                     <div className="form-group">
@@ -76,6 +113,7 @@ class LoginComponent extends React.Component {
             </div>
           </div>
         </section>
+        )}
         <FooterComponent />
       </div>
     )
