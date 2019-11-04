@@ -1,5 +1,5 @@
 -- Business email address for gmail send (nodemailer)
--- redirect on book test success.
+-- redirect on book test success and disable the button.
 -- Change Password page
 -- dynamic test details loading on home page and booking page
 -- loading animation when needed
