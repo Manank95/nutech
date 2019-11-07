@@ -32,7 +32,7 @@ class SignupComponent extends React.Component {
     else {
       try {
         let res = await this.Auth.signup(this.state.fullName, this.state.email, this.state.password);
-        if (res.message.startsWith('Signup Successful'))
+        if (res.status === 200)
           return this.setState({
             message: res.message,
             status: res.status

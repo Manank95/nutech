@@ -47,7 +47,8 @@ class CheckoutComponent extends React.Component {
     try{
       let res = await this.Auth.rzConfirmation(obj);
       if (res.status === 401) return <Redirect to='/logout' />;
-      return this.setState({ done: true })
+      this.setState({ done: true });
+      return <Redirect to='/dashboard' />;
     } catch (e) {
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
       // alert(e);
