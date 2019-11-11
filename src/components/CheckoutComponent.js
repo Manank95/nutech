@@ -22,13 +22,14 @@ class CheckoutComponent extends React.Component {
   async componentDidMount() {
     // initiate payment call ( "userEmailId": "dharmikbshah@gmail.com", "id": "order_1ahjhu63kk2493q7s")
     // response = orderid from razorpay
+    if (!this.Auth.loggedIn()) return this.props.history.replace('/login');
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
     try {
       let res = await this.Auth.rzInitiate(this.state.details.id, this.state.details.userEmailId);
-      if(res.status === 401) return <Redirect to='/logout' />
+      if(res.status === 401) return this.props.history.replace('/logout');
       if(res.status === 400) return this.props.history.push({ pathname: '/error', state: { status: 400, message: res.message } })
       return this.setState({
         rzOrderId: res.razorpay_order_id,
@@ -46,9 +47,9 @@ class CheckoutComponent extends React.Component {
     obj.id = this.state.details.id;
     try{
       let res = await this.Auth.rzConfirmation(obj);
-      if (res.status === 401) return <Redirect to='/logout' />;
+      if (res.status === 401) return this.props.history.replace('/logout');;
       this.setState({ done: true });
-      return <Redirect to='/dashboard' />;
+      return this.props.history.replace('/dashboard');;
     } catch (e) {
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
       // alert(e);
@@ -77,7 +78,7 @@ class CheckoutComponent extends React.Component {
         address: "note value"
       },
       theme: {
-        color: "#F37254"
+        color: "#02b9bb"
       }
     };
     let rzp1 = new window.Razorpay(options);
@@ -109,7 +110,7 @@ class CheckoutComponent extends React.Component {
               <h3 style={{ marginBottom: 0 }}>Your Test Details</h3>
               <div className="row">
                 <div className="seperator"><i className="fa fa-credit-card"></i><i className="fa fa-cc-visa"></i>
-                  <i className="fa fa-cc-mastercard"></i><i className="fa fa-cc-amex"></i><i className="fa fa-cc-diners-club"></i>
+                  <i className="fa fa-cc-mastercard"></i><i className="fa fa-cc-amex"></i><i className="fa fa-cc-diners-club"></i><i className="fa fa-paypal"></i>
                 </div>
                 <div className="col-md-3"></div>
                 <div className="col-md-6">

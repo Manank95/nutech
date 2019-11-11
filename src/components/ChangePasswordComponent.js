@@ -2,7 +2,6 @@ import React from 'react';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from '../auth/AuthService';
-import { Redirect } from 'react-router-dom';
 
 class ChangePasswordComponent extends React.Component {
   constructor(props) {
@@ -31,7 +30,7 @@ class ChangePasswordComponent extends React.Component {
     else {
       try {
         let res = await this.Auth.changePassword(this.state.token, this.state.password);
-        if(res.status===401) return <Redirect to='/logout' />;
+        if(res.status===401) return this.props.history.replace('/logout');
       } catch (e) {
         this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
         // alert(e);

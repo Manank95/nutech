@@ -3,7 +3,8 @@ import config from '../config';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from './../auth/AuthService';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
 
 class BookComponent extends React.Component {
   constructor(props) {
@@ -12,10 +13,11 @@ class BookComponent extends React.Component {
       fullName: '',
       contact: '',
       email: '',
-      gender: '',
+      gender: 'Male',
       dob: '',
       area: '',
       city: '',
+      istate: '',
       pincode: '',
       testID: '',
       responseBackend: '',
@@ -33,6 +35,15 @@ class BookComponent extends React.Component {
       this.props.history.replace('/login')
     }
   }
+
+  componentDidMount() {
+    if (!this.Auth.loggedIn()) return this.props.history.replace('/login');
+    let decoded = jwt.decode(this.Auth.getToken());
+    this.setState({
+      fullName: decoded.fullName,
+      email: decoded.email
+    });
+  }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -48,103 +59,219 @@ class BookComponent extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    let obj = this.state;
+    obj.city = obj.city + ', ' + obj.istate;
     try {
-      let res = await this.Auth.book(this.state);
-      if (res.status === 401) return <Redirect to='/logout' />;
+      let res = await this.Auth.book(obj);
+      if (res.status === 401) return this.props.history.replace('/logout');
       return this.setState({
         message: res.message,
         status: res.status
       })
     } catch (e) {
-      this.props.history.push({pathname: '/error', state: {status: 500, message: 'Internal Server Error!'}})
+      this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
     }
   }
   render() {
     return (
       <div>
         <Nav />
-        <section className="fullscreen">
-          <div className="container container-fullscreen">
-            <div className="text-middle">
-              <div className="row">
-                <div className="col-md-4 center p-30 background-white b-r-6">
-                  <h3>Register for the Lab test</h3>
-                  {this.state.message !== '' && (
-                    <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible": "alert alert-danger alert-dismissible"}>
-                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                      {this.state.status === 200 ? <Link to='/dashboard'><u>{this.state.message}</u></Link> : this.state.message}
-                    </div>
-                  )}
-                  <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
+        <section className="container">
+          <div className="row">
+            <div className="col-md-6 text-left">
+              <div className="col-md-12 m-b-20">
+                <h3>Register for the Lab test</h3>
+                {this.state.message !== '' && (
+                  <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible m-b-0" : "alert alert-danger alert-dismissible  m-b-0"}>
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                    {this.state.status === 200 ? <Link to='/dashboard'><u>{this.state.message}</u></Link> : this.state.message}
+                  </div>
+                )}
+              </div>
+              <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
 
-                    <div className="form-group">
-                      <label className="sr-only">TestName</label>
-                      <select value={this.state.testID} onChange={this.handleChange} name="testID" required>
-                        <option value=''> Select a Test </option>
-                        <option value="2500676"> SeroMark-1 </option>
-                        <option value="2567592"> Total Prostate Specific Antigen (PSA) </option>
-                        <option value="2567593"> Free  Prostate Specific Antigen (PSA) </option>
-                      </select>
-                    </div>
-
-
-                    <div className="form-group">
-                      <label className="sr-only">Full Name</label>
-                      <input type="text" className="form-control" placeholder="Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required />
-                    </div>
-                    <div className="form-group">
-                      <label className="sr-only">Email</label>
-                      <input type="email" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                    </div>
-                    <div className="form-group">
-                      <label className="sr-only">Contact No. For communication</label>
-                      <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Contact No. For communication" name="contact" value={this.state.contact} onChange={this.handleChange} required />
-                    </div>
+                <div className="col-md-12 form-group">
+                  <label className="sr-only">TestName</label>
+                  <select value={this.state.testID} onChange={this.handleChange} name="testID" required>
+                    <option value=''> Select a Test </option>
+                    <option value="2500676"> SeroMark-1 </option>
+                    <option value="2567592"> Total Prostate Specific Antigen (PSA) </option>
+                    <option value="2567593"> Free  Prostate Specific Antigen (PSA) </option>
+                  </select>
+                </div>
 
 
-                    <div className="form-group">
-                      <label className="sr-only">Gender</label>
-                      <select value={this.state.gender} onChange={this.handleChange} name="gender" required>
-                        <option value=''> Select your gender</option>
-                        <option value="Male"> Male</option>
-                        <option value="Female">Female</option>
-                      </select>
+                <div className="col-md-12 form-group">
+                  <label className="sr-only">Full Name</label>
+                  <input type="text" className="form-control" placeholder="Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required />
+                </div>
+                <div className="col-md-6 form-group m-b-0">
+                  <label className="sr-only">Email</label>
+                  <input type="email" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                </div>
+                <div className="col-md-6 form-group m-b-0">
+                  <label className="sr-only">Phone No. For communication</label>
+                  <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. For communication" name="contact" value={this.state.contact} onChange={this.handleChange} required />
+                </div>
+                <div className="row">
+                  <div className="col-md-1"></div>
+                  <div className="col-md-4 text-left">
+                    <div className="radio">
+                      <label> <input type="radio" name="gender" id="optionsRadios1" defaultValue="male" defaultChecked /> Male </label>
                     </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="radio">
+                      <label> <input type="radio" name="gender" id="optionsRadios2" defaultValue="female" /> Female </label>
+                    </div>
+                  </div>
+                  <div className="col-md-1"></div>
+                </div>
 
+                <div className="col-md-12 form-group">
+                  <label className="sr-only">Date of Birth</label>
+                  <input type="date" className="form-control" placeholder="Date of Birth" name="dob" value={this.state.dob} onChange={this.handleChange} required />
+                </div>
+                <div className="col-md-6 form-group">
+                  <label className="sr-only">Address</label>
+                  <input type="text" className="form-control" placeholder="Address" name="area" value={this.state.area} onChange={this.handleChange} required />
+                </div>
+                <div className="col-md-6 form-group">
+                  <label className="sr-only">City</label>
+                  <input type="text" className="form-control" placeholder="City" name="city" value={this.state.city} onChange={this.handleChange} required />
+                </div>
 
-                    <div className="form-group">
-                      <label className="sr-only">Date of Birth</label>
-                      <input type="date" className="form-control" placeholder="Date of Birth" name="dob" value={this.state.dob} onChange={this.handleChange} required />
-                    </div>
-                    <div className="form-group">
-                      <label className="sr-only">Area</label>
-                      <input type="text" className="form-control" placeholder="Address" name="area" value={this.state.area} onChange={this.handleChange} required />
-                    </div>
-                    <div className="form-group">
-                      <label className="sr-only">City</label>
-                      <input type="text" className="form-control" placeholder="City" name="city" value={this.state.city} onChange={this.handleChange} required />
-                    </div>
-                    <div className="form-group">
-                      <label className="sr-only">Pincode</label>
-                      <input type="text" className="form-control" placeholder="Pincode" name="pincode" value={this.state.pincode} onChange={this.handleChange} required />
-                    </div>
-                    <div>
+                <div className="col-md-6 form-group m-b-0">
+                  <label className="sr-only">State</label>
+                  <select value={this.state.istate} onChange={this.handleChange} name="istate" required>
+                    <option value>State</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                    <option value="Daman and Diu">Daman and Diu</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Orissa">Orissa</option>
+                    <option value="Pondicherry">Pondicherry</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttaranchal">Uttaranchal</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="West Bengal">West Bengal</option>
+                  </select>
+                </div>
+
+                <div className="col-md-6 form-group m-b-0">
+                  <label className="sr-only">Pincode</label>
+                  <input type="text" pattern="[0-9]{6}" className="form-control" placeholder="6 digits Pincode" name="pincode" value={this.state.pincode} onChange={this.handleChange} required />
+                </div>
+                <div className="col-md-12 form-group m-b-0">
+                  <div className="checkbox">
+                    <label>
                       <input
                         type="checkbox"
                         checked={this.state.consentChecked}
                         onChange={this.handleCheckbox}
-                      />
-                      &nbsp; Consent text
-                    </div>
-                    <div className="form-group">
-                      <button type="submit" className={this.state.consentChecked ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
-                    </div>
-                  </form>
+                      />Consent text
+                      </label>
+                  </div>
+                </div>
+                <div className="col-md-12 form-group">
+                  <button type={this.state.consentChecked ? "submit" : "button"} className={this.state.consentChecked ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
+                </div>
+              </form>
+            </div>
+
+
+            <div className="col-md-6 text-left">
+              <div className="m-b-20">
+                <h3>Order Details</h3>
+                {this.state.message !== '' && (
+                  <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible m-b-0" : "alert alert-danger alert-dismissible  m-b-0"}>
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                    {this.state.status === 200 ? <Link to='/dashboard'><u>{this.state.message}</u></Link> : this.state.message}
+                  </div>
+                )}
+              </div>
+              <div className="row m-b-10">
+                <div className="col-md-7">
+                  <label className="sr-only">Coupon Code</label>
+                  <input type="text" className="form-control" placeholder="Coupon Code" name="coupon" />
+                </div>
+                <div className="col-md-3">
+                  <button type="button" className="btn btn-block">Apply</button>
+                </div>
+                <div className="col-md-2 loader-inner line-scale-pulse-out-rapid">
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
                 </div>
               </div>
+              <div className="table-responsive">
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <td className="cart-product-name">
+                        <strong>Order Subtotal</strong>
+                      </td>
+                      <td className="cart-product-name text-right">
+                        <span className="amount">₹4000</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="cart-product-name">
+                        <strong>Coupon</strong>
+                      </td>
+                      <td className="cart-product-name  text-right">
+                        <span className="amount">-20%</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="cart-product-name">
+                        <strong>Discount</strong>
+                      </td>
+                      <td className="cart-product-name  text-right">
+                        <span className="amount">-₹800</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="cart-product-name">
+                        <strong>Total</strong>
+                      </td>
+                      <td className="cart-product-name text-right">
+                        <span className="amount color lead"><strong>₹3200</strong></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+
           </div>
-          <button type="button" className="btn btn-light btn-xs" onClick={this.handleLogout.bind(this)}>Logout</button>
         </section>
         <FooterComponent />
       </div>

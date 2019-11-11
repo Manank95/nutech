@@ -72,11 +72,143 @@ class AboutComponent extends React.Component {
 									Applied Bioscience India Private Limited and has a Master’s degree in Microbiology with over 30 years of
               experience in distribution and sales.</p>
               </div>
-              <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0088841" target="_blank" rel="noopener noreferrer"  className="btn btn-dark btn-outline btn-rounded scroll-to">Find out More</a>
+              <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0088841" target="_blank" rel="noopener noreferrer" className="btn btn-dark btn-outline btn-rounded scroll-to">Find out More</a>
             </div>
           </div>
         </section>
-        <section className="box-fancy section-fullwidth text-light p-b-0 text-left">
+
+
+        {/* Team Start */}
+        <section id="team" className="background-grey p-t-60 p-b-60">
+        <div className="container">
+          <h3>Our Team</h3>
+          <div className="row team-members team-members-shadow m-b-40">
+            <div className="col-md-3">
+              <div className="team-member">
+                <div className="team-image">
+                  <img src="/images/team/6.jpg" alt='Dr. Uddhav Kelavkar' />
+                </div>
+                <div className="team-desc">
+                  <h3>Dr. Uddhav Kelavkar</h3>
+                  <span>Managing Director</span>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+                  <div className="align-center">
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
+                      <i className="fa fa-facebook" />
+                      <span>Facebook</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
+                      <i className="fa fa-twitter" />
+                      <span>Twitter</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="https://www.instagram.com" data-width={118}>
+                      <i className="fa fa-instagram" />
+                      <span>Instagram</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
+                      <i className="fa fa-envelope" />
+                      <span>Mail</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="team-member">
+                <div className="team-image">
+                  <img src="/images/team/7.jpg" alt='Kalpana Patel Kelavkar' />
+                </div>
+                <div className="team-desc">
+                  <h3>Kalpana Patel Kelavkar</h3>
+                  <span>Director</span>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+                  <div className="align-center">
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
+                      <i className="fa fa-facebook" />
+                      <span>Facebook</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
+                      <i className="fa fa-twitter" />
+                      <span>Twitter</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={118}>
+                      <i className="fa fa-instagram" />
+                      <span>Instagram</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
+                      <i className="fa fa-envelope" />
+                      <span>Mail</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="team-member">
+                <div className="team-image">
+                  <img src="/images/team/8.jpg" alt='Tushar Barad'/>
+                </div>
+                <div className="team-desc">
+                  <h3>Tushar Barad</h3>
+                  <span>Director</span>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+                  <div className="align-center">
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
+                      <i className="fa fa-facebook" />
+                      <span>Facebook</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
+                      <i className="fa fa-twitter" />
+                      <span>Twitter</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={118}>
+                      <i className="fa fa-instagram" />
+                      <span>Instagram</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
+                      <i className="fa fa-envelope" />
+                      <span>Mail</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-3">
+              <div className="team-member">
+                <div className="team-image">
+                  <img src="/images/team/9.jpg" alt='Rashmikant Choksey' />
+                </div>
+                <div className="team-desc">
+                  <h3>Rashmikant Choksey</h3>
+                  <span>CA</span>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+                  <div className="align-center">
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
+                      <i className="fa fa-facebook" />
+                      <span>Facebook</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
+                      <i className="fa fa-twitter" />
+                      <span>Twitter</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={118}>
+                      <i className="fa fa-instagram" />
+                      <span>Instagram</span>
+                    </a>
+                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
+                      <i className="fa fa-envelope" />
+                      <span>Mail</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+        {/* Team End */}
+
+        <section className="box-fancy section-fullwidth text-light p-b-0 p-t-0 text-left">
           <div className="row">
             <div style={{ backgroundColor: '#917d5d' }} className="col-md-4">
               <h1 className="text-large text-uppercase">01.</h1>
@@ -131,14 +263,14 @@ class AboutComponent extends React.Component {
 											Prostate specific antigen (PSA) tests to help physicians and their patients make the most informed
 											decision on the need for invasive testing. PSA tests aren't foolproof and there is no known
                   "normal"(<a href="http://www.webmd.com">http://www.webmd.com</a>). It's possible for your PSA levels
-                  to be elevated when cancer isn't
-                  present, and to not be elevated when cancer is present. Neither the PSA test nor the rectal
-                  examination (DRE) is 100% accurate and can give an abnormal result even when cancer is not present
-                  (known as a false positive result). In addition, normal results can occur even when cancer is present
-                  (false negative). The results with PSA test results may help to find prostate cancer early even before
-                  there are symptoms. Many small prostate cancers detected by PSA would never develop enough to cause
-                  any symptoms. Even if your PSA level is raised, this could be for reasons other than prostate cancer
-                  and you may have unnecessary stress. This is very important since the results of PSA and DRE
+                      to be elevated when cancer isn't
+                      present, and to not be elevated when cancer is present. Neither the PSA test nor the rectal
+                      examination (DRE) is 100% accurate and can give an abnormal result even when cancer is not present
+                      (known as a false positive result). In addition, normal results can occur even when cancer is present
+                      (false negative). The results with PSA test results may help to find prostate cancer early even before
+                      there are symptoms. Many small prostate cancers detected by PSA would never develop enough to cause
+                      any symptoms. Even if your PSA level is raised, this could be for reasons other than prostate cancer
+                      and you may have unnecessary stress. This is very important since the results of PSA and DRE
                   screenings lead to both under and over treatment of prostate cancer (PCa).<br />
                       SeroMark-1 Test offers several potential advantages to these uncertainties:<br />
                       1. This test is a physician recommended/or self-ordered, is easy and results obtained within 1

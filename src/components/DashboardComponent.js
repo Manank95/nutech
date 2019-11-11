@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../config';
 import Nav from '../components/Nav';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FooterComponent from './FooterComponent';
 import AuthService from './../auth/AuthService';
 
@@ -24,7 +24,8 @@ class DashboardComponent extends React.Component {
       const res = await this.Auth.fetch(`${this.domain}/order/list`, {
         method: 'GET'
       });
-      if (res.status === 401) return <Redirect to='/logout' />;
+      console.log(res);
+      if (res.status === 401) return this.props.history.replace('/logout');
       return this.setState({ testDetails: res, loading: false });
     }
     catch (err) {

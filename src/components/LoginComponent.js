@@ -25,7 +25,7 @@ class LoginComponent extends React.Component {
   }
 
   lostPassword() {
-    this.setState({lost: !this.state.lost})
+    this.setState({ lost: !this.state.lost })
   }
   async handleSubmit(event) {
     event.preventDefault();
@@ -37,7 +37,7 @@ class LoginComponent extends React.Component {
       })
       if (res.token) this.props.history.replace('/dashboard');
     } catch (e) {
-      this.props.history.push({pathname: '/error', state: {status: 500, message: 'Internal Server Error!'}})
+      this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
       // alert(e);
     }
   }
@@ -46,45 +46,39 @@ class LoginComponent extends React.Component {
       <div>
         <Nav />
         {this.state.lost ? (
-          <section className="fullscreen">
-          <div className="container container-fullscreen">
-            <div className="text-middle">
-              <div className="row">
-                <div className="col-md-4 center p-30 background-white b-r-6">
-                  <h3>Forgot your Password?</h3>
-                  {this.state.message !== '' && (
-                    <div role="alert" className="alert alert-danger alert-dismissible">
-                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                      {this.state.message}
-                    </div>
-                  )}
-                  <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
-                    <div className="form-group m-b-5">
-                      <label className="sr-only">Email </label>
-                      <input type="email" className="form-control" placeholder="Email registered with our website" id="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                    </div>
-                    <div className="form-group form-inline">
-                      <Link onClick={this.lostPassword} to='/login' className="right"><small>Go Back to Login</small></Link>
-                    </div>
-                    <br />
-                    <div className="form-group">
-                      <button type="submit" className="btn btn-block">Recover Password</button>
-                    </div>
-                  </form>
-                </div>
+          <section className="container">
+            <div className="row">
+              <div className="col-md-5 center background-white">
+                <h3>Forgot your Password?</h3>
+                {this.state.message !== '' && (
+                  <div role="alert" className="alert alert-danger alert-dismissible">
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                    {this.state.message}
+                  </div>
+                )}
+                <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
+                  <div className="form-group m-b-5">
+                    <label className="sr-only">Email </label>
+                    <input type="email" className="form-control" placeholder="Email registered with our website" id="email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                  </div>
+                  <div className="form-group form-inline">
+                    <Link onClick={this.lostPassword} to='/login' className="right"><small>Go Back to Login</small></Link>
+                  </div>
+                  <br />
+                  <div className="form-group">
+                    <button type="submit" className="btn btn-block">Recover Password</button>
+                  </div>
+                </form>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
         ) : (
-          <section className="fullscreen">
-          <div className="container container-fullscreen">
-            <div className="text-middle">
+            <section className="container">
               <div className="row">
-                <div className="col-md-4 center p-30 background-white b-r-6">
+                <div className="col-md-5 center background-white">
                   <h3>Login to your Account</h3>
                   {this.state.message !== '' && (
-                    <div role="alert" className={this.state.status===200 ? "alert alert-success alert-dismissible": "alert alert-danger alert-dismissible" }>
+                    <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
                       <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
                       {this.state.message}
                     </div>
@@ -110,10 +104,8 @@ class LoginComponent extends React.Component {
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-        )}
+            </section>
+          )}
         <FooterComponent />
       </div>
     )
