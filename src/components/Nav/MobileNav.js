@@ -41,7 +41,11 @@ export default class MobileNav extends Component {
 
               <hr className={styles.divider} />
 
-              <Link to="/book" className={styles.link} onClick={this.close}>Book Test</Link>
+              <Link to="/book" style={{margin:"0px 20px"}} onClick={this.close}>
+                <button type="button" style={{margin: "0px"}} className="btn btn-rounded btn-reveal btn-sm btn-success">
+                  <span>Book Test</span><i className="fa fa-arrow-right"></i>
+                </button>
+              </Link>
 
               <hr className={styles.divider} />
 
@@ -60,6 +64,11 @@ export default class MobileNav extends Component {
           <div className={styles.backdrop_mobile} onClick={this.close} />
           <nav className={styles.sideDrawer}>
             <div className={styles.links_mobile}>
+              <Link to="/book" style={{margin:"0px 20px"}} onClick={this.close}>
+                <button type="button" style={{margin: "0px"}} className="btn btn-rounded btn-reveal btn-sm btn-success">
+                  <span>Book Test</span><i className="fa fa-arrow-right"></i>
+                </button>
+              </Link>
               <Link to="/home#mission" className={styles.link} onClick={this.close}>Mission</Link>
               <Link to="/home#facts" className={styles.link} onClick={this.close}>Facts</Link>
               <Link to="/home#gallery" className={styles.link} onClick={this.close}>Gallery</Link>

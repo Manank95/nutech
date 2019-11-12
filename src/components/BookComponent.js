@@ -113,8 +113,7 @@ class BookComponent extends React.Component {
                   <label className="sr-only">Phone No. For communication</label>
                   <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. For communication" name="contact" value={this.state.contact} onChange={this.handleChange} required />
                 </div>
-                <div className="row">
-                  <div className="col-md-1"></div>
+                <div className="col-md-12">
                   <div className="col-md-4 text-left">
                     <div className="radio">
                       <label> <input type="radio" name="gender" id="optionsRadios1" defaultValue="male" defaultChecked /> Male </label>
@@ -125,7 +124,6 @@ class BookComponent extends React.Component {
                       <label> <input type="radio" name="gender" id="optionsRadios2" defaultValue="female" /> Female </label>
                     </div>
                   </div>
-                  <div className="col-md-1"></div>
                 </div>
 
                 <div className="col-md-12 form-group">
@@ -143,7 +141,7 @@ class BookComponent extends React.Component {
 
                 <div className="col-md-6 form-group m-b-0">
                   <label className="sr-only">State</label>
-                  <select value={this.state.istate} onChange={this.handleChange} name="istate" required>
+                  <select className="form-control" value={this.state.istate} onChange={this.handleChange} name="istate" required>
                     <option value>State</option>
                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -223,7 +221,7 @@ class BookComponent extends React.Component {
                 <div className="col-md-3">
                   <button type="button" className="btn btn-block">Apply</button>
                 </div>
-                <div className="col-md-2 loader-inner line-scale-pulse-out-rapid">
+                <div className="text-center col-md-2 loader-inner line-scale-pulse-out-rapid">
                   <div />
                   <div />
                   <div />
