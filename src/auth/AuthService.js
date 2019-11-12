@@ -51,6 +51,17 @@ export default class AuthService {
     }
   }
 
+  async checkCoupon(couponCode) {
+    try{
+      const res = await this.fetch(`${this.domain}/coupon/${couponCode}`, {
+        method: 'GET'
+      });
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
   async book(details) {
     try{
       const res = await this.fetch(`${this.domain}/order/book-test`, {

@@ -8,7 +8,6 @@
 -- cors restriction, multiple requests by robot - blacklist
 -- empty dashboard, internet explorer 
 -- token expiry
-- done?? - dashboard - calls order/list but token expired - cover this scenario
 -- contact us form email
 -- remove comments
 - partially - test registration form
@@ -19,7 +18,11 @@
 -- image optimize for gallery/ team
 -- redirecting to desired path on login
 -- token logic for expiration
+-- redirect to dashboard after book test/ payment
+-- Show DOB text in the form
+-- Loading animation before login and signup
 
+- done?? - dashboard - calls order/list but token expired - cover this scenario
 - done - gallery
 - done - blog
 - done - Login Signup and dashboard pages

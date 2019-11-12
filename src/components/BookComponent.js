@@ -20,7 +20,11 @@ class BookComponent extends React.Component {
       istate: '',
       pincode: '',
       testID: '',
-      responseBackend: '',
+      couponCode: '',
+      couponMessage: '',
+      discountPercent: '',
+      isLoadingCoupon: false,
+      couponStatus: null,
       message: '',
       status: null,
       consentChecked: false
@@ -30,6 +34,7 @@ class BookComponent extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.checkCoupon = this.checkCoupon.bind(this);
     this.Auth = new AuthService();
     if (!this.Auth.loggedIn()) {
       this.props.history.replace('/login')
@@ -46,6 +51,32 @@ class BookComponent extends React.Component {
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  async checkCoupon() {
+    this.setState({
+      isLoadingCoupon: true
+    })
+    let couponCode = this.state.couponCode;
+    try{
+      let res = await this.Auth.checkCoupon(couponCode);
+      if (res.status === 401) return this.props.history.replace('/logout');
+      if (res.status !== 200) return this.setState({
+        isLoadingCoupon: false,
+        couponMessage: res.message,
+        couponStatus: res.status
+      });
+      return this.setState({
+        isLoadingCoupon: false,
+        discountPercent: res.discountPercent,
+        couponStatus: res.status
+      });
+    } catch(e) {
+      this.setState({
+        couponMessage: "Something went wrong! Please try again.",
+        isLoadingCoupon: false
+      })
+    }
   }
 
   handleCheckbox(event) {
@@ -78,21 +109,22 @@ class BookComponent extends React.Component {
         <Nav />
         <section className="container">
           <div className="row">
-            <div className="col-md-6 text-left">
-              <div className="col-md-12 m-b-20">
-                <h3>Register for the Lab test</h3>
-                {this.state.message !== '' && (
-                  <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible m-b-0" : "alert alert-danger alert-dismissible  m-b-0"}>
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                    {this.state.status === 200 ? <Link to='/dashboard'><u>{this.state.message}</u></Link> : this.state.message}
-                  </div>
-                )}
-              </div>
-              <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
+            <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
+              <div className="col-md-6 text-left">
+                <div className="col-md-12 m-b-20">
+                  <h3>Register for the Lab test</h3>
+                  {this.state.message !== '' && (
+                    <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible m-b-0" : "alert alert-danger alert-dismissible  m-b-0"}>
+                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                      {this.state.status === 200 ? <Link to='/dashboard'><u>{this.state.message}</u></Link> : this.state.message}
+                    </div>
+                  )}
+                </div>
+
 
                 <div className="col-md-12 form-group">
                   <label className="sr-only">TestName</label>
-                  <select value={this.state.testID} onChange={this.handleChange} name="testID" required>
+                  <select className="form-control" value={this.state.testID} onChange={this.handleChange} name="testID" required>
                     <option value=''> Select a Test </option>
                     <option value="2500676"> SeroMark-1 </option>
                     <option value="2567592"> Total Prostate Specific Antigen (PSA) </option>
@@ -185,6 +217,72 @@ class BookComponent extends React.Component {
                   <label className="sr-only">Pincode</label>
                   <input type="text" pattern="[0-9]{6}" className="form-control" placeholder="6 digits Pincode" name="pincode" value={this.state.pincode} onChange={this.handleChange} required />
                 </div>
+              </div>
+
+              <div className="col-md-6 text-left">
+                <div className="m-b-20">
+                  <h3>Order Details</h3>
+                  {this.state.couponStatus !== null && (
+                    <div role="alert" className={this.state.couponStatus === 200 ? "alert alert-success alert-dismissible m-b-0" : "alert alert-danger alert-dismissible  m-b-0"}>
+                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                      {this.state.couponStatus === 200 ? "Coupon applied successfully!" : this.state.couponMessage}
+                    </div>
+                  )}
+                </div>
+                <div className="row m-b-10">
+                  <div className="col-md-7">
+                    <label className="sr-only">Coupon Code</label>
+                    <input type="text" className="form-control" placeholder="Coupon Code" name="couponCode" value={this.state.couponCode} onChange={this.handleChange} />
+                  </div>
+                  <div className="col-md-3">
+                    <button type="button" onClick={this.checkCoupon} className="btn btn-block">Apply</button>
+                  </div>
+                  {this.state.isLoadingCoupon && (<div className="text-center col-md-2 loader-inner line-scale-pulse-out-rapid">
+                    <div />
+                    <div />
+                    <div />
+                    <div />
+                    <div />
+                  </div>)}
+                </div>
+                <div className="table-responsive">
+                  <table className="table">
+                    <tbody>
+                      <tr>
+                        <td className="cart-product-name">
+                          <strong>Order Subtotal</strong>
+                        </td>
+                        <td className="cart-product-name text-right">
+                          <span className="amount">₹4000</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="cart-product-name">
+                          <strong>Coupon</strong>
+                        </td>
+                        <td className="cart-product-name  text-right">
+                          <span className="amount">-20%</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="cart-product-name">
+                          <strong>Discount</strong>
+                        </td>
+                        <td className="cart-product-name  text-right">
+                          <span className="amount">-₹800</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="cart-product-name">
+                          <strong>Total</strong>
+                        </td>
+                        <td className="cart-product-name text-right">
+                          <span className="amount color lead"><strong>₹3200</strong></span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <div className="col-md-12 form-group m-b-0">
                   <div className="checkbox">
                     <label>
@@ -199,76 +297,8 @@ class BookComponent extends React.Component {
                 <div className="col-md-12 form-group">
                   <button type={this.state.consentChecked ? "submit" : "button"} className={this.state.consentChecked ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
                 </div>
-              </form>
-            </div>
-
-
-            <div className="col-md-6 text-left">
-              <div className="m-b-20">
-                <h3>Order Details</h3>
-                {this.state.message !== '' && (
-                  <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible m-b-0" : "alert alert-danger alert-dismissible  m-b-0"}>
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                    {this.state.status === 200 ? <Link to='/dashboard'><u>{this.state.message}</u></Link> : this.state.message}
-                  </div>
-                )}
               </div>
-              <div className="row m-b-10">
-                <div className="col-md-7">
-                  <label className="sr-only">Coupon Code</label>
-                  <input type="text" className="form-control" placeholder="Coupon Code" name="coupon" />
-                </div>
-                <div className="col-md-3">
-                  <button type="button" className="btn btn-block">Apply</button>
-                </div>
-                <div className="text-center col-md-2 loader-inner line-scale-pulse-out-rapid">
-                  <div />
-                  <div />
-                  <div />
-                  <div />
-                  <div />
-                </div>
-              </div>
-              <div className="table-responsive">
-                <table className="table">
-                  <tbody>
-                    <tr>
-                      <td className="cart-product-name">
-                        <strong>Order Subtotal</strong>
-                      </td>
-                      <td className="cart-product-name text-right">
-                        <span className="amount">₹4000</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="cart-product-name">
-                        <strong>Coupon</strong>
-                      </td>
-                      <td className="cart-product-name  text-right">
-                        <span className="amount">-20%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="cart-product-name">
-                        <strong>Discount</strong>
-                      </td>
-                      <td className="cart-product-name  text-right">
-                        <span className="amount">-₹800</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="cart-product-name">
-                        <strong>Total</strong>
-                      </td>
-                      <td className="cart-product-name text-right">
-                        <span className="amount color lead"><strong>₹3200</strong></span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
+            </form>
           </div>
         </section>
         <FooterComponent />
