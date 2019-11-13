@@ -3,13 +3,12 @@
 -- Change Password page
 -- dynamic test details loading on home page and booking page
 -- loading animation when needed
--- ask about email SES
 -- Book test form validation for date and other critical field
 -- cors restriction, multiple requests by robot - blacklist
 -- empty dashboard, internet explorer 
 -- token expiry
 -- contact us form email
--- remove comments
+-- remove comments, console.logs
 - partially - test registration form
 // -- update profile page
 -- discuss and move razorpay payment script tag to html
@@ -22,6 +21,7 @@
 -- Show DOB text in the form
 -- Loading animation before login and signup
 
+- done - ask about email SES
 - done?? - dashboard - calls order/list but token expired - cover this scenario
 - done - gallery
 - done - blog

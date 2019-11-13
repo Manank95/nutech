@@ -49,7 +49,7 @@ export default class MobileNav extends Component {
 
               <hr className={styles.divider} />
 
-              <Link to="/profile" className={styles.link} onClick={this.close}>Profile</Link>
+              <Link to="/changepassword" className={styles.link} onClick={this.close}>Password</Link>
               <Link to="/logout" className={styles.link} onClick={this.close}>Logout</Link>
             </div>
           </nav>

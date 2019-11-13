@@ -101,6 +101,18 @@ export default class AuthService {
     }
   }
 
+  async getReport(id) {
+    try{
+      const res = await this.fetch(`${this.domain}/order/fetch-report/${id}`, {
+        method: 'GET'
+      });
+      console.log('pdfres',res);
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken() // GEtting token from localstorage

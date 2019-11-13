@@ -14,6 +14,7 @@ class DashboardComponent extends React.Component {
     };
     this.domain = config.url;
     this.handleLogout = this.handleLogout.bind(this);
+    this.getReport = this.getReport.bind(this);
     this.Auth = new AuthService();
     if (!this.Auth.loggedIn()) {
       this.props.history.replace('/login')
@@ -31,6 +32,15 @@ class DashboardComponent extends React.Component {
     catch (err) {
       this.Auth.logout()
       this.props.history.replace('/login')
+    }
+  }
+
+  async getReport(id){
+    try{
+      const reportRes = await this.Auth.getReport(id.id);
+      if(reportRes.status === 401) return this.props.history.replace('/logout');
+    } catch (e) {
+      this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
     }
   }
 
@@ -56,7 +66,7 @@ class DashboardComponent extends React.Component {
     else {
       obj.div = "panel panel-success";
       obj.icon = <i className="fa fa-check-circle"></i>;
-      obj.button = <button type="button" className="btn btn-light btn-shadow">View Report</button>
+      obj.button = <button type="button" onClick={() => this.getReport(this.state.testDetails.Items[index])} className="btn btn-light btn-shadow">View Report</button>
     }
     return obj;
   }

@@ -34,7 +34,7 @@ export default function DesktopNav() {
         title={decoded.fullName.split(' ')[0] }
         custom={true}
         links={[
-          { to: "/profile", tag: "Profile" },
+          { to: "/changepassword", tag: "Password" },
           { to: "/logout", tag: "Logout" }
         ]} />
     </nav>)

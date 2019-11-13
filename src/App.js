@@ -33,6 +33,7 @@ class App extends Component {
             <Route path="/book" exact component={BookComponent} />
             <Route path="/checkout" exact component={CheckoutComponent} />
             <Route path="/verification/:token" exact component={VerificationComponent} />
+            <Route path="/changepassword" exact component={ChangePasswordComponent} />
             <Route path="/change-password/:token" exact component={ChangePasswordComponent} />
             <Route path="/logout" render={() => {
               Auth.logout();

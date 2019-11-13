@@ -277,7 +277,7 @@ class HomeComponent extends React.Component {
             <div className="post-item-wrap">
               <div className="post-quote-img">
                 <Link to="/blog" target="_blank">
-                  <img src="/images/quote.png" alt="blog"/>
+                  <img src="/images/quote.png" alt="blog" />
                 </Link>
                 <Link to="/blog"><span className="post-meta-category">Blog</span></Link>
               </div>
@@ -308,65 +308,34 @@ class HomeComponent extends React.Component {
               </div>
               <div className="col-md-2  col-md-offset-3 p-t-60">
                 <a href="#contact" className="btn btn-light btn-shadow btn-rounded btn-reveal btn-reveal-left scroll-to"><span>
-                  Register </span><i className="fa fa-long-arrow-right" /></a>
+                  Contact Us </span><i className="fa fa-long-arrow-right" /></a>
               </div>
             </div>
+
             <div className="row">
               <div className="pricing-table">
-                <div className="col-md-4 col-sm-12 col-xs-12">
-                  <div className="plan">
-                    <div className="plan-header">
-                      <h4>SeroMark-1 Test only</h4>
-                      <p className="text-muted">SeroMark-1 Test only</p>
-                      <div className="plan-price"><sup>₹</sup>3000</div>
-                    </div>
-                    <div className="plan-list">
-                      <ul>
-                        <li><i className="fa fa-check" /> bundle test- Discounted 50%</li>
-                        <li><i className="fa fa-check" />get PSA Tests FREE</li>
-                      </ul>
-                      <div className="plan-button">
-                        <Link to="/book" className="btn btn-light">Register Now</Link>
+              { config.services.map((item,index) => {
+                  return (<div key={index} className="col-md-3 col-sm-12 col-xs-12">
+                    <div className={index === Math.floor(config.services.length / 2)-1 ? "plan featured": "plan"}>
+                      <div className="plan-header">
+                        <h4>{item.testName}</h4>
+                        <p className="text-muted">{item.description}</p>
+                        <div className="plan-price"><sup>₹</sup>{item.testAmount}</div>
+                      </div>
+                      <div className="plan-list">
+                        <ul>
+                          {item.points.map((point, id) => {
+                            return <li key={id}>{id===3 ? <span className="label label-default">NEW</span>: <i className="fa fa-check" />}{point}</li>
+                          })}
+                        </ul>
+                        <div className="plan-button">
+                          <Link to="/book" className="btn">Book Now</Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-12 col-xs-12">
-                  <div className="plan featured">
-                    <div className="plan-header">
-                      <h4>SeroMark-1 Screening Test</h4>
-                      <p className="text-muted">Bundle Test</p>
-                      <div className="plan-price"><sup>₹</sup>4000</div>
-                    </div>
-                    <div className="plan-list">
-                      <ul>
-                        <li><i className="fa fa-check" /> bundle test- Discounted 50%</li>
-                        <li><i className="fa fa-check" />get PSA Tests FREE</li>
-                      </ul>
-                      <div className="plan-button">
-                        <Link to="/book" className="btn">Register Now</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-12 col-xs-12">
-                  <div className="plan">
-                    <div className="plan-header">
-                      <h4>Total PSA-tPSA Test</h4>
-                      <p className="text-muted">get PSA Tests FREE</p>
-                      <div className="plan-price"><sup>₹</sup>5000</div>
-                    </div>
-                    <div className="plan-list">
-                      <ul>
-                        <li><i className="fa fa-check" /> bundle test- Discounted 50%</li>
-                        <li><i className="fa fa-check" />get PSA Tests FREE</li>
-                      </ul>
-                      <div className="plan-button">
-                        <Link to="/book" className="btn btn-light">Register Now</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  </div>)
+                })
+              }
               </div>
             </div>
           </div>

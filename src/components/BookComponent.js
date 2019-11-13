@@ -20,6 +20,7 @@ class BookComponent extends React.Component {
       istate: '',
       pincode: '',
       testID: '',
+      testAmount: null,
       couponCode: '',
       couponMessage: '',
       discountPercent: '',
@@ -35,6 +36,7 @@ class BookComponent extends React.Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.checkCoupon = this.checkCoupon.bind(this);
+    this.handleChangeTest = this.handleChangeTest.bind(this);
     this.Auth = new AuthService();
     if (!this.Auth.loggedIn()) {
       this.props.history.replace('/login')
@@ -53,6 +55,14 @@ class BookComponent extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  handleChangeTest(event) {
+    console.log(event.target.datatestamount);
+    this.setState({
+      testID: event.target.value,
+      testAmount: event.target.datatestamount
+    },()=>console.log(this.state.testID, this.state.testAmount));
+  }
+
   async checkCoupon() {
     this.setState({
       isLoadingCoupon: true
@@ -60,6 +70,7 @@ class BookComponent extends React.Component {
     let couponCode = this.state.couponCode;
     try{
       let res = await this.Auth.checkCoupon(couponCode);
+      console.log(res);
       if (res.status === 401) return this.props.history.replace('/logout');
       if (res.status !== 200) return this.setState({
         isLoadingCoupon: false,
@@ -124,11 +135,11 @@ class BookComponent extends React.Component {
 
                 <div className="col-md-12 form-group">
                   <label className="sr-only">TestName</label>
-                  <select className="form-control" value={this.state.testID} onChange={this.handleChange} name="testID" required>
+                  <select className="form-control" value={this.state.testID} onChange={this.handleChangeTest} name="testID" required>
                     <option value=''> Select a Test </option>
-                    <option value="2500676"> SeroMark-1 </option>
-                    <option value="2567592"> Total Prostate Specific Antigen (PSA) </option>
-                    <option value="2567593"> Free  Prostate Specific Antigen (PSA) </option>
+                    {config.services.map((item, index)=>{
+                      return <option key={index} datatestamount={item.testAmount} value={item.testID}>{item.testName}</option>
+                    })}
                   </select>
                 </div>
 
