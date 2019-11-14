@@ -1,4 +1,5 @@
 import config from '../config';
+let download = require('downloadjs');
 export default class AuthService {
   constructor(domain) {
     this.domain = domain || config.url;
@@ -103,11 +104,22 @@ export default class AuthService {
 
   async getReport(id) {
     try{
-      const res = await this.fetch(`${this.domain}/order/fetch-report/${id}`, {
-        method: 'GET'
+      // window.location = `${this.domain}/order/fetch-report/${id}`;
+      // window.open(`${this.domain}/order/fetch-report/${id}`);
+      // console.log('pdfres',res);
+      // return res;
+      let url = `${this.domain}/order/fetch-report/${id}`;
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Authorization': this.getToken()
+        }
+      }).then(function(resp) {
+        if(resp.status===401) throw new Error();
+        return resp.blob();
+      }).then(function(blob) {
+        download(blob);
       });
-      console.log('pdfres',res);
-      return res;
     } catch(e) {
       console.log(e);
     }

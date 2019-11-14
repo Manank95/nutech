@@ -33,6 +33,7 @@ export default function DesktopNav() {
       <Dropdown
         title={decoded.fullName.split(' ')[0] }
         custom={true}
+        isLast
         links={[
           { to: "/changepassword", tag: "Password" },
           { to: "/logout", tag: "Logout" }
@@ -53,10 +54,10 @@ export default function DesktopNav() {
         links={[
           { to: "/about#whoweare", tag: "Who we are" },
           { to: "/about#faqs", tag: "FAQs" },
-          { to: "/about#resources", tag: "Resources" }
+          { to: "/about#resources", tag: "Resources" },
+          { to: "/home#contact", tag:"Contact"}
         ]} />
       <Link to="/home#services" className={styles.link}>Services</Link>
-      <Link to="/home#contact" className={styles.link}>Contact</Link>
       <Link to="/login" className={styles.link}>Login <i className="fa fa-user"></i></Link>
     </nav>)
   );

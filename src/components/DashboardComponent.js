@@ -37,9 +37,11 @@ class DashboardComponent extends React.Component {
 
   async getReport(id){
     try{
-      const reportRes = await this.Auth.getReport(id.id);
-      if(reportRes.status === 401) return this.props.history.replace('/logout');
+     await this.Auth.getReport(id.id);
+      // console.log(reportRes)
+      // if(reportRes.status === 401) return this.props.history.replace('/logout');
     } catch (e) {
+      console.log(e)
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
     }
   }

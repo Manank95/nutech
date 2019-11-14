@@ -17,7 +17,7 @@ export default class Dropdown extends Component {
         </div>
         {this.state.open && <>
           <div className={styles.backdrop} onClick={this.close} />
-          <div className={styles.dropdown}>
+          <div className={styles.dropdown} style={this.props.isLast && {right:0, width: 120}}>
             {this.props.links.map((ele, index) => (
               <Link to={ele.to} className={styles.link} onClick={this.close} key={index}>{ele.tag}</Link>
             ))}

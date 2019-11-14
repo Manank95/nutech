@@ -19,7 +19,6 @@
 -- token logic for expiration
 -- redirect to dashboard after book test/ payment
 -- Show DOB text in the form
--- Loading animation before login and signup
 
 - done - ask about email SES
 - done?? - dashboard - calls order/list but token expired - cover this scenario

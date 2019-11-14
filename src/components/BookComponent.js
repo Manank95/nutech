@@ -23,7 +23,9 @@ class BookComponent extends React.Component {
       testAmount: null,
       couponCode: '',
       couponMessage: '',
-      discountPercent: '',
+      discountPercent: 0,
+      discountAmount: 0,
+      totalAmount: null,
       isLoadingCoupon: false,
       couponStatus: null,
       message: '',
@@ -56,11 +58,11 @@ class BookComponent extends React.Component {
   }
 
   handleChangeTest(event) {
-    console.log(event.target.datatestamount);
+    const test = config.services.find(ele=>ele.testID===event.target.value);
     this.setState({
-      testID: event.target.value,
-      testAmount: event.target.datatestamount
-    },()=>console.log(this.state.testID, this.state.testAmount));
+      testID: test.testID,
+      testAmount: test.testAmount
+    });
   }
 
   async checkCoupon() {
@@ -80,6 +82,8 @@ class BookComponent extends React.Component {
       return this.setState({
         isLoadingCoupon: false,
         discountPercent: res.discountPercent,
+        discountAmount: this.state.testAmount * (res.discountPercent)/100,
+        totalAmount: this.state.testAmount * (100-res.discountPercent)/100,
         couponStatus: res.status
       });
     } catch(e) {
@@ -136,9 +140,9 @@ class BookComponent extends React.Component {
                 <div className="col-md-12 form-group">
                   <label className="sr-only">TestName</label>
                   <select className="form-control" value={this.state.testID} onChange={this.handleChangeTest} name="testID" required>
-                    <option value=''> Select a Test </option>
+                    <option value='' disabled hidden> Select a Test </option>
                     {config.services.map((item, index)=>{
-                      return <option key={index} datatestamount={item.testAmount} value={item.testID}>{item.testName}</option>
+                      return <option key={index} value={item.testID}>{item.testName}</option>
                     })}
                   </select>
                 </div>
@@ -148,13 +152,15 @@ class BookComponent extends React.Component {
                   <label className="sr-only">Full Name</label>
                   <input type="text" className="form-control" placeholder="Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required />
                 </div>
-                <div className="col-md-6 form-group m-b-0">
-                  <label className="sr-only">Email</label>
-                  <input type="email" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} required />
-                </div>
-                <div className="col-md-6 form-group m-b-0">
-                  <label className="sr-only">Phone No. For communication</label>
-                  <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. For communication" name="contact" value={this.state.contact} onChange={this.handleChange} required />
+                <div>
+                  <div className="col-md-6 form-group m-b-0">
+                    <label className="sr-only">Email</label>
+                    <input type="email" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                  </div>
+                  <div className="col-md-6 form-group m-b-0">
+                    <label className="sr-only">Phone No. For communication</label>
+                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. For communication" name="contact" value={this.state.contact} onChange={this.handleChange} required />
+                  </div>
                 </div>
                 <div className="col-md-12">
                   <div className="col-md-4 text-left">
@@ -232,7 +238,7 @@ class BookComponent extends React.Component {
 
               <div className="col-md-6 text-left">
                 <div className="m-b-20">
-                  <h3>Order Details</h3>
+                  <h3>Order Summary</h3>
                   {this.state.couponStatus !== null && (
                     <div role="alert" className={this.state.couponStatus === 200 ? "alert alert-success alert-dismissible m-b-0" : "alert alert-danger alert-dismissible  m-b-0"}>
                       <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
@@ -264,7 +270,7 @@ class BookComponent extends React.Component {
                           <strong>Order Subtotal</strong>
                         </td>
                         <td className="cart-product-name text-right">
-                          <span className="amount">₹4000</span>
+                          <span className="amount">₹{this.state.testAmount}</span>
                         </td>
                       </tr>
                       <tr>
@@ -272,7 +278,7 @@ class BookComponent extends React.Component {
                           <strong>Coupon</strong>
                         </td>
                         <td className="cart-product-name  text-right">
-                          <span className="amount">-20%</span>
+                          <span className="amount">{this.state.discountPercent}%</span>
                         </td>
                       </tr>
                       <tr>
@@ -280,7 +286,7 @@ class BookComponent extends React.Component {
                           <strong>Discount</strong>
                         </td>
                         <td className="cart-product-name  text-right">
-                          <span className="amount">-₹800</span>
+                          <span className="amount">₹{this.state.discountAmount}</span>
                         </td>
                       </tr>
                       <tr>
@@ -288,7 +294,9 @@ class BookComponent extends React.Component {
                           <strong>Total</strong>
                         </td>
                         <td className="cart-product-name text-right">
-                          <span className="amount color lead"><strong>₹3200</strong></span>
+                          <span className="amount color lead">
+                            <strong>₹{this.state.totalAmount!==null? this.state.totalAmount : this.state.testAmount}</strong>
+                          </span>
                         </td>
                       </tr>
                     </tbody>
