@@ -62,12 +62,24 @@ class BookComponent extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleChangeTest(event) {
+  async handleChangeTest(event) {
     const test = config.services.find(ele=>ele.testID===event.target.value);
-    this.setState({
+    await this.setState({
       testID: test.testID,
-      testAmount: test.testAmount
+      testAmount: test.testAmount,
+      discountPercent: 0,
+      couponStatus: null,
+      couponMessage: '',
+      couponCode: ''
     });
+    this.reCalculatePrice();
+  }
+
+  async reCalculatePrice(){
+    return await this.setState({
+      discountAmount: this.state.testAmount * (this.state.discountPercent)/100,
+      totalAmount: this.state.testAmount * (100-this.state.discountPercent)/100,
+    })
   }
 
   async checkCoupon() {
@@ -75,27 +87,37 @@ class BookComponent extends React.Component {
       isLoadingCoupon: true
     })
     let couponCode = this.state.couponCode;
+    if(!couponCode || !this.state.testID) return this.setState({isLoadingCoupon: false})
     try{
       let res = await this.Auth.checkCoupon(couponCode);
       console.log(res);
       if (res.status === 401) return this.props.history.replace('/logout');
-      if (res.status !== 200) return this.setState({
-        isLoadingCoupon: false,
-        couponMessage: res.message,
-        couponStatus: res.status
-      });
-      return this.setState({
+      if (res.status !== 200) {
+        await this.setState({
+          isLoadingCoupon: false,
+          couponMessage: res.message,
+          couponStatus: res.status,
+          discountPercent: 0,
+          couponCode: ''
+        });
+        return this.reCalculatePrice()
+      };
+      await this.setState({
         isLoadingCoupon: false,
         discountPercent: res.discountPercent,
-        discountAmount: this.state.testAmount * (res.discountPercent)/100,
-        totalAmount: this.state.testAmount * (100-res.discountPercent)/100,
-        couponStatus: res.status
+        couponStatus: res.status,
+        couponCode: couponCode
       });
+      return this.reCalculatePrice()
     } catch(e) {
-      this.setState({
+      await this.setState({
         couponMessage: "Something went wrong! Please try again.",
-        isLoadingCoupon: false
-      })
+        isLoadingCoupon: false,
+        discountPercent: 0,
+        couponCode:'',
+        couponStatus: 500
+      });
+      return this.reCalculatePrice()
     }
   }
 
