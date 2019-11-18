@@ -40,7 +40,11 @@ class SignupComponent extends React.Component {
           return this.setState({
             message: res.message,
             status: res.status,
-            isLoading: false
+            isLoading: false,
+            fullName: '',
+            email: '',
+            password: '',
+            repassword: ''
           })
 
         return this.setState({
@@ -94,7 +98,7 @@ class SignupComponent extends React.Component {
                   <input type="password" className="form-control" placeholder="Confirm Password" name="repassword" value={this.state.repassword} onChange={(e) => this.handleChange(e)} required />
                 </div>
                 <div className="form-group">
-                  <button type="submit" className="btn btn-block">Signup</button>
+                  {!this.state.isLoading && <button type="submit" className="btn btn-block">Signup</button>}
                 </div>
               </form>
               <p className="small">Already have an account? &nbsp; <Link to="/login"> <button type="button" className="btn btn-light btn-xs">Login</button> </Link>

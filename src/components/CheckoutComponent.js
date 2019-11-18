@@ -12,7 +12,7 @@ class CheckoutComponent extends React.Component {
       rzOrderId: null,
       loading: true,
       details: this.props.location.state,
-      done: false
+      isLoadingSubmit: false
     };
     this.razorpayConfirmation = this.razorpayConfirmation.bind(this);
     this.handlePayment = this.handlePayment.bind(this);
@@ -45,11 +45,12 @@ class CheckoutComponent extends React.Component {
   async razorpayConfirmation(res) {
     let obj = res;
     obj.id = this.state.details.id;
+    this.setState({isLoadingSubmit: true})
     try{
-      let res = await this.Auth.rzConfirmation(obj);
-      if (res.status === 401) return this.props.history.replace('/logout');;
-      this.setState({ done: true });
-      return this.props.history.replace('/dashboard');;
+      await this.Auth.rzConfirmation(obj);
+      // if (res.status === 401) return this.props.history.replace('/logout');
+      this.setState({ isLoadingSubmit: false });
+      return this.props.history.replace('/dashboard');
     } catch (e) {
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
       // alert(e);
@@ -112,6 +113,13 @@ class CheckoutComponent extends React.Component {
                 <div className="seperator"><i className="fa fa-credit-card"></i><i className="fa fa-cc-visa"></i>
                   <i className="fa fa-cc-mastercard"></i><i className="fa fa-cc-amex"></i><i className="fa fa-cc-diners-club"></i><i className="fa fa-paypal"></i>
                 </div>
+                {this.state.isLoadingSubmit && (<div className="text-center row loader-inner line-scale-pulse-out-rapid">
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                </div>)}
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
                   <div className="table-responsive">
@@ -204,7 +212,7 @@ class CheckoutComponent extends React.Component {
                 </div>
                 <div className="col-md-3"></div>
               </div>
-              <button type="button" className="btn" onClick={this.handlePayment} ><i className="fa fa-lock" />Secure Pay</button>
+              {!this.state.isLoadingSubmit && <button type="button" className="btn" onClick={this.handlePayment} ><i className="fa fa-lock" />Secure Pay</button>}
             </div>)}
         </div>
         <br />

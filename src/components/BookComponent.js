@@ -31,6 +31,7 @@ class BookComponent extends React.Component {
       discountAmount: 0,
       totalAmount: null,
       isLoadingCoupon: false,
+      isLoadingSubmit: false,
       couponStatus: null,
       message: '',
       status: null,
@@ -132,6 +133,9 @@ class BookComponent extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    this.setState({
+      isLoadingSubmit: true
+    })
     let obj = this.state;
     obj.city = obj.city + ', ' + obj.istate;
     try {
@@ -139,7 +143,28 @@ class BookComponent extends React.Component {
       if (res.status === 401) return this.props.history.replace('/logout');
       return this.setState({
         message: res.message,
-        status: res.status
+        status: res.status,
+        isLoadingSubmit: false,
+        fullName: '',
+        contact: '',
+        email: '',
+        gender: 'Male',
+        dob: '',
+        area: '',
+        city: '',
+        istate: '',
+        pincode: '',
+        testID: '',
+        testAmount: null,
+        couponCode: '',
+        couponMessage: '',
+        discountPercent: 0,
+        discountAmount: 0,
+        totalAmount: null,
+        isLoadingCoupon: false,
+        couponStatus: null,
+        consentChecked: false
+
       })
     } catch (e) {
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
@@ -163,6 +188,13 @@ class BookComponent extends React.Component {
               </Steps>
             </div>
           </div>
+          {this.state.isLoadingSubmit && (<div className="text-center row loader-inner line-scale-pulse-out-rapid">
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+          </div>)}
           <div className="row">
             <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
               <div className="col-md-6 text-left">
@@ -198,8 +230,8 @@ class BookComponent extends React.Component {
                     <input type="email" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} required />
                   </div>
                   <div className="col-md-6 form-group m-b-0">
-                    <label className="sr-only">Phone No. For communication</label>
-                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. For communication" name="contact" value={this.state.contact} onChange={this.handleChange} required />
+                    <label className="sr-only">Phone No. For communication </label>
+                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. (e.g. 9876543210)" name="contact" value={this.state.contact} onChange={this.handleChange} required />
                   </div>
                 </div>
                 <div className="col-md-12">
@@ -360,7 +392,7 @@ class BookComponent extends React.Component {
                   <Modal fullName={this.state.fullName} area={this.state.area} city={this.state.city} istate={this.state.istate} pincode={this.state.pincode} />
                 </div>
                 <div className="form-group">
-                  <button type={this.state.consentChecked ? "submit" : "button"} className={this.state.consentChecked ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
+                  <button type={(this.state.consentChecked && !this.state.isLoadingSubmit) ? "submit" : "button"} className={(this.state.consentChecked && !this.state.isLoadingSubmit) ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
                 </div>
               </div>
             </form>

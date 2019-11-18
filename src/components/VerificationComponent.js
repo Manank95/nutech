@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from '../auth/AuthService';
+import { Link } from 'react-router-dom';
 
 class VerificationComponent extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class VerificationComponent extends React.Component {
     const { token } = this.props.match.params;
     try {
       const res = await this.Auth.verification(token);
-      return this.setState({ res });
+      return this.setState({ message: res.message, status: res.status });
     } catch (e) {
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
     }
@@ -31,7 +32,7 @@ class VerificationComponent extends React.Component {
           <div className="container container-fullscreen">
             <div className="text-middle">
               <div className="row">
-                <div className="col-md-4 center p-30 background-white b-r-6">
+                <div className="col-md-6 center p-30 background-white b-r-6">
                   {
                     this.state.message === '' ?
                       (
@@ -48,7 +49,10 @@ class VerificationComponent extends React.Component {
                           <p>Loading...</p>
                         </div>
                       ): 
-                      <h3>{this.state.message}</h3>
+                      <div>
+                        <h3>{this.state.message} <i className='fa fa-check-circle'></i></h3>
+                        <h4>Login to access your account: </h4><Link to='/login'><button type="btn" className="btn">Login</button></Link>
+                      </div>
                   }
                 </div>
               </div>

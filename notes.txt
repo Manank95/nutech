@@ -14,6 +14,10 @@
 -- redirect to dashboard after book test/ payment
 -- Show DOB placeholder in the form
 
+// server side - 
+change password
+download report integration with livehealth
+
 
 - done - empty dashboard, internet explorer
 - done - dynamic test details loading on home page and booking page

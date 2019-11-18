@@ -13,7 +13,8 @@ class DashboardComponent extends React.Component {
     super(props);
     this.state = {
       testDetails: null,
-      loading: true
+      loading: true,
+      isLoadingReport: false
     };
     this.domain = config.url;
     this.handleLogout = this.handleLogout.bind(this);
@@ -39,8 +40,10 @@ class DashboardComponent extends React.Component {
   }
 
   async getReport(id){
+    this.setState({isLoadingReport: true});
     try{
      await this.Auth.getReport(id.id);
+     this.setState({isLoadingReport: false});
       // console.log(reportRes)
       // if(reportRes.status === 401) return this.props.history.replace('/logout');
     } catch (e) {
@@ -71,7 +74,17 @@ class DashboardComponent extends React.Component {
     else {
       obj.div = "panel panel-success";
       obj.icon = <i className="fa fa-check-circle"></i>;
-      obj.button = <button type="button" onClick={() => this.getReport(this.state.testDetails.Items[index])} className="btn btn-light btn-shadow">View Report</button>
+      obj.button = 
+        <div>
+          <button type="button" onClick={() => this.getReport(this.state.testDetails.Items[index])} className="btn btn-light btn-shadow">Download Report</button>
+          {this.state.isLoadingReport && (<div className="text-center loader-inner line-scale-pulse-out-rapid">
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+          </div>)}
+        </div>
     }
     return obj;
   }
