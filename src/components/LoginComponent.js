@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { DatePicker } from 'antd';
+
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from '../auth/AuthService';
@@ -30,7 +32,7 @@ class LoginComponent extends React.Component {
   }
   async handleSubmit(event) {
     event.preventDefault();
-    this.setState({isLoading: true, message: ''});
+    this.setState({ isLoading: true, message: '' });
     try {
       let res = await this.Auth.login(this.state.email, this.state.password);
       this.setState({
@@ -48,6 +50,7 @@ class LoginComponent extends React.Component {
     return (
       <div>
         <Nav />
+        <DatePicker format="DD/MM/YYYY" />
         {this.state.lost ? (
           <section className="container">
             <div className="row">
