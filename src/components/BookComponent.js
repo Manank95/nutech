@@ -24,12 +24,12 @@ class BookComponent extends React.Component {
       istate: '',
       pincode: '',
       testID: '',
-      testAmount: null,
+      testAmount: 0,
       couponCode: '',
       couponMessage: '',
       discountPercent: 0,
       discountAmount: 0,
-      totalAmount: null,
+      totalAmount: 0,
       isLoadingCoupon: false,
       isLoadingSubmit: false,
       couponStatus: null,
@@ -155,12 +155,12 @@ class BookComponent extends React.Component {
         istate: '',
         pincode: '',
         testID: '',
-        testAmount: null,
+        testAmount: 0,
         couponCode: '',
         couponMessage: '',
         discountPercent: 0,
         discountAmount: 0,
-        totalAmount: null,
+        totalAmount: 0,
         isLoadingCoupon: false,
         couponStatus: null,
         consentChecked: false
@@ -367,7 +367,7 @@ class BookComponent extends React.Component {
                         </td>
                         <td className="cart-product-name text-right">
                           <span className="amount color lead">
-                            <strong>₹{this.state.totalAmount!==null? this.state.totalAmount : this.state.testAmount}</strong>
+                            <strong>₹{this.state.totalAmount}</strong>
                           </span>
                         </td>
                       </tr>
