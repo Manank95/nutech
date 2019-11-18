@@ -13,7 +13,8 @@ class SignupComponent extends React.Component {
       password: '',
       repassword: '',
       message: '',
-      status: null
+      status: null,
+      isLoading: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.Auth = new AuthService();
@@ -25,23 +26,26 @@ class SignupComponent extends React.Component {
 
   async handleSubmit(e) {
     e.preventDefault();
+    this.setState({isLoading: true, message: ''})
     // new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^)(_])[A-Za-z\d@$!%*?&#^)(_]{8,}$/g);
     // for atleast 8, 1 upper, 1 lower, 1 number, 1 special
     let pregex = new RegExp(/^(?=.*[a-zA-Z0-9]).{6,}$/g);
-    if (this.state.password !== this.state.repassword) return this.setState({ message: 'Passwords don\'t match' });
+    if (this.state.password !== this.state.repassword) return this.setState({ message: 'Passwords don\'t match', isLoading: false });
     else if (!pregex.test(this.state.password))
-      return this.setState({ message: 'Password must be atleast 6 characters long.' })
+      return this.setState({ message: 'Password must be atleast 6 characters long.', isLoading: false })
     else {
       try {
         let res = await this.Auth.signup(this.state.fullName, this.state.email, this.state.password);
         if (res.status === 200)
           return this.setState({
             message: res.message,
-            status: res.status
+            status: res.status,
+            isLoading: false
           })
 
         return this.setState({
-          message: res.message
+          message: res.message,
+          isLoading: false
         })
       } catch (e) {
         this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
@@ -63,6 +67,15 @@ class SignupComponent extends React.Component {
                   {this.state.message}
                 </div>
               )}
+              {this.state.isLoading && (
+                    <div className="col-md-12 loader-inner line-scale-pulse-out-rapid text-center m-b-15">
+                      <div />
+                      <div />
+                      <div />
+                      <div />
+                      <div />
+                    </div>
+                  )}
               <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label className="sr-only">Full Name</label>

@@ -1,8 +1,6 @@
--- Business email address for gmail send (nodemailer)
 -- redirect on book test success and disable the button.
 -- Change Password page
 -- dynamic test details loading on home page and booking page
--- loading animation when needed
 -- Book test form validation for date and other critical field
 -- cors restriction, multiple requests by robot - blacklist
 -- contact us form email
@@ -18,7 +16,9 @@
 -- Show DOB placeholder in the form
 
 
-- done - empty dashboard, internet explorer 
+- done - empty dashboard, internet explorer
+- done - loading animation when needed
+- done - /only with gmail Business email address for gmail send (nodemailer)
 - done - token logic for expiration
 - done - ask about email SES
 - done?? - dashboard - calls order/list but token expired - cover this scenario

@@ -12,7 +12,8 @@ class LoginComponent extends React.Component {
       password: '',
       status: null,
       message: '',
-      lost: false
+      lost: false,
+      isLoading: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,15 +26,17 @@ class LoginComponent extends React.Component {
   }
 
   lostPassword() {
-    this.setState({ lost: !this.state.lost })
+    this.setState({ lost: !this.state.lost, status: null, message: '', email: '', isLoading: false })
   }
   async handleSubmit(event) {
     event.preventDefault();
+    this.setState({isLoading: true, message: ''});
     try {
       let res = await this.Auth.login(this.state.email, this.state.password);
       this.setState({
         message: res.message,
-        status: res.status
+        status: res.status,
+        isLoading: false
       })
       if (res.token) this.props.history.replace('/dashboard');
     } catch (e) {
@@ -81,6 +84,15 @@ class LoginComponent extends React.Component {
                     <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
                       <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
                       {this.state.message}
+                    </div>
+                  )}
+                  {this.state.isLoading && (
+                    <div className="col-md-12 loader-inner line-scale-pulse-out-rapid text-center m-b-15">
+                      <div />
+                      <div />
+                      <div />
+                      <div />
+                      <div />
                     </div>
                   )}
                   <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
