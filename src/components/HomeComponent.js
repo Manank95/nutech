@@ -10,7 +10,6 @@ class HomeComponent extends React.Component {
   }
 
   render() {
-    console.log(config.services);
     return (
       <div>
         <Nav />

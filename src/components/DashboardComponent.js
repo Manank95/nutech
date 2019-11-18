@@ -4,6 +4,9 @@ import Nav from '../components/Nav';
 import { Link } from 'react-router-dom';
 import FooterComponent from './FooterComponent';
 import AuthService from './../auth/AuthService';
+import 'rc-steps/assets/index.css';
+import 'rc-steps/assets/iconfont.css';
+import Steps, { Step } from 'rc-steps';
 
 class DashboardComponent extends React.Component {
   constructor(props) {
@@ -93,7 +96,25 @@ class DashboardComponent extends React.Component {
           ) :
             (<div>
               <br />
+              <div className="row">
+                <div style={{padding:'30px 0px'}} className="text-left">
+                  <Steps
+                    current={0}
+                    status='process'
+                  >
+                    <Step title="Book a Test" />
+                    <Step title="Make Payment" icon={<i className="fa fa-warning" style={{color:'#a94442'}}/>} />
+                    <Step title="Sit Back and Relax" icon={<i className="fa fa-clock-o" style={{color: '#31708f'}} />} />
+                    <Step title="Download Report" icon={<i className="fa fa-check-circle" style={{color:'#3c763d'}} />} />
+                  </Steps>
+                </div>
+              </div>
               {this.state.testDetails && <h3>Total Tests: {this.state.testDetails.Count}</h3>}
+              {this.state.testDetails.Count===0 && 
+              <div>
+                <img src="https://img.icons8.com/nolan/96/000000/empty-box.png" alt='No Tests yet'></img>
+                <p>No data yet. Book a test to get started.</p>
+              </div>}
               <div className="row">
                 {this.state.testDetails && this.state.testDetails.Items.map((test, index) => (
                   <div key={index} className="col-md-6">

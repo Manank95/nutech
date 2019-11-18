@@ -5,6 +5,7 @@
   "dependencies": {
     "downloadjs": "^1.4.7",
     "jsonwebtoken": "^8.5.1",
+    "rc-steps": "^3.5.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-router-dom": "^5.1.2",

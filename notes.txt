@@ -5,21 +5,21 @@
 -- loading animation when needed
 -- Book test form validation for date and other critical field
 -- cors restriction, multiple requests by robot - blacklist
--- empty dashboard, internet explorer 
--- token expiry
 -- contact us form email
 -- remove comments, console.logs
 - partially - test registration form
 // -- update profile page
 -- discuss and move razorpay payment script tag to html
--- admin pages to view all patient details
--- re-captcha
+-- re-captcha - works after domain name
 -- image optimize for gallery/ team
 -- redirecting to desired path on login
--- token logic for expiration
--- redirect to dashboard after book test/ payment
--- Show DOB text in the form
 
+-- redirect to dashboard after book test/ payment
+-- Show DOB placeholder in the form
+
+
+- done - empty dashboard, internet explorer 
+- done - token logic for expiration
 - done - ask about email SES
 - done?? - dashboard - calls order/list but token expired - cover this scenario
 - done - gallery
@@ -44,7 +44,12 @@
 - done - 401 logout
 - done - show order id on dashboard
 - done - remove console.logs
+- done - admin pages to view all patient details(dynamo db)
 
+for modal - https://dev.to/achowba/building-a-modal-in-react-15hg
+https://daveceddia.com/open-modal-in-react/
+
+steps ->  bok test, make payment, sit back, download report
 
 -Company     - About US        - Services    - Contact    - Login/ signup
   - Mission    - Who we are?

@@ -1,10 +1,14 @@
 import React from 'react';
 import config from '../config';
-import Nav from '../components/Nav';
+import Nav from './Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from './../auth/AuthService';
 import { Link } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
+import 'rc-steps/assets/index.css';
+import 'rc-steps/assets/iconfont.css';
+import Steps, { Step } from 'rc-steps';
+import Modal from './Modal/Modal';
 
 class BookComponent extends React.Component {
   constructor(props) {
@@ -46,6 +50,7 @@ class BookComponent extends React.Component {
   }
 
   componentDidMount() {
+    window.updateUIAfterReact();
     if (!this.Auth.loggedIn()) return this.props.history.replace('/login');
     let decoded = jwt.decode(this.Auth.getToken());
     this.setState({
@@ -122,7 +127,20 @@ class BookComponent extends React.Component {
     return (
       <div>
         <Nav />
-        <section className="container">
+        <section className="container" style={{paddingTop:'25px'}}>
+          <div className="row">
+            <div style={{padding:'30px 0px'}} className="text-left">
+              <Steps
+                current={0}
+                status='process'
+              >
+                <Step title="Book a Test" />
+                <Step title="Make Payment" icon={<i className="fa fa-warning" style={{color:'#a94442'}}/>} />
+                <Step title="Sit Back and Relax" icon={<i className="fa fa-clock-o" style={{color: '#31708f'}} />} />
+                <Step title="Download Report" icon={<i className="fa fa-check-circle" style={{color:'#3c763d'}} />} />
+              </Steps>
+            </div>
+          </div>
           <div className="row">
             <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
               <div className="col-md-6 text-left">
@@ -263,7 +281,7 @@ class BookComponent extends React.Component {
                   </div>)}
                 </div>
                 <div className="table-responsive">
-                  <table className="table">
+                  <table className="table" style={{marginBottom:0}}>
                     <tbody>
                       <tr>
                         <td className="cart-product-name">
@@ -302,18 +320,24 @@ class BookComponent extends React.Component {
                     </tbody>
                   </table>
                 </div>
-                <div className="col-md-12 form-group m-b-0">
+                <div className="form-group m-b-0">
                   <div className="checkbox">
                     <label>
                       <input
                         type="checkbox"
                         checked={this.state.consentChecked}
                         onChange={this.handleCheckbox}
-                      />Consent text
+                      />I consent with all the <a href='#modalConsent' data-lightbox="inline"><u>terms and conditions</u></a>
                       </label>
                   </div>
                 </div>
-                <div className="col-md-12 form-group">
+
+                <div id="modalConsent" className="modal" data-delay={1000} style={{ maxWidth: '75%', height: '75%' }}>
+                  <h5>Prostate Cancer Screening. Patient Consent Details</h5>
+                  <hr />
+                  <Modal fullName={this.state.fullName} area={this.state.area} city={this.state.city} istate={this.state.istate} pincode={this.state.pincode} />
+                </div>
+                <div className="form-group">
                   <button type={this.state.consentChecked ? "submit" : "button"} className={this.state.consentChecked ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
                 </div>
               </div>
