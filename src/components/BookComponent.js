@@ -52,6 +52,12 @@ class BookComponent extends React.Component {
 
   componentDidMount() {
     window.updateUIAfterReact();
+    const picker=window.jQuery('[data-toggle="datepicker"]');
+    picker.datepicker({format: 'dd/MM/yyyy'});
+    picker.on('pick.datepicker', e=>{
+      this.dob=e.date.toISOString().split('T')[0];
+    } );
+
     if (!this.Auth.loggedIn()) return this.props.history.replace('/login');
     let decoded = jwt.decode(this.Auth.getToken());
     this.setState({
@@ -138,6 +144,7 @@ class BookComponent extends React.Component {
     })
     let obj = this.state;
     obj.city = obj.city + ', ' + obj.istate;
+    obj.dob = this.dob;
     try {
       let res = await this.Auth.book(obj);
       if (res.status === 401) return this.props.history.replace('/logout');
@@ -225,31 +232,24 @@ class BookComponent extends React.Component {
                   <input type="text" className="form-control" placeholder="Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required />
                 </div>
                 <div>
-                  <div className="col-md-6 form-group m-b-0">
+                  <div className="col-md-6 form-group">
                     <label className="sr-only">Email</label>
                     <input type="email" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} required />
                   </div>
-                  <div className="col-md-6 form-group m-b-0">
+                  <div className="col-md-6 form-group">
                     <label className="sr-only">Phone No. For communication </label>
                     <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. (e.g. 9876543210)" name="contact" value={this.state.contact} onChange={this.handleChange} required />
                   </div>
                 </div>
-                <div className="col-md-12">
-                  <div className="col-md-4 text-left">
-                    <div className="radio">
-                      <label> <input type="radio" name="gender" id="optionsRadios1" defaultValue="male" defaultChecked /> Male </label>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="radio">
-                      <label> <input type="radio" name="gender" id="optionsRadios2" defaultValue="female" /> Female </label>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="col-md-12 form-group">
+                {/* <div className="col-md-12 form-group">
                   <label className="sr-only">Date of Birth</label>
                   <input type="date" className="form-control" placeholder="Date of Birth" name="dob" value={this.state.dob} onChange={this.handleChange} required />
+                </div> */}
+
+                <div className="col-md-12 form-group">
+                  <input type='text' pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control docs-date" placeholder="Date of Birth (dd/mm/yyyy)" name="dob" data-toggle="datepicker" required/>
+                  <div data-toggle="datepicker"></div>
                 </div>
                 <div className="col-md-6 form-group">
                   <label className="sr-only">Address</label>
@@ -278,10 +278,12 @@ class BookComponent extends React.Component {
                     <option value="Gujarat">Gujarat</option>
                     <option value="Haryana">Haryana</option>
                     <option value="Himachal Pradesh">Himachal Pradesh</option>
-                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Jammu">Jammu</option>
+                    <option value="Kashmir">Kashmir</option>
                     <option value="Jharkhand">Jharkhand</option>
                     <option value="Karnataka">Karnataka</option>
                     <option value="Kerala">Kerala</option>
+                    <option value="Ladakh">Ladakh</option>
                     <option value="Lakshadweep">Lakshadweep</option>
                     <option value="Madhya Pradesh">Madhya Pradesh</option>
                     <option value="Maharashtra">Maharashtra</option>
@@ -295,6 +297,7 @@ class BookComponent extends React.Component {
                     <option value="Rajasthan">Rajasthan</option>
                     <option value="Sikkim">Sikkim</option>
                     <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
                     <option value="Tripura">Tripura</option>
                     <option value="Uttaranchal">Uttaranchal</option>
                     <option value="Uttar Pradesh">Uttar Pradesh</option>

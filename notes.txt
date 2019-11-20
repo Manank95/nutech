@@ -1,4 +1,3 @@
--- redirect on book test success and disable the button.
 -- Change Password page
 -- Book test form validation for date and other critical field
 -- cors restriction, multiple requests by robot - blacklist
@@ -19,7 +18,7 @@ change password
 download report integration with livehealth
 odd percent total amount
 
-
+- done - redirect on book test success and disable the button.
 - done - empty dashboard, internet explorer
 - done - dynamic test details loading on home page and booking page
 - done - loading animation when needed
