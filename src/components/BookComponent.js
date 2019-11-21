@@ -219,26 +219,32 @@ class BookComponent extends React.Component {
                 <div className="col-md-12 form-group">
                   <label className="sr-only">TestName</label>
                   <select className="form-control" value={this.state.testID} onChange={this.handleChangeTest} name="testID" required>
-                    <option value='' disabled hidden> Select a Test </option>
+                    <option value='' disabled hidden> *Select a Test ▼</option>
                     {config.services.map((item, index)=>{
                       return <option key={index} value={item.testID}>{item.testName}</option>
                     })}
                   </select>
                 </div>
 
-
-                <div className="col-md-12 form-group">
-                  <label className="sr-only">Full Name</label>
-                  <input type="text" className="form-control" placeholder="Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required />
+                <div>
+                  <div className="col-md-6 form-group">
+                    <label className="sr-only">Full Name</label>
+                    <input type="text" className="form-control" placeholder="*Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required />
+                  </div>
+                  <div className="col-md-6 form-group">
+                    <input type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control docs-date" placeholder="*Date of Birth (dd/mm/yyyy)" name="dob" data-toggle="datepicker" required/>
+                    <div data-toggle="datepicker"></div>
+                  </div>
                 </div>
+                
                 <div>
                   <div className="col-md-6 form-group">
                     <label className="sr-only">Email</label>
-                    <input type="email" className="form-control" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} required />
+                    <input type="email" className="form-control" placeholder="*Email" name="email" value={this.state.email} onChange={this.handleChange} required />
                   </div>
                   <div className="col-md-6 form-group">
                     <label className="sr-only">Phone No. For communication </label>
-                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Phone No. (e.g. 9876543210)" name="contact" value={this.state.contact} onChange={this.handleChange} required />
+                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="*Phone No. - 10 digits" name="contact" value={this.state.contact} onChange={this.handleChange} required />
                   </div>
                 </div>
 
@@ -246,24 +252,19 @@ class BookComponent extends React.Component {
                   <label className="sr-only">Date of Birth</label>
                   <input type="date" className="form-control" placeholder="Date of Birth" name="dob" value={this.state.dob} onChange={this.handleChange} required />
                 </div> */}
-
-                <div className="col-md-12 form-group">
-                  <input type='text' pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control docs-date" placeholder="Date of Birth (dd/mm/yyyy)" name="dob" data-toggle="datepicker" required/>
-                  <div data-toggle="datepicker"></div>
-                </div>
                 <div className="col-md-6 form-group">
                   <label className="sr-only">Address</label>
-                  <input type="text" className="form-control" placeholder="Address" name="area" value={this.state.area} onChange={this.handleChange} required />
+                  <input type="text" className="form-control" placeholder="*Address" name="area" value={this.state.area} onChange={this.handleChange} required />
                 </div>
                 <div className="col-md-6 form-group">
                   <label className="sr-only">City</label>
-                  <input type="text" className="form-control" placeholder="City" name="city" value={this.state.city} onChange={this.handleChange} required />
+                  <input type="text" className="form-control" placeholder="*City" name="city" value={this.state.city} onChange={this.handleChange} required />
                 </div>
 
-                <div className="col-md-6 form-group m-b-0">
+                <div className="col-md-6 form-group">
                   <label className="sr-only">State</label>
                   <select className="form-control" value={this.state.istate} onChange={this.handleChange} name="istate" required>
-                    <option value>State</option>
+                    <option value='' disabled hidden> *State (INDIA) ▼</option>
                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -305,9 +306,23 @@ class BookComponent extends React.Component {
                   </select>
                 </div>
 
-                <div className="col-md-6 form-group m-b-0">
+                <div className="col-md-6 form-group">
                   <label className="sr-only">Pincode</label>
-                  <input type="text" pattern="[0-9]{6}" className="form-control" placeholder="6 digits Pincode" name="pincode" value={this.state.pincode} onChange={this.handleChange} required />
+                  <input type="text" pattern="[0-9]{6}" className="form-control" placeholder="*6 digits Pincode" name="pincode" value={this.state.pincode} onChange={this.handleChange} required />
+                </div>
+                <div className="col-md-12 form-group m-b-5">
+                  1) Who is your treating doctor?
+                </div>
+                <div>
+                  <div className="col-md-6 form-group">
+                    <input type="text" className="form-control" placeholder="*Doctor's name" name="doctorName" required />
+                  </div>
+                  <div className="col-md-6 form-group">
+                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="*Doctor's phone" name="doctorContact" required/>
+                  </div>
+                </div>
+                <div className="col-md-12 form-group">
+                  <input type="text" className="form-control" placeholder="Doctor's Address" name="doctorAddress" />
                 </div>
               </div>
 
@@ -385,7 +400,8 @@ class BookComponent extends React.Component {
                         checked={this.state.consentChecked}
                         onChange={this.handleCheckbox}
                       />I consent with all the <a href='#modalConsent' data-lightbox="inline"><u>terms and conditions</u></a>
-                      </label>
+                    </label>
+                    <p className="m-b-0">* You must agree (check the box) with the above conditions to proceed further.</p>
                   </div>
                 </div>
 
