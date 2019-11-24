@@ -9,6 +9,7 @@ import 'rc-steps/assets/index.css';
 import 'rc-steps/assets/iconfont.css';
 import Steps, { Step } from 'rc-steps';
 import Modal from './Modal/Modal';
+import Datepicker from './Datepicker';
 
 class BookComponent extends React.Component {
   constructor(props) {
@@ -18,7 +19,6 @@ class BookComponent extends React.Component {
       contact: '',
       email: '',
       gender: 'Male',
-      dob: '',
       area: '',
       city: '',
       istate: '',
@@ -35,7 +35,16 @@ class BookComponent extends React.Component {
       couponStatus: null,
       message: '',
       status: null,
-      consentChecked: false
+      consentChecked: false,
+      positive: '',
+      prostateRemoved: '',
+      hivPositive: '',
+      doctorName: '',
+      doctorContact: '',
+      doctorAddress: '',
+      tPSA: '',
+      fPSA: '',
+      relativeWithCancer: ''
     };
     this.domain = config.url;
     this.handleChange = this.handleChange.bind(this);
@@ -52,11 +61,11 @@ class BookComponent extends React.Component {
 
   componentDidMount() {
     window.updateUIAfterReact();
-    const picker=window.jQuery('[data-toggle="datepicker"]');
-    picker.datepicker({format: 'dd/MM/yyyy'});
-    picker.on('pick.datepicker', e=>{
-      this.dob=e.date.toISOString().split('T')[0];
-    } );
+    const picker = window.jQuery('[data-toggle="datepicker"]');
+    picker.datepicker({ format: 'dd/MM/yyyy' });
+    picker.on('pick.datepicker', e => {
+      this.dob = e.date.toISOString().split('T')[0];
+    });
 
     if (!this.Auth.loggedIn()) return this.props.history.replace('/login');
     let decoded = jwt.decode(this.Auth.getToken());
@@ -70,7 +79,7 @@ class BookComponent extends React.Component {
   }
 
   async handleChangeTest(event) {
-    const test = config.services.find(ele=>ele.testID===event.target.value);
+    const test = config.services.find(ele => ele.testID === event.target.value);
     await this.setState({
       testID: test.testID,
       testAmount: test.testAmount,
@@ -82,10 +91,10 @@ class BookComponent extends React.Component {
     this.reCalculatePrice();
   }
 
-  async reCalculatePrice(){
+  async reCalculatePrice() {
     return await this.setState({
-      discountAmount: this.state.testAmount * (this.state.discountPercent)/100,
-      totalAmount: this.state.testAmount * (100-this.state.discountPercent)/100,
+      discountAmount: this.state.testAmount * (this.state.discountPercent) / 100,
+      totalAmount: this.state.testAmount * (100 - this.state.discountPercent) / 100,
     })
   }
 
@@ -94,10 +103,9 @@ class BookComponent extends React.Component {
       isLoadingCoupon: true
     })
     let couponCode = this.state.couponCode;
-    if(!couponCode || !this.state.testID) return this.setState({isLoadingCoupon: false})
-    try{
+    if (!couponCode || !this.state.testID) return this.setState({ isLoadingCoupon: false })
+    try {
       let res = await this.Auth.checkCoupon(couponCode);
-      console.log(res);
       if (res.status === 401) return this.props.history.replace('/logout');
       if (res.status !== 200) {
         await this.setState({
@@ -143,8 +151,21 @@ class BookComponent extends React.Component {
       isLoadingSubmit: true
     })
     let obj = this.state;
+    let questions = {
+      "Doctor's Name": this.state.doctorName || null,
+      "Doctor's Contact": this.state.doctorContact || null,
+      "Doctor's Address": this.state.doctorAddress || null,
+      "Already tested positive for prostate cancer?": 'No',
+      "Total PSA (ng/mL)": this.state.tPSA || null,
+      "Free PSA (ng/mL)": this.state.fPSA || null,
+      "Is the prostate surgically removed becaues of cancer?": this.state.prostateRemoved || null,
+      "If removed, when? ": this.when || null,
+      "Does anyone in your family have prostate cancer?": this.state.relativeWithCancer || null,
+      "Are you HIV positive? ": this.state.hivPositive || null
+    }
     obj.city = obj.city + ', ' + obj.istate;
     obj.dob = this.dob;
+    obj.questions = questions;
     try {
       let res = await this.Auth.book(obj);
       if (res.status === 401) return this.props.history.replace('/logout');
@@ -152,11 +173,7 @@ class BookComponent extends React.Component {
         message: res.message,
         status: res.status,
         isLoadingSubmit: false,
-        fullName: '',
         contact: '',
-        email: '',
-        gender: 'Male',
-        dob: '',
         area: '',
         city: '',
         istate: '',
@@ -171,7 +188,6 @@ class BookComponent extends React.Component {
         isLoadingCoupon: false,
         couponStatus: null,
         consentChecked: false
-
       })
     } catch (e) {
       this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
@@ -181,17 +197,17 @@ class BookComponent extends React.Component {
     return (
       <div>
         <Nav />
-        <section className="container" style={{paddingTop:'25px'}}>
+        <section className="container" style={{ paddingTop: '25px' }}>
           <div className="row">
-            <div style={{padding:'30px 0px'}} className="text-left">
+            <div style={{ padding: '30px 0px' }} className="text-left">
               <Steps
                 current={0}
                 status='process'
               >
                 <Step title="Book a Test" />
-                <Step title="Make Payment" icon={<i className="fa fa-warning" style={{color:'#a94442'}}/>} />
-                <Step title="Sit Back and Relax" icon={<i className="fa fa-clock-o" style={{color: '#31708f'}} />} />
-                <Step title="Download Report" icon={<i className="fa fa-check-circle" style={{color:'#3c763d'}} />} />
+                <Step title="Make Payment" icon={<i className="fa fa-warning" style={{ color: '#a94442' }} />} />
+                <Step title="Sit Back and Relax" icon={<i className="fa fa-clock-o" style={{ color: '#31708f' }} />} />
+                <Step title="Download Report" icon={<i className="fa fa-check-circle" style={{ color: '#3c763d' }} />} />
               </Steps>
             </div>
           </div>
@@ -220,7 +236,7 @@ class BookComponent extends React.Component {
                   <label className="sr-only">TestName</label>
                   <select className="form-control" value={this.state.testID} onChange={this.handleChangeTest} name="testID" required>
                     <option value='' disabled hidden> *Select a Test ▼</option>
-                    {config.services.map((item, index)=>{
+                    {config.services.map((item, index) => {
                       return <option key={index} value={item.testID}>{item.testName}</option>
                     })}
                   </select>
@@ -229,14 +245,14 @@ class BookComponent extends React.Component {
                 <div>
                   <div className="col-md-6 form-group">
                     <label className="sr-only">Full Name</label>
-                    <input type="text" className="form-control" placeholder="*Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required />
+                    <input type="text" className="form-control" placeholder="*Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required/>
                   </div>
                   <div className="col-md-6 form-group">
-                    <input type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control docs-date" placeholder="*Date of Birth (dd/mm/yyyy)" name="dob" data-toggle="datepicker" required/>
+                    <input type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control docs-date" placeholder="*Date of Birth (dd/mm/yyyy)" name="dob" data-toggle="datepicker" required />
                     <div data-toggle="datepicker"></div>
                   </div>
                 </div>
-                
+
                 <div>
                   <div className="col-md-6 form-group">
                     <label className="sr-only">Email</label>
@@ -280,9 +296,9 @@ class BookComponent extends React.Component {
                     <option value="Haryana">Haryana</option>
                     <option value="Himachal Pradesh">Himachal Pradesh</option>
                     <option value="Jammu">Jammu</option>
-                    <option value="Kashmir">Kashmir</option>
                     <option value="Jharkhand">Jharkhand</option>
                     <option value="Karnataka">Karnataka</option>
+                    <option value="Kashmir">Kashmir</option>
                     <option value="Kerala">Kerala</option>
                     <option value="Ladakh">Ladakh</option>
                     <option value="Lakshadweep">Lakshadweep</option>
@@ -305,7 +321,6 @@ class BookComponent extends React.Component {
                     <option value="West Bengal">West Bengal</option>
                   </select>
                 </div>
-
                 <div className="col-md-6 form-group">
                   <label className="sr-only">Pincode</label>
                   <input type="text" pattern="[0-9]{6}" className="form-control" placeholder="*6 digits Pincode" name="pincode" value={this.state.pincode} onChange={this.handleChange} required />
@@ -315,15 +330,90 @@ class BookComponent extends React.Component {
                 </div>
                 <div>
                   <div className="col-md-6 form-group">
-                    <input type="text" className="form-control" placeholder="*Doctor's name" name="doctorName" required />
+                    <input type="text" className="form-control" placeholder="*Doctor's name" name="doctorName" value={this.state.doctorName} onChange={this.handleChange} required />
                   </div>
                   <div className="col-md-6 form-group">
-                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="*Doctor's phone" name="doctorContact" required/>
+                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="*Doctor's phone" name="doctorContact" value={this.state.doctorContact} onChange={this.handleChange}  required />
                   </div>
                 </div>
                 <div className="col-md-12 form-group">
-                  <input type="text" className="form-control" placeholder="Doctor's Address" name="doctorAddress" />
+                  <input type="text" className="form-control" placeholder="Doctor's Address (OPTIONAL)" name="doctorAddress" value={this.state.doctorAddress} onChange={this.handleChange} />
                 </div>
+                <div className="col-md-12 form-group m-b-5">
+                  2) Are you already tested positive for prostate cancer?
+                </div>
+                <div onChange={this.handleChange} className="col-md-12">
+                  <div className="col-md-6 m-t-0 radio">
+                    <label>
+                      <input type="radio" name="positive" id="positiveYes" value="yes" /> Yes
+                    </label>
+                  </div>
+                  <div className="col-md-6 m-t-0 radio">
+                    <label>
+                      <input type="radio" name="positive" id="positiveNo" value="no" required/> No
+                    </label>
+                  </div>
+                </div>
+                {this.state.positive === 'yes' && 
+                  <div className="col-md-12 form-group m-b-5 text-danger">
+                    &nbsp; &nbsp; You are not eligible to take the test.
+                  </div>
+                }
+                {this.state.positive === 'no' &&
+                <>
+                  <div className="col-md-12 form-group m-b-5">
+                    3) Your recent PSA test values <strong>(OPTIONAL)</strong>
+                  </div>
+                  <div className="col-md-6 form-group">
+                    <input type="text" className="form-control" placeholder="Total PSA (ng/mL)" name="tPSA" value={this.state.tPSA} onChange={this.handleChange}/>
+                  </div>
+                  <div className="col-md-6 form-group">
+                    <input type="text" className="form-control" placeholder="Free PSA (ng/mL)" name="fPSA" value={this.state.fPSA} onChange={this.handleChange}/>
+                  </div>
+                  <div className="col-md-12 form-group m-b-5">
+                    4) Is your prostate surgically removed because of cancer?
+                  </div>
+                  <div onChange={this.handleChange} className="col-md-12">
+                    <div className="col-md-6 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="prostateRemoved" id="sremovedYes" value="yes" required/> Yes
+                    </label>
+                    </div>
+                    <div className="col-md-6 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="prostateRemoved" id="sremovedNo" value="no" /> No
+                    </label>
+                    </div>
+                  </div>
+                  {this.state.prostateRemoved==='yes' &&
+                    <div className="col-md-12 form-group">
+                      <Datepicker id="1" name="when" placeholder="when?" dateChange={e=>{
+                          this.when = e.date.toISOString().split('T')[0];
+                      }}/>
+                    </div>}
+                  <div className="col-md-12 form-group m-b-5">
+                    5) Does anyone in your family have prostate cancer? <strong>(OPTIONAL)</strong>
+                  </div>
+                  <div className="col-md-12 form-group">
+                    <input type="text" className="form-control" placeholder="Father/ Brother/ Uncle/ Cousin..." name="relativeWithCancer" value={this.state.relativeWithCancer} onChange={this.handleChange} />
+                  </div>
+                  <div className="col-md-12 form-group m-b-5">
+                    6) Are you HIV positive?
+                  </div>
+                  <div onChange={this.handleChange} className="col-md-12">
+                    <div className="col-md-6 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="hivPositive" id="hivYes" value="yes" required/> Yes
+                      </label>
+                    </div>
+                    <div className="col-md-6 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="hivPositive" id="hivNo" value="no" required/> No
+                      </label>
+                    </div>
+                  </div>
+                </>
+                }
               </div>
 
               <div className="col-md-6 text-left">
@@ -353,7 +443,7 @@ class BookComponent extends React.Component {
                   </div>)}
                 </div>
                 <div className="table-responsive">
-                  <table className="table" style={{marginBottom:0}}>
+                  <table className="table" style={{ marginBottom: 0 }}>
                     <tbody>
                       <tr>
                         <td className="cart-product-name">
@@ -401,7 +491,7 @@ class BookComponent extends React.Component {
                         onChange={this.handleCheckbox}
                       />I consent with all the <a href='#modalConsent' data-lightbox="inline"><u>terms and conditions</u></a>
                     </label>
-                    <p className="m-b-0">* You must agree (check the box) with the above conditions to proceed further.</p>
+                    <p className="m-b-0 text-info">* You must agree (check the box) with the above conditions to proceed further.</p>
                   </div>
                 </div>
 
@@ -411,7 +501,12 @@ class BookComponent extends React.Component {
                   <Modal fullName={this.state.fullName} area={this.state.area} city={this.state.city} istate={this.state.istate} pincode={this.state.pincode} />
                 </div>
                 <div className="form-group">
-                  <button type={(this.state.consentChecked && !this.state.isLoadingSubmit) ? "submit" : "button"} className={(this.state.consentChecked && !this.state.isLoadingSubmit) ? "btn btn-block" : "btn btn-block disabled"}>Submit</button>
+                  <button 
+                    type={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no') ? "submit" : "button"}
+                    className={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no') ? "btn btn-block" : "btn btn-block disabled"}
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             </form>

@@ -17,6 +17,7 @@ class LoginComponent extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitLostPassword = this.handleSubmitLostPassword.bind(this);
     this.lostPassword = this.lostPassword.bind(this);
     this.Auth = new AuthService();
     if (this.Auth.loggedIn()) this.props.history.replace('/dashboard');
@@ -26,8 +27,27 @@ class LoginComponent extends React.Component {
   }
 
   lostPassword() {
-    this.setState({ lost: !this.state.lost, status: null, message: '', email: '', isLoading: false })
+    this.setState({ lost: !this.state.lost, status: null, message: '', email: '', password: '', isLoading: false })
   }
+
+  async handleSubmitLostPassword(event){
+    event.preventDefault();
+    this.setState({isLoading: true, message: ''});
+    try {
+      let res = await this.Auth.lostPassword(this.state.email);
+      return this.setState({
+        message: res.message,
+        status: res.status,
+        isLoading: false,
+        password: '',
+        email: ''
+      })
+    } catch (e) {
+      this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
+      // alert(e);
+    }
+  }
+
   async handleSubmit(event) {
     event.preventDefault();
     this.setState({isLoading: true, message: ''});
@@ -36,7 +56,9 @@ class LoginComponent extends React.Component {
       this.setState({
         message: res.message,
         status: res.status,
-        isLoading: false
+        isLoading: false,
+        password: '',
+        email: ''
       })
       if (res.token) this.props.history.replace('/dashboard');
     } catch (e) {
@@ -52,14 +74,23 @@ class LoginComponent extends React.Component {
           <section className="container">
             <div className="row">
               <div className="col-md-5 center background-white">
-                <h3>Forgot your Password?</h3>
+                {this.state.status === 200 ? <h3>Verification Email Sent <i className="fa fa-check-circle"></i></h3> : <h3>Forgot your Password?</h3>}
                 {this.state.message !== '' && (
-                  <div role="alert" className="alert alert-danger alert-dismissible">
+                  <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
                     {this.state.message}
                   </div>
                 )}
-                <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
+                {this.state.isLoading && (
+                    <div className="col-md-12 loader-inner line-scale-pulse-out-rapid text-center m-b-15">
+                      <div />
+                      <div />
+                      <div />
+                      <div />
+                      <div />
+                    </div>
+                  )}
+                <form className="form-transparent-grey" onSubmit={this.handleSubmitLostPassword}>
                   <div className="form-group m-b-5">
                     <label className="sr-only">Email </label>
                     <input type="email" className="form-control" placeholder="Email registered with our website" id="email" name="email" value={this.state.email} onChange={this.handleChange} required />

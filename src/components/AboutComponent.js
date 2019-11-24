@@ -83,29 +83,17 @@ class AboutComponent extends React.Component {
         <div className="container">
           <h3>Our Team</h3>
           <div className="row team-members team-members-shadow m-b-40">
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="team-member">
                 <div className="team-image">
-                  <img src="/images/team/6.jpg" alt='Dr. Uddhav Kelavkar' />
+                  <img src="/images/team/druddhav.jpeg" alt='Dr. Uddhav Kelavkar' />
                 </div>
                 <div className="team-desc">
                   <h3>Dr. Uddhav Kelavkar</h3>
                   <span>Managing Director</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+                  <p> </p>
                   <div className="align-center">
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
-                      <i className="fa fa-facebook" />
-                      <span>Facebook</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
-                      <i className="fa fa-twitter" />
-                      <span>Twitter</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="https://www.instagram.com" data-width={118}>
-                      <i className="fa fa-instagram" />
-                      <span>Instagram</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
+                    <a className="btn btn-xs btn-slide btn-light" href="mailto:uddhav@ncbiprivatelimited.com" data-width={80}>
                       <i className="fa fa-envelope" />
                       <span>Mail</span>
                     </a>
@@ -113,29 +101,17 @@ class AboutComponent extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="team-member">
                 <div className="team-image">
-                  <img src="/images/team/7.jpg" alt='Kalpana Patel Kelavkar' />
+                  <img src="/images/team/kalpana.jpg" alt='Kalpana Patel Kelavkar' />
                 </div>
                 <div className="team-desc">
                   <h3>Kalpana Patel Kelavkar</h3>
                   <span>Director</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+                  <p> </p>
                   <div className="align-center">
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
-                      <i className="fa fa-facebook" />
-                      <span>Facebook</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
-                      <i className="fa fa-twitter" />
-                      <span>Twitter</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={118}>
-                      <i className="fa fa-instagram" />
-                      <span>Instagram</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
+                    <a className="btn btn-xs btn-slide btn-light" href="mailto:kalpana@ncbiprivatelimited.com" data-width={80}>
                       <i className="fa fa-envelope" />
                       <span>Mail</span>
                     </a>
@@ -143,59 +119,17 @@ class AboutComponent extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="team-member">
                 <div className="team-image">
-                  <img src="/images/team/8.jpg" alt='Tushar Barad'/>
+                  <img src="/images/team/tushar.jpg" alt='Tushar Barad'/>
                 </div>
                 <div className="team-desc">
                   <h3>Tushar Barad</h3>
                   <span>Director</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
+                  <p> </p>
                   <div className="align-center">
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
-                      <i className="fa fa-facebook" />
-                      <span>Facebook</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
-                      <i className="fa fa-twitter" />
-                      <span>Twitter</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={118}>
-                      <i className="fa fa-instagram" />
-                      <span>Instagram</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
-                      <i className="fa fa-envelope" />
-                      <span>Mail</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="team-member">
-                <div className="team-image">
-                  <img src="/images/team/9.jpg" alt='Rashmikant Choksey' />
-                </div>
-                <div className="team-desc">
-                  <h3>Rashmikant Choksey</h3>
-                  <span>CA</span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing tristique hendrerit laoreet. </p>
-                  <div className="align-center">
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com">
-                      <i className="fa fa-facebook" />
-                      <span>Facebook</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={100}>
-                      <i className="fa fa-twitter" />
-                      <span>Twitter</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="www.instagram.com" data-width={118}>
-                      <i className="fa fa-instagram" />
-                      <span>Instagram</span>
-                    </a>
-                    <a className="btn btn-xs btn-slide btn-light" href="mailto:#" data-width={80}>
+                    <a className="btn btn-xs btn-slide btn-light" href="mailto:tushar@ncbiprivatelimited.com" data-width={80}>
                       <i className="fa fa-envelope" />
                       <span>Mail</span>
                     </a>

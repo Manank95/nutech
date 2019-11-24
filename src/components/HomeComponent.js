@@ -3,10 +3,62 @@ import { HashLink as Link } from 'react-router-hash-link';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import config from './../config';
+import AuthService from './../auth/AuthService';
 
 class HomeComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      contact: '',
+      email: '',
+      comment: '',
+      status: null,
+      message: '',
+      isLoadingSubmit: false
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.Auth = new AuthService();
+  }
   componentDidMount() {
     window.updateUIAfterReact();
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      isLoadingSubmit: true,
+      message: ''
+    });
+    try {
+      let res = await this.Auth.contactUs(this.state.name, this.state.email, this.state.contact, this.state.comment);
+      if (res.status === 200){
+        return this.setState({
+          isLoadingSubmit: false,
+          name: '',
+          contact: '',
+          email: '',
+          comment: '',
+          status: res.status,
+          message: res.message
+        });
+      }
+      return this.setState({
+        isLoadingSubmit: false,
+        name: '',
+        contact: '',
+        email: '',
+        comment: '',
+        status: 400,
+        message: 'Something went wrong! please try again after some time.'
+      })
+    } catch (e) {
+      this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
+    }
   }
 
   render() {
@@ -295,7 +347,7 @@ class HomeComponent extends React.Component {
         </div>
         {/* end: Post item*/}
         {/* end: Know more */}
-        <section id="services" className="background-grey p-t-120 p-b-120">
+        <section id="services" className="background-grey p-t-80 p-b-80">
           <div className="container">
             <div className="row">
               <div className="col-md-7">
@@ -340,7 +392,7 @@ class HomeComponent extends React.Component {
           </div>
         </section>
         {/* Contact */}
-        <section id="contact" className="p-t-150 p-b-200" style={{ backgroundImage: 'url(/homepages/branding/images/background-4.png)', backgroundPosition: '71% 22%' }}>
+        <section id="contact" className="p-t-80 p-b-80">
           <div className="container">
             <div className="row">
               <div className="col-md-6">
@@ -375,25 +427,40 @@ class HomeComponent extends React.Component {
                 </div>
               </div>
               <div className="col-md-5 col-md-offset-1 text-left">
-                <form className="widget-contact-form">
+                <h2>Drop us a line!</h2>
+                <form className="form-transparent-grey" onSubmit={this.handleSubmit}>
                   <div className="row">
                     <div className="form-group col-sm-6">
-                      <label htmlFor="name">Name</label>
-                      <input type="text" aria-required="true" name="widget-contact-form-name" className="form-control required name" placeholder="Enter your Name" />
+                      <input type="text" name="name" className="form-control" placeholder="Enter your Name" value={this.state.name} onChange={(e) => this.handleChange(e)} required/>
                     </div>
                     <div className="form-group col-sm-6">
-                      <label htmlFor="email">Email</label>
-                      <input type="email" aria-required="true" name="widget-contact-form-email" className="form-control required email" placeholder="Enter your Email" />
+                      <input type="tel" pattern="[0-9]{10}" name="contact" className="form-control" placeholder="Phone No. (10 digits)" value={this.state.contact} onChange={(e) => this.handleChange(e)} required/>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="message">Message</label>
-                    <textarea type="text" name="widget-contact-form-message" rows={9} className="form-control required" placeholder="Enter your Message" defaultValue={""} />
+                    <input type="email" name="email" className="form-control" placeholder="Enter your Email" value={this.state.email} onChange={(e) => this.handleChange(e)} required/>
                   </div>
                   <div className="form-group">
-                    <button className="btn btn-light" type="submit" id="form-submit"><i className="fa fa-paper-plane" />&nbsp;Send
-                  message</button>
+                    <textarea type="text" name="comment" rows={8} className="form-control required" placeholder="Enter your Message" defaultValue={""} value={this.state.comment} onChange={(e) => this.handleChange(e)} required/>
                   </div>
+                  <div className="row">
+                    <div className="form-group col-sm-6">
+                      <button className="btn btn-light" type="submit"><i className="fa fa-paper-plane" />&nbsp;Send message</button>
+                    </div>
+                    {this.state.isLoadingSubmit && (<div className="text-center row loader-inner line-scale-pulse-out-rapid">
+                        <div />
+                        <div />
+                        <div />
+                        <div />
+                        <div />
+                      </div>)}
+                  </div>
+                  {this.state.message !== '' && (
+                    <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
+                      <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                      {this.state.message}
+                    </div>
+                  )}
                 </form>
               </div>
             </div>

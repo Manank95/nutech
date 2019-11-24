@@ -40,6 +40,33 @@ export default class AuthService {
     }
   }
 
+  async lostPassword(email) {
+    try {
+      const res = await this.fetch(`${this.domain}/user/forgot-password`, {
+        method: 'POST',
+        body: JSON.stringify({
+          email
+        })
+      });
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  async changePassword(token, password) {
+    try{
+      const res = await this.fetch(`${this.domain}/user/change-password/${token}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          password
+        })
+      });
+      return res;
+    } catch(e) {
+      console.log(e);
+    }
+  }
 
   async verification(token) {
     try{
@@ -104,10 +131,6 @@ export default class AuthService {
 
   async getReport(id) {
     try{
-      // window.location = `${this.domain}/order/fetch-report/${id}`;
-      // window.open(`${this.domain}/order/fetch-report/${id}`);
-      // console.log('pdfres',res);
-      // return res;
       let url = `${this.domain}/order/fetch-report/${id}`;
       return fetch(url, {
         method: 'GET',
@@ -120,6 +143,23 @@ export default class AuthService {
       }).then(function(blob) {
         download(blob);
       });
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  async contactUs(name, email, contact, comment) {
+    try{
+      const res = await this.fetch(`${this.domain}/user/contact-us`, {
+        method: 'POST',
+        body: JSON.stringify({
+          name,
+          email,
+          contact,
+          comment
+        })
+      });
+      return res;
     } catch(e) {
       console.log(e);
     }

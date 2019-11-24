@@ -11,7 +11,8 @@ class ChangePasswordComponent extends React.Component {
       status: null,
       token: null,
       password: '',
-      repassword: ''
+      repassword: '',
+      isLoading: false
     };
     this.Auth = new AuthService();
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,7 +21,10 @@ class ChangePasswordComponent extends React.Component {
   componentDidMount() {
     // for query parameter: const token  = this.props.location.search.substring(2)
     const { token } = this.props.match.params;
-    if (token !== undefined) this.setState({ token }, () => console.log(this.state.token));
+    let loggedInToken = this.Auth.getToken();
+    if (token !== undefined) return this.setState({ token: token });
+    else if (loggedInToken !== null) return this.setState({token: loggedInToken});
+    else return this.props.history.replace('/login');
   }
 
   async handleSubmit(e) {
@@ -30,9 +34,16 @@ class ChangePasswordComponent extends React.Component {
     else if (!pregex.test(this.state.password))
       return this.setState({ message: 'Password must be atleast 6 characters long.' })
     else {
+      this.setState({isLoading: true, message: ''});
       try {
         let res = await this.Auth.changePassword(this.state.token, this.state.password);
-        if (res.status === 401) return this.props.history.replace('/logout');
+        this.setState({
+          message: res.message,
+          status: res.status,
+          isLoading: false,
+          password: '',
+          email: ''
+        })
       } catch (e) {
         this.props.history.push({ pathname: '/error', state: { status: 500, message: 'Internal Server Error!' } })
         // alert(e);
@@ -50,11 +61,20 @@ class ChangePasswordComponent extends React.Component {
         <section className="container">
           <div className="row">
             <div className="col-md-5 center background-white">
-            <h3>Change Password</h3>
+              {this.state.status === 200 ? <h3>Password has been changed <i className="fa fa-check-circle"></i></h3> : <h3>Change Password</h3>}
               {this.state.message !== '' && (
-                <div role="alert" className="alert alert-danger alert-dismissible">
+                <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
                   <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
                   {this.state.message}
+                </div>
+              )}
+              {this.state.isLoading && (
+                <div className="col-md-12 loader-inner line-scale-pulse-out-rapid text-center m-b-15">
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                  <div />
                 </div>
               )}
               <form className="form-transparent-grey" onSubmit={this.handleSubmit}>

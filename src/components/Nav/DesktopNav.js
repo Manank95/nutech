@@ -35,7 +35,7 @@ export default function DesktopNav() {
         custom={true}
         isLast
         links={[
-          { to: "/changepassword", tag: "Password" },
+          // { to: "/changepassword", tag: "Password" },
           { to: "/logout", tag: "Logout" }
         ]} />
     </nav>)

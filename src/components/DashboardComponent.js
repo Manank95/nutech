@@ -29,7 +29,6 @@ class DashboardComponent extends React.Component {
       const res = await this.Auth.fetch(`${this.domain}/order/list`, {
         method: 'GET'
       });
-      console.log(res);
       if (res.status === 401) return this.props.history.replace('/logout');
       return this.setState({ testDetails: res, loading: false });
     }
