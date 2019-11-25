@@ -1,23 +1,23 @@
--- Change Password page
--- Book test form validation for date and other critical field
--- cors restriction, multiple requests by robot - blacklist
--- contact us form email
--- remove comments, console.logs
-- partially - test registration form
 // -- update profile page
+-- add our names in footer
 -- discuss and move razorpay payment script tag to html
 -- re-captcha - works after domain name
--- image optimize for gallery/ team
--- redirecting to desired path on login
-
--- redirect to dashboard after book test/ payment
--- Show DOB placeholder in the form
 
 // server side - 
 change password
 download report integration with livehealth
 odd percent total amount
 
+- done - Change Password page
+- done - Book test form validation for date and other critical field
+- done - cors restriction, multiple requests by robot - blacklist
+- done - contact us form email
+- done - remove comments, console.logs
+- done - test registration form
+- done - image optimize for gallery/ team
+- done - redirecting to desired path on login
+- done - redirect to dashboard after book test/ payment
+- done - Show DOB placeholder in the form
 - done - redirect on book test success and disable the button.
 - done - empty dashboard, internet explorer
 - done - dynamic test details loading on home page and booking page

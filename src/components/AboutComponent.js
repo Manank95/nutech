@@ -81,7 +81,7 @@ class AboutComponent extends React.Component {
         {/* Team Start */}
         <section id="team" className="background-grey p-t-60 p-b-60">
         <div className="container">
-          <h3>Our Team</h3>
+          <h2>Our Team</h2>
           <div className="row team-members team-members-shadow m-b-40">
             <div className="col-md-4">
               <div className="team-member">
@@ -138,6 +138,9 @@ class AboutComponent extends React.Component {
               </div>
             </div>
           </div>
+          <a href="./downloads/Business_Organization_2019.tif">
+            <button type="button" className="btn btn-outline"><i className="fa fa-download" /> Business Organization</button>
+          </a>
         </div>
         </section>
         {/* Team End */}
@@ -284,9 +287,6 @@ class AboutComponent extends React.Component {
             <p className="lead text-center">Below are some of the useful information/ downloads/ resources about the organization.
         </p>
             {/* Testimonials */}
-            <a href="./downloads/Business_Organization_2019.tif">
-              <div role="alert" className="alert alert-info text-left"><i className="fa fa-download" /> <strong>Business Organization 2019</strong> </div>
-            </a>
             <a href="./downloads/PROSTATE_HEALTH_AWARENESS-EASILY_UNDERSTANDABLE.pdf">
               <div role="alert" className="alert alert-info text-left"><i className="fa fa-download" /> <strong>PROSTATE_HEALTH AWARENESS-EASILY UNDERSTANDABLE</strong></div>
             </a>

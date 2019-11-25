@@ -68,7 +68,7 @@ class HomeComponent extends React.Component {
         {/* Inspiro Slider */}
         <div id="slider" className="inspiro-slider arrows-large arrows-creative dots-creative" data-height-xs={360}>
           {/* Slide 1 */}
-          <div className="slide background-overlay-gradient background-image" style={{ backgroundImage: 'url("/homepages/corporate-v7/images/1.jpg")' }}>
+          <div className="slide background-overlay-gradient background-image" style={{ backgroundImage: 'url("/images/banner/1.jpg")' }}>
             <div className="container">
               <div className="slide-captions text-center text-light">
                 {/* Captions */}
@@ -90,7 +90,7 @@ class HomeComponent extends React.Component {
           </div>
           {/* end: Slide 1 */}
           {/* Slide 2 */}
-          <div className="slide background-overlay-gradient kenburns background-image" style={{ backgroundImage: 'url("/homepages/corporate-v7/images/2.jpg")' }}>
+          <div className="slide background-overlay-gradient kenburns background-image" style={{ backgroundImage: 'url("/images/banner/2.jpg")' }}>
             <div className="container">
               <div className="slide-captions text-left text-light">
                 {/* Captions */}
@@ -441,7 +441,7 @@ class HomeComponent extends React.Component {
                     <input type="email" name="email" className="form-control" placeholder="Enter your Email" value={this.state.email} onChange={(e) => this.handleChange(e)} required/>
                   </div>
                   <div className="form-group">
-                    <textarea type="text" name="comment" rows={8} className="form-control required" placeholder="Enter your Message" defaultValue={""} value={this.state.comment} onChange={(e) => this.handleChange(e)} required/>
+                    <textarea type="text" name="comment" rows={8} className="form-control required" placeholder="Enter your Message" value={this.state.comment} onChange={(e) => this.handleChange(e)} required/>
                   </div>
                   <div className="row">
                     <div className="form-group col-sm-6">

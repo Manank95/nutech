@@ -75,7 +75,7 @@ class DashboardComponent extends React.Component {
       obj.icon = <i className="fa fa-check-circle"></i>;
       obj.button = 
         <div>
-          <button type="button" onClick={() => this.getReport(this.state.testDetails.Items[index])} className="btn btn-light btn-shadow">Download Report</button>
+          <button type="button" onClick={() => this.getReport(this.state.testDetails.Items[index])} className="btn btn-light btn-shadow">Download Report <i className="fa fa-download" /></button>
           {this.state.isLoadingReport && (<div className="text-center loader-inner line-scale-pulse-out-rapid">
             <div />
             <div />
