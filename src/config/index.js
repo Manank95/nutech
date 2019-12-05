@@ -1,7 +1,7 @@
-let url = 'http://localhost:5000';
+let url = 'https://qfg5xea7df.execute-api.ap-south-1.amazonaws.com/dev';
 let services = [
   {
-    testID: '2727684',
+    testID: '2889951',
     testName: 'SeroMark-1 test',
     testAmount: 4000,
     description: 'Basic Seromark 1 test',
@@ -10,7 +10,7 @@ let services = [
     ]
   },
   {
-    testID: '2727685',
+    testID: '2889955',
     testName: 'SeroMark-1 BUNDLED test',
     testAmount: 4000,
     description: 'Bundle Test',
@@ -22,7 +22,7 @@ let services = [
     ]
   },
   {
-    testID: '2727687',
+    testID: '2889952',
     testName: 'Total PSA (tPSA)',
     testAmount: 750,
     description: 'tPSA test',
@@ -31,7 +31,7 @@ let services = [
     ]
   },
   {
-    testID: '2727688',
+    testID: '2889953',
     testName: 'Free PSA (fPSA)',
     testAmount: 850,
     description: 'fPSA test',

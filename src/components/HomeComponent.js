@@ -113,9 +113,7 @@ class HomeComponent extends React.Component {
             <div className="row">
               <div className="col-md-12 col-sm-12 text-left">
                 <h2 className="text-left">Our Health Mission</h2>
-                <h3 className="m-b-20 text-left">Nutech Cancer Biomarkers India Pvt. Ltd. is a recognized Start-up by the
-									Department of
-              Industrial Policy and Promotion, Government of India.</h3>
+                <h3 className="m-b-20 text-left">Nutech Cancer Biomarkers India Pvt. Ltd. is a Start-up recognised  by the Department of Industrial Policy and Promotion, Government of India.</h3>
                 <p className="lead text-left">Prostate (present under the urinary bladder) is only found in men and there are
 									a total of
 									12-13 crore (age ≈40-65) Indian males based upon the 2011 Census data. The age specific
