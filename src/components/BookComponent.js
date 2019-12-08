@@ -37,6 +37,11 @@ class BookComponent extends React.Component {
       status: null,
       consentChecked: false,
       positive: '',
+      biopsyPositive: '',
+      dre: '',
+      enlargedProstate: '',
+      biopsyPlanning: '',
+      biopsyDoctorName:'',
       prostateRemoved: '',
       hivPositive: '',
       doctorName: '',
@@ -155,7 +160,14 @@ class BookComponent extends React.Component {
       "Doctor's Name": this.state.doctorName || null,
       "Doctor's Contact": this.state.doctorContact || null,
       "Doctor's Address": this.state.doctorAddress || null,
-      "Already tested positive for prostate cancer?": 'No',
+      "Has your doctor performed Digital Rectal Exam (DRE)?": this.state.dre || null,
+      "Do you have an enlarged Prostate?": this.state.enlargedProstate || null,
+      "Have you done or planning biopsy?": this.state.biopsyPlanning || null,
+      "Is your biopsy positive for cancer?": 'no',
+      "Name of the doctor who did biopsy": this.state.biopsyDoctorName || null,
+      "If done, When did you do your biopsy?": this.biopsyWhen || null,
+      "If planning, When are you planning to do biopsy?": this.biopsyPlanningWhen || null,
+      "Already tested positive for prostate cancer?": 'no',
       "Total PSA (ng/mL)": this.state.tPSA || null,
       "Free PSA (ng/mL)": this.state.fPSA || null,
       "Is the prostate surgically removed becaues of cancer?": this.state.prostateRemoved || null,
@@ -340,7 +352,97 @@ class BookComponent extends React.Component {
                   <input type="text" className="form-control" placeholder="Doctor's Address (OPTIONAL)" name="doctorAddress" value={this.state.doctorAddress} onChange={this.handleChange} />
                 </div>
                 <div className="col-md-12 form-group m-b-5">
-                  2) Are you already tested positive for prostate cancer?
+                  2) Has your doctor performed Digital Rectal Exam (DRE) on you?
+                </div>
+                <div onChange={this.handleChange} className="col-md-12">
+                  <div className="col-md-6 m-t-0 radio">
+                    <label>
+                      <input type="radio" name="dre" id="dreYes" value="yes" /> Yes
+                    </label>
+                  </div>
+                  <div className="col-md-6 m-t-0 radio">
+                    <label>
+                      <input type="radio" name="dre" id="dreNo" value="no" required/> No
+                    </label>
+                  </div>
+                </div>
+                {this.state.dre === 'yes' && 
+                  <>
+                  <div className="col-md-12 form-group m-b-5">
+                    2a) Do you have an enlarged prostate (BPH)?
+                  </div>
+                  <div onChange={this.handleChange} className="col-md-12">
+                    <div className="col-md-6 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="enlargedProstate" id="enlargedProstateYes" value="yes" /> Yes
+                      </label>
+                    </div>
+                    <div className="col-md-6 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="enlargedProstate" id="enlargedProstateNo" value="no" required/> No
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-md-12 form-group m-b-5">
+                    2b) Have you done or planning biopsy?
+                  </div>
+                  <div onChange={this.handleChange} className="col-md-12">
+                    <div className="col-md-4 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="biopsyPlanning" id="biopsyPlanningDone" value="done" /> Done
+                      </label>
+                    </div>
+                    <div className="col-md-4 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="biopsyPlanning" id="biopsyPlanningPlanning" value="planning" /> Planning
+                      </label>
+                    </div>
+                    <div className="col-md-4 m-t-0 radio">
+                      <label>
+                        <input type="radio" name="biopsyPlanning" id="biopsyPlanningNot" value="notSure" required/> Not Sure
+                      </label>
+                    </div>
+                  </div>
+                  {this.state.biopsyPlanning === 'done' &&
+                    <>
+                      <div>
+                        <div className="col-md-6 form-group">
+                          <input type="text" className="form-control" placeholder="*Doctor's name who did it" name="biopsyDoctorName" value={this.state.biopsyDoctorName} onChange={this.handleChange} required />
+                        </div>
+                        <div className="col-md-6 form-group">
+                          <Datepicker id="2" name="biopsyWhen" placeholder="when?" dateChange={e=>{
+                              this.biopsyWhen = e.date.toISOString().split('T')[0];
+                          }}/>
+                        </div>
+                      </div>
+                      <div className="col-md-12 form-group m-b-5">
+                        2c) Is your biopsy positive for cancer?
+                      </div>
+                      <div onChange={this.handleChange} className="col-md-12">
+                        <div className="col-md-6 m-t-0 radio">
+                          <label>
+                            <input type="radio" name="biopsyPositive" id="biopsyPositiveYes" value="yes" /> Yes
+                          </label>
+                        </div>
+                        <div className="col-md-6 m-t-0 radio">
+                          <label>
+                            <input type="radio" name="biopsyPositive" id="biopsyPositiveNo" value="no" required/> No
+                          </label>
+                        </div>
+                      </div>
+                    </>
+                  }
+                  {this.state.biopsyPlanning === 'planning' &&
+                    <div className="col-md-12 form-group">
+                      <Datepicker id="3" name="biopsyPlanningWhen" placeholder="when?" dateChange={e=>{
+                          this.biopsyPlanningWhen = e.date.toISOString().split('T')[0];
+                      }}/>
+                    </div>
+                  }
+                  </>
+                }
+                <div className="col-md-12 form-group m-b-5">
+                  3) Are you already tested positive for prostate cancer?
                 </div>
                 <div onChange={this.handleChange} className="col-md-12">
                   <div className="col-md-6 m-t-0 radio">
@@ -354,15 +456,15 @@ class BookComponent extends React.Component {
                     </label>
                   </div>
                 </div>
-                {this.state.positive === 'yes' && 
+                {(this.state.positive === 'yes' || this.state.biopsyPositive === 'yes') && 
                   <div className="col-md-12 form-group m-b-5 text-danger">
                     &nbsp; &nbsp; You are not eligible to take the test.
                   </div>
                 }
-                {this.state.positive === 'no' &&
+                {this.state.positive === 'no' && this.state.biopsyPositive !== 'yes' &&
                 <>
                   <div className="col-md-12 form-group m-b-5">
-                    3) Your recent PSA test values <strong>(OPTIONAL)</strong>
+                    4) Your recent PSA test values <strong>(OPTIONAL)</strong>
                   </div>
                   <div className="col-md-6 form-group">
                     <input type="text" className="form-control" placeholder="Total PSA (ng/mL)" name="tPSA" value={this.state.tPSA} onChange={this.handleChange}/>
@@ -371,7 +473,7 @@ class BookComponent extends React.Component {
                     <input type="text" className="form-control" placeholder="Free PSA (ng/mL)" name="fPSA" value={this.state.fPSA} onChange={this.handleChange}/>
                   </div>
                   <div className="col-md-12 form-group m-b-5">
-                    4) Is your prostate surgically removed because of cancer?
+                    5) Is your prostate surgically removed because of cancer?
                   </div>
                   <div onChange={this.handleChange} className="col-md-12">
                     <div className="col-md-6 m-t-0 radio">
@@ -392,13 +494,13 @@ class BookComponent extends React.Component {
                       }}/>
                     </div>}
                   <div className="col-md-12 form-group m-b-5">
-                    5) Does anyone in your family have prostate cancer? <strong>(OPTIONAL)</strong>
+                    6) Does anyone in your family have prostate cancer? <strong>(OPTIONAL)</strong>
                   </div>
                   <div className="col-md-12 form-group">
                     <input type="text" className="form-control" placeholder="Father/ Brother/ Uncle/ Cousin..." name="relativeWithCancer" value={this.state.relativeWithCancer} onChange={this.handleChange} />
                   </div>
                   <div className="col-md-12 form-group m-b-5">
-                    6) Are you HIV positive?
+                    7) Are you HIV positive?
                   </div>
                   <div onChange={this.handleChange} className="col-md-12">
                     <div className="col-md-6 m-t-0 radio">
@@ -502,8 +604,8 @@ class BookComponent extends React.Component {
                 </div>
                 <div className="form-group">
                   <button 
-                    type={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no') ? "submit" : "button"}
-                    className={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no') ? "btn btn-block" : "btn btn-block disabled"}
+                    type={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no' && this.state.biopsyPositive === 'no') ? "submit" : "button"}
+                    className={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no' && this.state.biopsyPositive === 'no') ? "btn btn-block" : "btn btn-block disabled"}
                   >
                     Submit
                   </button>
