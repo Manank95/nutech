@@ -4,6 +4,7 @@ import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import config from './../config';
 import AuthService from './../auth/AuthService';
+import { ReCaptcha } from 'react-recaptcha-v3';
 
 class HomeComponent extends React.Component {
   constructor(props) {
@@ -19,6 +20,10 @@ class HomeComponent extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.Auth = new AuthService();
+  }
+  verifyCallback = (recaptchaToken) => {
+    // Here you will get the final recaptchaToken!!!  
+    console.log("hello")
   }
   componentDidMount() {
     window.updateUIAfterReact();
@@ -441,6 +446,11 @@ class HomeComponent extends React.Component {
                   <div className="form-group">
                     <textarea type="text" name="comment" rows={8} className="form-control required" placeholder="Enter your Message" value={this.state.comment} onChange={(e) => this.handleChange(e)} required/>
                   </div>
+                  <ReCaptcha
+                    sitekey={config.sitekey}
+                    action='login'
+                    verifyCallback={this.verifyCallback}
+                  />
                   <div className="row">
                     <div className="form-group col-sm-6">
                       <button className="btn btn-light" type="submit"><i className="fa fa-paper-plane" />&nbsp;Send message</button>

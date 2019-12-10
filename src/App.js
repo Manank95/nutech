@@ -15,8 +15,13 @@ import CheckoutComponent from './components/CheckoutComponent';
 import VerificationComponent from './components/VerificationComponent';
 import ChangePasswordComponent from './components/ChangePasswordComponent';
 import ErrorComponent from './error';
+import { loadReCaptcha } from 'react-recaptcha-v3';
+import config from './config';
 
 class App extends Component {
+  componentDidMount() {
+    loadReCaptcha(config.sitekey);
+  }
   render() {
     let Auth = new AuthService();
     return (

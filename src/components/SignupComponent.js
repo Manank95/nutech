@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from '../auth/AuthService';
+import { ReCaptcha } from 'react-recaptcha-v3';
+import config from './../config';
 
 class SignupComponent extends React.Component {
   constructor(props) {
@@ -23,7 +25,10 @@ class SignupComponent extends React.Component {
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+  verifyCallback = (recaptchaToken) => {
+    // Here you will get the final recaptchaToken!!!  
+    console.log("hello")
+  }
   async handleSubmit(e) {
     e.preventDefault();
     this.setState({isLoading: true, message: ''})
@@ -97,6 +102,11 @@ class SignupComponent extends React.Component {
                   <label className="sr-only">Confirm Password</label>
                   <input type="password" className="form-control" placeholder="Confirm Password" name="repassword" value={this.state.repassword} onChange={(e) => this.handleChange(e)} required />
                 </div>
+                <ReCaptcha
+                  sitekey={config.sitekey}
+                  action='signup'
+                  verifyCallback={this.verifyCallback}
+                />
                 <div className="form-group">
                   {!this.state.isLoading && <button type="submit" className="btn btn-block">Signup</button>}
                 </div>

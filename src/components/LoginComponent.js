@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import FooterComponent from './FooterComponent';
 import AuthService from '../auth/AuthService';
+import { ReCaptcha } from 'react-recaptcha-v3';
+import config from './../config';
 
 class LoginComponent extends React.Component {
   constructor(props) {
@@ -66,10 +68,19 @@ class LoginComponent extends React.Component {
       // alert(e);
     }
   }
+  verifyCallback = (recaptchaToken) => {
+    // Here you will get the final recaptchaToken!!!  
+    console.log("hello")
+  }
   render() {
     return (
       <div>
         <Nav />
+        <ReCaptcha
+          sitekey={config.sitekey}
+          action='login'
+          verifyCallback={this.verifyCallback}
+        />
         {this.state.lost ? (
           <section className="container">
             <div className="row">
@@ -139,6 +150,11 @@ class LoginComponent extends React.Component {
                       <Link onClick={this.lostPassword} to='/login' className="right"><small>Lost your Password?</small></Link>
                     </div>
                     <br />
+                    <ReCaptcha
+                      sitekey={config.sitekey}
+                      action='login'
+                      verifyCallback={this.verifyCallback}
+                    />
                     <div className="form-group">
                       <button type="submit" className="btn btn-block">Login</button>
                     </div>

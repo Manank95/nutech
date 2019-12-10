@@ -604,8 +604,8 @@ class BookComponent extends React.Component {
                 </div>
                 <div className="form-group">
                   <button 
-                    type={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no' && this.state.biopsyPositive === 'no') ? "submit" : "button"}
-                    className={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no' && this.state.biopsyPositive === 'no') ? "btn btn-block" : "btn btn-block disabled"}
+                    type={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no' && (this.state.biopsyPositive === 'no' || this.state.biopsyPositive ==='')) ? "submit" : "button"}
+                    className={(this.state.consentChecked && !this.state.isLoadingSubmit && this.state.positive==='no' && (this.state.biopsyPositive === 'no' || this.state.biopsyPositive ==='')) ? "btn btn-block" : "btn btn-block disabled"}
                   >
                     Submit
                   </button>

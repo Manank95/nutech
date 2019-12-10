@@ -1,4 +1,5 @@
 let url = 'https://qfg5xea7df.execute-api.ap-south-1.amazonaws.com/dev';
+let sitekey = "6LdRucYUAAAAAOHVGrFURmaeoBai_7j_U6sWAy8m";
 let services = [
   {
     testID: '2889951',
@@ -41,4 +42,4 @@ let services = [
   }
 ]
 
-export default { url, services };
+export default { url, sitekey, services };
