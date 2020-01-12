@@ -44,6 +44,7 @@ class FooterComponent extends React.Component {
                     <ul className="list-icon list-icon-arrow">
                       <li><Link to="/home#slider">Home</Link></li>
                       <li><Link to="/about#whoweare">About</Link></li>
+                      <li><Link to="/home#ayurvedic">Ayurvedic Treatment</Link></li>
                       <li><Link to="/home#services">Services</Link></li>
                       <li><Link to="/home#facts">Facts</Link></li>
                       <li><Link to="/home#gallery">Gallery</Link></li>
