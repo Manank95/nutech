@@ -24,6 +24,7 @@ export default class MobileNav extends Component {
           <nav className={styles.sideDrawer}>
             <div className={styles.links_mobile}>
               <Link to="/home#mission" className={styles.link} onClick={this.close}>Mission</Link>
+              <Link to="/home#ayurvedic" className={styles.link} onClick={this.close}>Ayurvedic Treatment</Link>
               <Link to="/home#facts" className={styles.link} onClick={this.close}>Facts</Link>
               <Link to="/home#gallery" className={styles.link} onClick={this.close}>Gallery</Link>
               <Link to="/home#services" className={styles.link} onClick={this.close}>Services</Link>
@@ -70,6 +71,7 @@ export default class MobileNav extends Component {
                 </button>
               </Link>
               <Link to="/home#mission" className={styles.link} onClick={this.close}>Mission</Link>
+              <Link to="/home#ayurvedic" className={styles.link} onClick={this.close}>Ayurvedic Treatment</Link>
               <Link to="/home#facts" className={styles.link} onClick={this.close}>Facts</Link>
               <Link to="/home#gallery" className={styles.link} onClick={this.close}>Gallery</Link>
 

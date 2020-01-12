@@ -48,7 +48,7 @@
 
 .dropdown {
   position        : absolute;
-  width           : 180px;
+  width           : 205px;
   top             : 36px;
   display         : flex;
   flex-direction  : column;

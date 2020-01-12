@@ -18,6 +18,7 @@ export default function DesktopNav() {
         title="Company"
         links={[
           { to: "/home#mission", tag: "Mission" },
+          { to: "/home#ayurvedic", tag: "Ayurvedic Treatment" },
           { to: "/home#facts", tag: "Facts" },
           { to: "/home#gallery", tag: "Gallery" },
           { to: "/home#services", tag: "Services"}
@@ -46,6 +47,7 @@ export default function DesktopNav() {
         title="Company"
         links={[
           { to: "/home#mission", tag: "Mission" },
+          { to: "/home#ayurvedic", tag: "Ayurvedic Treatment" },
           { to: "/home#facts", tag: "Facts" },
           { to: "/home#gallery", tag: "Gallery" }
         ]} />

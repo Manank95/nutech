@@ -16,9 +16,14 @@ class HomeComponent extends React.Component {
       comment: '',
       status: null,
       message: '',
-      isLoadingSubmit: false
+      isLoadingSubmit: false,
+      checkBoxMsg1: false,
+      checkBoxMsg2: false,
+      checkBoxMsg3: false,
+      checkBoxMsg4: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
     this.Auth = new AuthService();
   }
   verifyCallback = (recaptchaToken) => {
@@ -27,6 +32,13 @@ class HomeComponent extends React.Component {
   }
   componentDidMount() {
     window.updateUIAfterReact();
+  }
+
+  handleCheckbox(arg, event) {
+    if(arg === 'a' ) this.setState({ checkBoxMsg1: !this.state.checkBoxMsg1 });
+    else if(arg === 'b' ) this.setState({ checkBoxMsg2: !this.state.checkBoxMsg2 });
+    else if(arg === 'c' ) this.setState({ checkBoxMsg3: !this.state.checkBoxMsg3 });
+    else if(arg === 'd' ) this.setState({ checkBoxMsg4: !this.state.checkBoxMsg4 });
   }
 
   handleChange(e) {
@@ -40,7 +52,13 @@ class HomeComponent extends React.Component {
       message: ''
     });
     try {
-      let res = await this.Auth.contactUs(this.state.name, this.state.email, this.state.contact, this.state.comment);
+      let message = '';
+      if (this.state.checkBoxMsg1) message = message + 'Checkbox1: I am a family or specialist doctor and I would like to offer the Seromark1®-Prostate Cancer Screening test to my patients \n\n';
+      if (this.state.checkBoxMsg2) message = message + 'Checkbox2: I would like to become an independent provider / distributor of the Seromark1®-Prostate Cancer Screening test outside the US(In India) \n\n';
+      if (this.state.checkBoxMsg3) message = message + 'Checkbox3: I am a patient interested in the Seromark1®-Prostate Cancer Screening test \n\n';
+      if (this.state.checkBoxMsg4) message = message + 'Checkbox4: I would like to join the mailing list and be kept informed about Seromark1®-Prostate Cancer Screening and Nutech Cancer Biomarkers. \n\n';
+      message = message + 'Custom Message: ' + this.state.comment;
+      let res = await this.Auth.contactUs(this.state.name, this.state.email, this.state.contact, message);
       if (res.status === 200){
         return this.setState({
           isLoadingSubmit: false,
@@ -70,6 +88,15 @@ class HomeComponent extends React.Component {
     return (
       <div>
         <Nav />
+        <div id="modalYoutube1" className="modal modal-auto-open" data-delay={1000} style={{maxWidth: '700px', minHeight: '380px'}}>
+          <div className="text-center">
+            <h5>All about Nutech Cancer Biomarkers</h5>
+            <div className="iframe-wrap m-b-20">
+              <iframe title="nutechanimation" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/H524NGstHrQ" frameBorder={0} allowFullScreen />
+            </div>
+          </div>
+        </div>
+
         {/* Inspiro Slider */}
         <div id="slider" className="inspiro-slider arrows-large arrows-creative dots-creative" data-height-xs={360}>
           {/* Slide 1 */}
@@ -79,14 +106,15 @@ class HomeComponent extends React.Component {
                 {/* Captions */}
                 <span className="strong" data-caption-animation="zoom-out"><h4 className="business"><span className="business">NUTECH CANCER BIOMARKERS</span></h4>
                 </span>
-                <h2>Welcome to NUTECH CANCER BIOMARKERS INDIA PRIVATE LIMITED</h2>
+                <h2>Welcome to Nutech Cancer Biomarkers India Pvt. Ltd.</h2>
+                <h4>Let’s invest in your prostate health</h4>
                 <div data-caption-animation="zoom-out">
-                  <button href="#modalYoutube" data-lightbox="inline" className="btn btn-rounded"><i className="fa fa-play" /> View our Work</button>
+                  <button href="#modalYoutube" data-lightbox="inline" className="btn btn-rounded"><i className="fa fa-play" /> All about us</button>
                 </div>
                 <div id="modalYoutube" className="modal" data-delay={3000} style={{ maxWidth: '700px', minHeight: '380px' }}>
                   <h5>Check out our latest Video</h5>
                   <div className="iframe-wrap m-b-20">
-                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/u0v1hgXfLhQ" frameBorder={0} allowFullScreen />
+                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/H524NGstHrQ" frameBorder={0} allowFullScreen />
                   </div>
                 </div>
                 {/* end: Captions */}
@@ -105,6 +133,15 @@ class HomeComponent extends React.Component {
                 <h2>Dedicated to investing in your prostate health.</h2>
                 <a type="button" href="#mission" className="btn btn-default scroll-to"><span className="btn-label"><i className="fa fa-check" /></span>Explore more</a>
                 <a type="button" href="#contact" className="btn btn-light scroll-to">Contact</a>
+                <div data-caption-animation="zoom-out">
+                  <button href="#modalYoutube2" data-lightbox="inline" className="btn btn-rounded"><i className="fa fa-play" /> Video</button>
+                </div>
+                <div id="modalYoutube2" className="modal" data-delay={3000} style={{ maxWidth: '700px', minHeight: '380px' }}>
+                  <h5>Check out our latest Video</h5>
+                  <div className="iframe-wrap m-b-20">
+                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/u0v1hgXfLhQ" frameBorder={0} allowFullScreen />
+                  </div>
+                </div>
                 {/* end: Captions */}
               </div>
             </div>
@@ -140,7 +177,7 @@ class HomeComponent extends React.Component {
 									fulfills that urgent unmet need to address this unforeseen devastating health problem in
 									Indian males.
 									IT'S WORTH INVESTING IN YOURSELF"
-            </p>
+                </p>
                 <Link to="/about#whoweare" className="btn btn-dark btn-outline btn-rounded">Read More</Link>
               </div>
               {/* end features box */}
@@ -155,14 +192,47 @@ class HomeComponent extends React.Component {
               <h3 style={{ fontWeight: 100 }}>We’re Just Getting Started! Explore the possibilities...</h3>
               <br />
               <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">Find risk early</a>
-              <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">Eliminate costly treatment for
-            prostate cancer</a>
+              <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">Eliminate costly cancer treatment</a>
               <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">At home service</a>
-              <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">Reduce risk of
-            spreading/developing prostate cancer</a>
-              <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">Ayurvedic treatment for
+              <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">Stop
+            developing prostate cancer</a>
+              <a type="button" href="#ayurvedic" className="btn btn-default btn-rounded scroll-to">Ayurvedic treatment for
             cancer</a>
               <a type="button" href="#contact" className="btn btn-default btn-rounded scroll-to">First blood test in India</a>
+            </div>
+          </div>
+        </section>
+        <section id="ayurvedic">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12 col-sm-12 text-left">
+                <h2 className="text-left">Ayurvedic treatment by Dr. Swathi Giri</h2>
+                <h3 className="m-b-20 text-left">Ayurvedic treatment can stop further spread of prostate cancer.</h3>
+                <p className="lead text-left">Dr. Swathi Giri is one of the celebrated Ayurvedic physicians in India,
+                and practiced Ayurvedic medicine for several years. Dr. Swathi's clinic was established in 2001,
+                and since then, she has drawn scores of patients, including cancer patients. She is proficient in identifying,
+                diagnosing (nadi pariksha) various health issues and treating them successfully by Ayurved.
+                </p>
+                <p className="lead text-left">Dr. Giri is an expert in identifying diverse set of health ailments and conditions including cancers and can treat them early.
+                Particularly, if detected early, via available tests such as <Link to="/book"><u>SeroMark-1</u></Link>,
+                her expertise in Ayurvedic treatment can stop further spread of prostate cancer.
+                </p>
+                <p className="lead text-left">Dr. Giri’s clinic  is located in Manish Nagar, Nagpur, Maharashtra - 440015.
+                Please visit website: <a href="http://drswathi.in" target="_blank" rel="noopener noreferrer"><u>www.drswathi.in</u></a> for more information.
+                </p>
+                
+                <div data-caption-animation="zoom-out">
+                  <a href="http://drswathi.in" target="_blank" rel="noopener noreferrer" className="btn btn-dark btn-outline btn-rounded">Website</a>
+                  <button href="#modalYoutube3" data-lightbox="inline" className="btn btn-rounded"><i className="fa fa-play" /> Video</button>
+                </div>
+                <div id="modalYoutube3" className="modal" data-delay={3000} style={{ maxWidth: '700px', minHeight: '380px' }}>
+                  <h5>A few words from Dr. Swathi Giri</h5>
+                  <div className="iframe-wrSwathi Giriap m-b-20">
+                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/v6F-GWGKWQw" frameBorder={0} allowFullScreen />
+                  </div>
+                </div>
+              </div>
+              {/* end features box */}
             </div>
           </div>
         </section>
@@ -182,19 +252,19 @@ class HomeComponent extends React.Component {
 									to address your existing prostate condition early, they will also strive to help you improve
 									your quality of life, achieve your wellness goals, and heal your body to live your best life
               possible. </p>
-                <a href="http://www.freepatentsonline.com/9903878.html" target="”_blank”" className="btn btn-light btn-outline btn-rounded">Patent Recognized by Govt. of India</a>
+                <a href="http://www.freepatentsonline.com/9903878.html" target="”_blank”" className="btn btn-light btn-outline btn-rounded">Patent</a>
               </div>
               <div className="col-md-4">
                 <div className="col-md-12">
                   <div className="text-center">
-                    <div className="counter text-large"> <span data-speed={3000} data-refresh-interval={30} data-to={10} data-from={0} data-seperator="true" /> </div>
+                    <div className="counter text-large"> <span data-speed={4000} data-refresh-interval={30} data-to={1} data-from={0} data-seperator="true" /> </div>
                     <div className="seperator seperator-small" />
-                    <p>YEARS</p>
+                    <p>YEAR</p>
                   </div>
                 </div>
                 <div className="col-md-12">
                   <div className="text-center">
-                    <div className="counter text-large"> <span data-speed={4550} data-refresh-interval={30} data-to={254} data-from={50} data-seperator="true" /> </div>
+                    <div className="counter text-large"> <span data-speed={4550} data-refresh-interval={30} data-to={254} data-from={100} data-seperator="true" /> </div>
                     <div className="seperator seperator-small" />
                     <p>LIVES SAVED</p>
                   </div>
@@ -443,8 +513,46 @@ class HomeComponent extends React.Component {
                   <div className="form-group">
                     <input type="email" name="email" className="form-control" placeholder="Enter your Email" value={this.state.email} onChange={(e) => this.handleChange(e)} required/>
                   </div>
+                  <div className="form-group m-b-0">
+                    <div className="checkbox">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={this.state.checkBoxMsg1}
+                          onChange={(event)=> this.handleCheckbox('a', event)}
+                        />I am a family or specialist doctor and I would like to offer the Seromark1®-Prostate Cancer Screening test to my patients
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={this.state.checkBoxMsg2}
+                          onChange={(event)=> this.handleCheckbox('b', event)}
+                        />I would like to become an independent provider / distributor of the Seromark1®-Prostate Cancer Screening test outside the US(In India)
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={this.state.checkBoxMsg3}
+                          onChange={(event)=> this.handleCheckbox('c', event)}
+                        />I am a patient interested in the Seromark1®-Prostate Cancer Screening test
+                      </label>
+                    </div>
+                    <div className="checkbox">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={this.state.checkBoxMsg4}
+                          onChange={(event)=> this.handleCheckbox('d', event)}
+                        />I would like to join the mailing list and be kept informed about Seromark1®-Prostate Cancer Screening and Nutech Cancer Biomarkers.
+                      </label>
+                    </div>
+                  </div>
                   <div className="form-group">
-                    <textarea type="text" name="comment" rows={8} className="form-control required" placeholder="Enter your Message" value={this.state.comment} onChange={(e) => this.handleChange(e)} required/>
+                    <textarea type="text" name="comment" rows={4} className="form-control required" placeholder="Enter your Message" value={this.state.comment} onChange={(e) => this.handleChange(e)} required/>
                   </div>
                   <ReCaptcha
                     sitekey={config.sitekey}

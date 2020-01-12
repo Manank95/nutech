@@ -19,6 +19,7 @@ class AboutComponent extends React.Component {
                 <span className="strong">Who we are</span>
                 <h1>About the company</h1>
                 {/* end: Captions */}
+                <h4>Let’s invest in your prostate health</h4>
               </div>
             </div>
           </div>
@@ -30,6 +31,7 @@ class AboutComponent extends React.Component {
             <div className="col-md-3">
               <div className="heading heading text-left">
                 <h2>Experience and Professionalism at NUTECH</h2>
+                <h4>"Managing prostate health is your savings account. Let us help you guard your principal assets early."</h4>
               </div>
             </div>
             <div className="col-md-9 text-left">
