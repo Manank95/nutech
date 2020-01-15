@@ -66,11 +66,11 @@ class BookComponent extends React.Component {
 
   componentDidMount() {
     window.updateUIAfterReact();
-    const picker = window.jQuery('[data-toggle="datepicker"]');
-    picker.datepicker({ format: 'dd/MM/yyyy' });
-    picker.on('pick.datepicker', e => {
-      this.dob = e.date.toISOString().split('T')[0];
-    });
+    // const picker = window.jQuery('[data-toggle="datepicker"]');
+    // picker.datepicker({ format: 'dd/MM/yyyy' });
+    // picker.on('pick.datepicker', e => {
+    //   this.dob = e.date.toISOString().split('T')[0];
+    // });
 
     if (!this.Auth.loggedIn()) return this.props.history.replace('/login');
     let decoded = jwt.decode(this.Auth.getToken());
@@ -260,8 +260,11 @@ class BookComponent extends React.Component {
                     <input type="text" className="form-control" placeholder="*Full Name" name="fullName" value={this.state.fullName} onChange={this.handleChange} required/>
                   </div>
                   <div className="col-md-6 form-group">
-                    <input type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control docs-date" placeholder="*Date of Birth (dd/mm/yyyy)" name="dob" data-toggle="datepicker" required />
-                    <div data-toggle="datepicker"></div>
+                    {/* <input type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control docs-date" placeholder="*Date of Birth (dd/mm/yyyy)" name="dob" data-toggle="datepicker" required />
+                    <div data-toggle="datepicker"></div> */}
+                    <Datepicker id="0" name="dob" placeholder="*Date of Birth (dd/mm/yyyy)" dateChange={e=>{
+                          this.dob = e.date.toISOString().split('T')[0];
+                      }}/>
                   </div>
                 </div>
 
