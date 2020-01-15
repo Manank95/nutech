@@ -70,7 +70,7 @@ class LoginComponent extends React.Component {
   }
   verifyCallback = (recaptchaToken) => {
     // Here you will get the final recaptchaToken!!!  
-    console.log("hello")
+    console.log("")
   }
   render() {
     return (

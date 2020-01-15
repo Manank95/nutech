@@ -272,7 +272,7 @@ class BookComponent extends React.Component {
                   </div>
                   <div className="col-md-6 form-group">
                     <label className="sr-only">Phone No. For communication </label>
-                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="*Phone No. - 10 digits" name="contact" value={this.state.contact} onChange={this.handleChange} required />
+                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="*Phone No. - 10 digits" name="contact" title="For e.g. 9876543210" value={this.state.contact} onChange={this.handleChange} required />
                   </div>
                 </div>
 

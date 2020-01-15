@@ -28,7 +28,7 @@ class HomeComponent extends React.Component {
   }
   verifyCallback = (recaptchaToken) => {
     // Here you will get the final recaptchaToken!!!  
-    console.log("hello")
+    console.log("")
   }
   componentDidMount() {
     window.updateUIAfterReact();
@@ -176,7 +176,7 @@ class HomeComponent extends React.Component {
 									finding test that
 									fulfills that urgent unmet need to address this unforeseen devastating health problem in
 									Indian males.
-									IT'S WORTH INVESTING IN YOURSELF"
+									"IT'S WORTH INVESTING IN YOURSELF"
                 </p>
                 <Link to="/about#whoweare" className="btn btn-dark btn-outline btn-rounded">Read More</Link>
               </div>
