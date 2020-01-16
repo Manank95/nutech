@@ -92,7 +92,7 @@ class HomeComponent extends React.Component {
           <div className="text-center">
             <h5>All about Nutech Cancer Biomarkers</h5>
             <div className="iframe-wrap m-b-20">
-              <iframe title="nutechanimation" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/H524NGstHrQ" frameBorder={0} allowFullScreen />
+              <iframe title="nutechanimation" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/H524NGstHrQ?loop=1&playlist=H524NGstHrQ" frameBorder={0} allowFullScreen />
             </div>
           </div>
         </div>
@@ -112,9 +112,9 @@ class HomeComponent extends React.Component {
                   <button href="#modalYoutube" data-lightbox="inline" className="btn btn-rounded"><i className="fa fa-play" /> All about us</button>
                 </div>
                 <div id="modalYoutube" className="modal" data-delay={3000} style={{ maxWidth: '700px', minHeight: '380px' }}>
-                  <h5>Check out our latest Video</h5>
+                  <h5>All about Nutech Cancer Biomarkers</h5>
                   <div className="iframe-wrap m-b-20">
-                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/H524NGstHrQ" frameBorder={0} allowFullScreen />
+                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/H524NGstHrQ?loop=1&playlist=H524NGstHrQ" frameBorder={0} allowFullScreen />
                   </div>
                 </div>
                 {/* end: Captions */}
@@ -139,7 +139,7 @@ class HomeComponent extends React.Component {
                 <div id="modalYoutube2" className="modal" data-delay={3000} style={{ maxWidth: '700px', minHeight: '380px' }}>
                   <h5>Check out our latest Video</h5>
                   <div className="iframe-wrap m-b-20">
-                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/u0v1hgXfLhQ" frameBorder={0} allowFullScreen />
+                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/u0v1hgXfLhQ?loop=1&playlist=u0v1hgXfLhQ" frameBorder={0} allowFullScreen />
                   </div>
                 </div>
                 {/* end: Captions */}
@@ -228,7 +228,7 @@ class HomeComponent extends React.Component {
                 <div id="modalYoutube3" className="modal" data-delay={3000} style={{ maxWidth: '700px', minHeight: '380px' }}>
                   <h5>A few words from Dr. Swathi Giri</h5>
                   <div className="iframe-wrSwathi Giriap m-b-20">
-                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/v6F-GWGKWQw" frameBorder={0} allowFullScreen />
+                    <iframe title="youtubetitle" id="youtube" width={560} height={315} src="https://www.youtube.com/embed/v6F-GWGKWQw?loop=1&playlist=v6F-GWGKWQw" frameBorder={0} allowFullScreen />
                   </div>
                 </div>
               </div>
