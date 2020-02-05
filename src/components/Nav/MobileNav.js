@@ -38,7 +38,7 @@ export default class MobileNav extends Component {
 
               <hr className={styles.divider} />
 
-              <Link to="/dashboard" className={styles.link} onClick={this.close}>Dashboard</Link>
+              <Link to="/dashboard" className={styles.link} onClick={this.close}>Tests Status</Link>
 
               <hr className={styles.divider} />
 

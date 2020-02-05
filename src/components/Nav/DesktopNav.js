@@ -13,7 +13,7 @@ export default function DesktopNav() {
     Auth.loggedIn() ?
     (<nav className={styles.nav}>
       <Link to="/book"><button type="button" style={{margin: "0px"}} className="btn btn-rounded btn-reveal btn-sm btn-success"><span>Book Test</span><i className="fa fa-arrow-right"></i></button></Link>
-      <Link to="/dashboard" className={styles.link}>Dashboard</Link>
+      <Link to="/dashboard" className={styles.link}>Tests Status</Link>
       <Dropdown
         title="Company"
         links={[

@@ -115,7 +115,7 @@ class DashboardComponent extends React.Component {
                     status='process'
                   >
                     <Step title="Book a Test" />
-                    <Step title="Make Payment" icon={<i className="fa fa-warning" style={{color:'#a94442'}}/>} />
+                    <Step title="Make Payment" icon={<i className="fa fa-rupee" style={{color:'#a94442'}}/>} />
                     <Step title="Sit Back and Relax" icon={<i className="fa fa-clock-o" style={{color: '#31708f'}} />} />
                     <Step title="Download Report" icon={<i className="fa fa-check-circle" style={{color:'#3c763d'}} />} />
                   </Steps>

@@ -121,6 +121,8 @@ class LoginComponent extends React.Component {
             <section className="container">
               <div className="row">
                 <div className="col-md-5 center background-white">
+                  <p className="m-b-5">Don't have an account yet? &nbsp; <Link to="/signup"> <button type="button" className="btn btn-light btn-xs">Signup</button> </Link>
+                  </p>
                   <h3>Login to your Account</h3>
                   {this.state.message !== '' && (
                     <div role="alert" className={this.state.status === 200 ? "alert alert-success alert-dismissible" : "alert alert-danger alert-dismissible"}>
@@ -159,8 +161,6 @@ class LoginComponent extends React.Component {
                       <button type="submit" className="btn btn-block">Login</button>
                     </div>
                   </form>
-                  <p className="small">Don't have an account yet? &nbsp; <Link to="/signup"> <button type="button" className="btn btn-light btn-xs">Signup</button> </Link>
-                  </p>
                 </div>
               </div>
             </section>

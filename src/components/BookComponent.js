@@ -51,6 +51,8 @@ class BookComponent extends React.Component {
       fPSA: '',
       relativeWithCancer: ''
     };
+    this.textInput = React.createRef();
+    this.focusTextInput = this.focusTextInput.bind(this);
     this.domain = config.url;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,6 +83,12 @@ class BookComponent extends React.Component {
   }
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  focusTextInput() {
+    // Explicitly focus the text input using the raw DOM API
+    // Note: we're accessing "current" to get the DOM node
+    this.textInput.current.focus();
   }
 
   async handleChangeTest(event) {
@@ -217,7 +225,7 @@ class BookComponent extends React.Component {
                 status='process'
               >
                 <Step title="Book a Test" />
-                <Step title="Make Payment" icon={<i className="fa fa-warning" style={{ color: '#a94442' }} />} />
+                <Step title="Make Payment" icon={<i className="fa fa-rupee" style={{ color: '#a94442' }} />} />
                 <Step title="Sit Back and Relax" icon={<i className="fa fa-clock-o" style={{ color: '#31708f' }} />} />
                 <Step title="Download Report" icon={<i className="fa fa-check-circle" style={{ color: '#3c763d' }} />} />
               </Steps>
@@ -345,10 +353,10 @@ class BookComponent extends React.Component {
                 </div>
                 <div>
                   <div className="col-md-6 form-group">
-                    <input type="text" className="form-control" placeholder="*Doctor's name" name="doctorName" value={this.state.doctorName} onChange={this.handleChange} required />
+                    <input type="text" className="form-control" placeholder="Doctor's name (OPTIONAL)" name="doctorName" value={this.state.doctorName} onChange={this.handleChange} />
                   </div>
                   <div className="col-md-6 form-group">
-                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="*Doctor's phone" name="doctorContact" value={this.state.doctorContact} onChange={this.handleChange}  required />
+                    <input type="tel" pattern="[0-9]{10}" className="form-control" placeholder="Doctor's phone (OPTIONAL)" name="doctorContact" value={this.state.doctorContact} onChange={this.handleChange} />
                   </div>
                 </div>
                 <div className="col-md-12 form-group">
@@ -517,10 +525,12 @@ class BookComponent extends React.Component {
                       </label>
                     </div>
                   </div>
+                  {(this.state.hivPositive !== '') && 
+                    <button type="button" onClick={this.focusTextInput} className="btn btn-block">Proceed with Order Summary</button>
+                  }
                 </>
                 }
               </div>
-
               <div className="col-md-6 text-left">
                 <div className="m-b-20">
                   <h3>Order Summary</h3>
@@ -534,7 +544,7 @@ class BookComponent extends React.Component {
                 <div className="row m-b-10">
                   <div className="col-md-7">
                     <label className="sr-only">Coupon Code</label>
-                    <input type="text" className="form-control" placeholder="Coupon Code" name="couponCode" value={this.state.couponCode} onChange={this.handleChange} />
+                    <input ref={this.textInput} type="text" className="form-control" placeholder="Coupon Code" name="couponCode" value={this.state.couponCode} onChange={this.handleChange} />
                   </div>
                   <div className="col-md-3">
                     <button type="button" onClick={this.checkCoupon} className="btn btn-block">Apply</button>
@@ -594,9 +604,9 @@ class BookComponent extends React.Component {
                         type="checkbox"
                         checked={this.state.consentChecked}
                         onChange={this.handleCheckbox}
-                      />I consent with all the <a href='#modalConsent' data-lightbox="inline"><u>terms and conditions</u></a>
+                      /><b>I consent to all the <a href='#modalConsent' data-lightbox="inline"><u>terms and conditions</u></a></b>
                     </label>
-                    <p className="m-b-0 text-info">* You must agree (check the box) with the above conditions to proceed further.</p>
+                    <p className="m-b-0 text-danger">* You must agree <b>(check the box ↑)</b> to the above conditions to proceed further.</p>
                   </div>
                 </div>
 
