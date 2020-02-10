@@ -11,6 +11,16 @@ let services = [
     ]
   },
   {
+    testID: '3106245',
+    testName: 'Free PSA + Total PSA',
+    testAmount: 1600,
+    description: 'Combo Test',
+    points: [
+      'Free PSA (fPSA)',
+      'Total PSA (tPSA)'
+    ]
+  },
+  {
     testID: '2889955',
     testName: 'SeroMark-1 BUNDLED test',
     testAmount: 4000,

@@ -435,12 +435,13 @@ class HomeComponent extends React.Component {
                   Contact Us </span><i className="fa fa-long-arrow-right" /></a>
               </div>
             </div>
+            </div>
 
             <div className="row">
-              <div className="pricing-table">
+              <div className="pricing-table full-width">
               { config.services.map((item,index) => {
-                  return (<div key={index} className="col-md-3 col-sm-12 col-xs-12">
-                    <div className={index === Math.floor(config.services.length / 2)-1 ? "plan featured": "plan"}>
+                  return (<div key={index} className="col-md-2 col-sm-12 col-xs-12">
+                    <div className={index === Math.ceil(config.services.length / 2)-1 ? "plan featured": "plan"}>
                       <div className="plan-header">
                         <h4>{item.testName}</h4>
                         <p className="text-muted">{item.description}</p>
@@ -462,7 +463,6 @@ class HomeComponent extends React.Component {
               }
               </div>
             </div>
-          </div>
         </section>
         {/* Contact */}
         <section id="contact" className="p-t-80 p-b-80">
