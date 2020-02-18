@@ -70,9 +70,17 @@ class AboutComponent extends React.Component {
 									Realtors and a Financial Service Representative certification from the United Jersey Bank. Kalpana has
 									been
               a Lifetime member of AAHOA and served as a member on its board.</p><br />
-                <p><b><i>Tushar Barad, MS, BA (Director)</i></b> He is the Chief Managing Director and Founder of
-									Applied Bioscience India Private Limited and has a Master’s degree in Microbiology with over 30 years of
-              experience in distribution and sales.</p>
+                <p><b><i>Tushar Barad, MS, BA (Director)</i></b> He is a professional who has worked from grassroot level 
+                interacting with research scientists, clinicians, oncologists, pharmacologists, quality control heads, regulatory 
+                compliance officials, and accreditation bodies in India. His journey on molecular oncology began in 2004 for breast 
+                and colon cancer screening and detecting metastasis from blood samples. Later on in 2007 he launched patented Biomed2 
+                technology for B & T Cell Clonality assays for Lymphoma Diagnosis and built the market from scratch. His 13 years of 
+                expertise in Hematology propelled him as a leader in CML Monitoring using Real Time PCR Assays on International Scale 
+                reporting. His strengths were further leveraged in areas such as Molecular Cytogenetics, Next Generation Sequencing, 
+                and Microarray technology. He has been invited as a speaker, as an expert panelist, and as a chair in several prestigious 
+                national conferences on molecular oncology and pathology. Having success in the area of Onco-pathology for over 2 decades, 
+                he was appointed as a Director in Nutech Cancer Biomarkers India Private Limited to lead Marketing, Sales, Operations, 
+                and Regulatory Compliance areas.</p>
               </div>
               <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0088841" target="_blank" rel="noopener noreferrer" className="btn btn-dark btn-outline btn-rounded scroll-to">Find out More</a>
             </div>
@@ -82,68 +90,68 @@ class AboutComponent extends React.Component {
 
         {/* Team Start */}
         <section id="team" className="background-grey p-t-60 p-b-60">
-        <div className="container">
-          <h2>Our Team</h2>
-          <div className="row team-members team-members-shadow m-b-40">
-            <div className="col-md-4">
-              <div className="team-member">
-                <div className="team-image">
-                  <img src="/images/team/druddhav.jpeg" alt='Dr. Uddhav Kelavkar' />
+          <div className="container">
+            <h2>Our Team</h2>
+            <div className="row team-members team-members-shadow m-b-40">
+              <div className="col-md-4">
+                <div className="team-member">
+                  <div className="team-image">
+                    <img src="/images/team/druddhav.jpeg" alt='Dr. Uddhav Kelavkar' />
+                  </div>
+                  <div className="team-desc">
+                    <h3>Dr. Uddhav Kelavkar</h3>
+                    <span>Managing Director</span>
+                    <p> </p>
+                    <div className="align-center">
+                      <a className="btn btn-xs btn-slide btn-light" href="mailto:uddhav@ncbiprivatelimited.com" data-width={80}>
+                        <i className="fa fa-envelope" />
+                        <span>Mail</span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div className="team-desc">
-                  <h3>Dr. Uddhav Kelavkar</h3>
-                  <span>Managing Director</span>
-                  <p> </p>
-                  <div className="align-center">
-                    <a className="btn btn-xs btn-slide btn-light" href="mailto:uddhav@ncbiprivatelimited.com" data-width={80}>
-                      <i className="fa fa-envelope" />
-                      <span>Mail</span>
-                    </a>
+              </div>
+              <div className="col-md-4">
+                <div className="team-member">
+                  <div className="team-image">
+                    <img src="/images/team/kalpana.jpg" alt='Kalpana Patel Kelavkar' />
+                  </div>
+                  <div className="team-desc">
+                    <h3>Kalpana Patel Kelavkar</h3>
+                    <span>Director</span>
+                    <p> </p>
+                    <div className="align-center">
+                      <a className="btn btn-xs btn-slide btn-light" href="mailto:kalpana@ncbiprivatelimited.com" data-width={80}>
+                        <i className="fa fa-envelope" />
+                        <span>Mail</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="team-member">
+                  <div className="team-image">
+                    <img src="/images/team/tushar.jpg" alt='Tushar Barad' />
+                  </div>
+                  <div className="team-desc">
+                    <h3>Tushar Barad</h3>
+                    <span>Director</span>
+                    <p> </p>
+                    <div className="align-center">
+                      <a className="btn btn-xs btn-slide btn-light" href="mailto:tushar@ncbiprivatelimited.com" data-width={80}>
+                        <i className="fa fa-envelope" />
+                        <span>Mail</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
-              <div className="team-member">
-                <div className="team-image">
-                  <img src="/images/team/kalpana.jpg" alt='Kalpana Patel Kelavkar' />
-                </div>
-                <div className="team-desc">
-                  <h3>Kalpana Patel Kelavkar</h3>
-                  <span>Director</span>
-                  <p> </p>
-                  <div className="align-center">
-                    <a className="btn btn-xs btn-slide btn-light" href="mailto:kalpana@ncbiprivatelimited.com" data-width={80}>
-                      <i className="fa fa-envelope" />
-                      <span>Mail</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="team-member">
-                <div className="team-image">
-                  <img src="/images/team/tushar.jpg" alt='Tushar Barad'/>
-                </div>
-                <div className="team-desc">
-                  <h3>Tushar Barad</h3>
-                  <span>Director</span>
-                  <p> </p>
-                  <div className="align-center">
-                    <a className="btn btn-xs btn-slide btn-light" href="mailto:tushar@ncbiprivatelimited.com" data-width={80}>
-                      <i className="fa fa-envelope" />
-                      <span>Mail</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <a href="./downloads/Business_Organization_2019.tif">
+              <button type="button" className="btn btn-outline"><i className="fa fa-download" /> Business Organization</button>
+            </a>
           </div>
-          <a href="./downloads/Business_Organization_2019.tif">
-            <button type="button" className="btn btn-outline"><i className="fa fa-download" /> Business Organization</button>
-          </a>
-        </div>
         </section>
         {/* Team End */}
 
@@ -202,14 +210,14 @@ class AboutComponent extends React.Component {
 											Prostate specific antigen (PSA) tests to help physicians and their patients make the most informed
 											decision on the need for invasive testing. PSA tests aren't foolproof and there is no known
                   "normal"(<a href="http://www.webmd.com">http://www.webmd.com</a>). It's possible for your PSA levels
-                      to be elevated when cancer isn't
-                      present, and to not be elevated when cancer is present. Neither the PSA test nor the rectal
-                      examination (DRE) is 100% accurate and can give an abnormal result even when cancer is not present
-                      (known as a false positive result). In addition, normal results can occur even when cancer is present
-                      (false negative). The results with PSA test results may help to find prostate cancer early even before
-                      there are symptoms. Many small prostate cancers detected by PSA would never develop enough to cause
-                      any symptoms. Even if your PSA level is raised, this could be for reasons other than prostate cancer
-                      and you may have unnecessary stress. This is very important since the results of PSA and DRE
+                          to be elevated when cancer isn't
+                          present, and to not be elevated when cancer is present. Neither the PSA test nor the rectal
+                          examination (DRE) is 100% accurate and can give an abnormal result even when cancer is not present
+                          (known as a false positive result). In addition, normal results can occur even when cancer is present
+                          (false negative). The results with PSA test results may help to find prostate cancer early even before
+                          there are symptoms. Many small prostate cancers detected by PSA would never develop enough to cause
+                          any symptoms. Even if your PSA level is raised, this could be for reasons other than prostate cancer
+                          and you may have unnecessary stress. This is very important since the results of PSA and DRE
                   screenings lead to both under and over treatment of prostate cancer (PCa).<br />
                       SeroMark-1 Test offers several potential advantages to these uncertainties:<br />
                       1. This test is a physician recommended/or self-ordered, is easy and results obtained within 1
